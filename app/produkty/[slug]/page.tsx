@@ -6,12 +6,15 @@ import {
   addToCartUrl,
   formatPriceWithVat,
   getProduct,
+  priceWithVat,
   stripHtml,
 } from "@/lib/woocommerce";
 
 export const revalidate = 3600;
 
 type Params = { slug: string };
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://skinderma.sk";
 
 export async function generateMetadata({
   params,
@@ -20,17 +23,38 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const product = await getProduct(params.slug).catch(() => null);
   if (!product) return { title: "Produkt nenájdený" };
-  const desc = stripHtml(product.short_description || product.description).slice(
-    0,
-    160
-  );
+
+  const yoast = product.yoast_head_json;
+  const fallbackDesc = stripHtml(
+    product.short_description || product.description
+  ).slice(0, 160);
+  const image =
+    yoast?.og_image?.[0]?.url || product.images?.[0]?.src;
+  const canonical =
+    yoast?.canonical || `${SITE_URL}/produkty/${product.slug}`;
+
   return {
-    title: product.name,
-    description: desc,
+    title: yoast?.title || product.name,
+    description: yoast?.description || fallbackDesc,
+    alternates: { canonical },
     openGraph: {
-      title: product.name,
-      description: desc,
-      images: product.images?.[0]?.src ? [product.images[0].src] : [],
+      title: yoast?.og_title || product.name,
+      description: yoast?.og_description || fallbackDesc,
+      url: canonical,
+      type: "website",
+      siteName: "Skinderma",
+      images: image ? [{ url: image }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: yoast?.twitter_title || yoast?.og_title || product.name,
+      description:
+        yoast?.twitter_description || yoast?.og_description || fallbackDesc,
+      images: yoast?.twitter_image
+        ? [yoast.twitter_image]
+        : image
+        ? [image]
+        : undefined,
     },
   };
 }
@@ -46,8 +70,47 @@ export default async function ProductDetailPage({
   const mainImage = product.images?.[0];
   const gallery = product.images?.slice(1, 5) ?? [];
 
+  const priceVat = priceWithVat(product.price);
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: stripHtml(
+      product.short_description || product.description || ""
+    ),
+    image: product.images?.map((img) => img.src) ?? [],
+    sku: product.sku || String(product.id),
+    brand: { "@type": "Brand", name: "Skinderma" },
+    offers: {
+      "@type": "Offer",
+      price: isFinite(priceVat) ? priceVat.toFixed(2) : product.price,
+      priceCurrency: "EUR",
+      availability:
+        product.stock_status === "instock"
+          ? "https://schema.org/InStock"
+          : product.stock_status === "onbackorder"
+          ? "https://schema.org/BackOrder"
+          : "https://schema.org/OutOfStock",
+      url: `${SITE_URL}/produkty/${product.slug}`,
+      seller: { "@type": "Organization", name: "Red Cube s.r.o." },
+    },
+    ...(product.average_rating && Number(product.average_rating) > 0
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: product.average_rating,
+            reviewCount: product.rating_count ?? 0,
+          },
+        }
+      : {}),
+  };
+
   return (
     <article className="container-page py-10 md:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <nav className="mb-6 text-sm text-brand-gray">
         <Link href="/" className="hover:text-gold">
           Domov

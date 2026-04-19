@@ -68,6 +68,31 @@ export async function getProductsByCategory(
   });
 }
 
+export async function getAllProductSlugs(): Promise<
+  Array<{ slug: string; date_modified?: string }>
+> {
+  const perPage = 100;
+  const all: Array<{ slug: string; date_modified?: string }> = [];
+  for (let page = 1; page <= 10; page++) {
+    const batch = await wcFetch<Array<{ slug: string; date_modified?: string }>>(
+      "/products",
+      {
+        revalidate: 3600,
+        params: {
+          per_page: perPage,
+          page,
+          status: "publish",
+          _fields: "slug,date_modified",
+        },
+      }
+    ).catch(() => []);
+    if (!batch.length) break;
+    all.push(...batch);
+    if (batch.length < perPage) break;
+  }
+  return all;
+}
+
 export async function getCategories(): Promise<WCCategory[]> {
   const cats = await wcFetch<WCCategory[]>("/products/categories", {
     revalidate: 86400,

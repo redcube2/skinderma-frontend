@@ -11,6 +11,8 @@ export const revalidate = 3600;
 
 type Params = { slug: string };
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://skinderma.sk";
+
 export async function generateMetadata({
   params,
 }: {
@@ -18,10 +20,26 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const cat = await getCategory(params.slug).catch(() => null);
   if (!cat) return { title: "Kategória nenájdená" };
-  const desc =
+  const yoast = cat.yoast_head_json;
+  const fallbackDesc =
     stripHtml(cat.description).slice(0, 160) ||
     `Produkty z kategórie ${cat.name} v e-shope Skinderma.`;
-  return { title: cat.name, description: desc };
+  const canonical =
+    yoast?.canonical || `${SITE_URL}/kategoria/${cat.slug}`;
+  const image = yoast?.og_image?.[0]?.url || cat.image?.src;
+  return {
+    title: yoast?.title || cat.name,
+    description: yoast?.description || fallbackDesc,
+    alternates: { canonical },
+    openGraph: {
+      title: yoast?.og_title || cat.name,
+      description: yoast?.og_description || fallbackDesc,
+      url: canonical,
+      type: "website",
+      siteName: "Skinderma",
+      images: image ? [{ url: image }] : [],
+    },
+  };
 }
 
 export default async function CategoryPage({ params }: { params: Params }) {

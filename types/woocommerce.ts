@@ -1,3 +1,31 @@
+export interface YoastOgImage {
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}
+
+export interface YoastMeta {
+  title?: string;
+  description?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: YoastOgImage[];
+  og_url?: string;
+  og_site_name?: string;
+  og_type?: string;
+  twitter_card?: string;
+  twitter_title?: string;
+  twitter_description?: string;
+  twitter_image?: string;
+  canonical?: string;
+  robots?: Record<string, string>;
+  schema?: {
+    "@context": string;
+    "@graph": unknown[];
+  };
+}
+
 export interface WCImage {
   id: number;
   src: string;
@@ -33,6 +61,9 @@ export interface WCProduct {
   tags: WCTermRef[];
   average_rating?: string;
   rating_count?: number;
+  date_modified?: string;
+  yoast_head?: string;
+  yoast_head_json?: YoastMeta;
 }
 
 export interface WCCategory {
@@ -45,6 +76,8 @@ export interface WCCategory {
   image: WCImage | null;
   menu_order: number;
   count: number;
+  yoast_head?: string;
+  yoast_head_json?: YoastMeta;
 }
 
 export interface WPPost {
@@ -56,6 +89,9 @@ export interface WPPost {
   excerpt: { rendered: string };
   content: { rendered: string };
   featured_media: number;
+  modified?: string;
+  yoast_head?: string;
+  yoast_head_json?: YoastMeta;
   _embedded?: {
     "wp:featuredmedia"?: Array<{
       id: number;

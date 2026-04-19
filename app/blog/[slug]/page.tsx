@@ -9,6 +9,8 @@ export const revalidate = 3600;
 
 type Params = { slug: string };
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://skinderma.sk";
+
 export async function generateMetadata({
   params,
 }: {
@@ -16,14 +18,35 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const post = await getPost(params.slug).catch(() => null);
   if (!post) return { title: "Článok nenájdený" };
-  const desc = stripHtml(post.excerpt.rendered).slice(0, 160);
+  const yoast = post.yoast_head_json;
+  const title = stripHtml(post.title.rendered);
+  const fallbackDesc = stripHtml(post.excerpt.rendered).slice(0, 160);
+  const canonical = yoast?.canonical || `${SITE_URL}/blog/${post.slug}`;
+  const image =
+    yoast?.og_image?.[0]?.url ||
+    post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
   return {
-    title: stripHtml(post.title.rendered),
-    description: desc,
+    title: yoast?.title || title,
+    description: yoast?.description || fallbackDesc,
+    alternates: { canonical },
     openGraph: {
-      title: stripHtml(post.title.rendered),
-      description: desc,
+      title: yoast?.og_title || title,
+      description: yoast?.og_description || fallbackDesc,
+      url: canonical,
       type: "article",
+      siteName: "Skinderma",
+      images: image ? [{ url: image }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: yoast?.twitter_title || yoast?.og_title || title,
+      description:
+        yoast?.twitter_description || yoast?.og_description || fallbackDesc,
+      images: yoast?.twitter_image
+        ? [yoast.twitter_image]
+        : image
+        ? [image]
+        : undefined,
     },
   };
 }
