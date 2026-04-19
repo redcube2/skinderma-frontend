@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { WCProduct } from "@/types/woocommerce";
-import { addToCartUrl, formatPrice } from "@/lib/woocommerce";
+import { addToCartUrl, formatPriceWithVat } from "@/lib/woocommerce";
 
 export default function ProductCard({ product }: { product: WCProduct }) {
   const image = product.images?.[0];
@@ -51,16 +51,20 @@ export default function ProductCard({ product }: { product: WCProduct }) {
           {product.on_sale && product.regular_price ? (
             <>
               <span className="text-lg font-bold text-gold">
-                {formatPrice(product.price)}
+                {formatPriceWithVat(product.price)}
               </span>
               <span className="text-sm text-brand-gray line-through">
-                {formatPrice(product.regular_price)}
+                {formatPriceWithVat(product.regular_price)}
               </span>
+              <span className="text-xs text-gray-400">s DPH</span>
             </>
           ) : (
-            <span className="text-lg font-bold text-gold">
-              {formatPrice(product.price)}
-            </span>
+            <>
+              <span className="text-lg font-bold text-gold">
+                {formatPriceWithVat(product.price)}
+              </span>
+              <span className="text-xs text-gray-400">s DPH</span>
+            </>
           )}
         </div>
 

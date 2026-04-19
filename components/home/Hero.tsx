@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[90vh] items-center overflow-hidden">
+    <section className="relative flex min-h-[90vh] items-center">
       <div className="absolute inset-0 z-0">
         <Image
           src="https://skinderma.sk/wp-content/uploads/2025/09/serum-solution-scaled-1.jpg"
@@ -16,7 +16,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-navy/60" />
       </div>
 
-      <div className="container-page relative z-10 py-24">
+      <div className="container-page relative z-[1] py-24">
         <div className="max-w-2xl">
           <p className="mb-4 text-sm font-medium uppercase tracking-widest text-gold">
             Lekárska kozmetika

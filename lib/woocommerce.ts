@@ -90,6 +90,21 @@ export function formatPrice(price: string | number, currency = "€"): string {
   return `${n.toFixed(2).replace(".", ",")} ${currency}`;
 }
 
+export const VAT_RATE = 0.2;
+
+export function priceWithVat(price: string | number): number {
+  const n = typeof price === "string" ? parseFloat(price) : price;
+  if (!isFinite(n)) return NaN;
+  return n * (1 + VAT_RATE);
+}
+
+export function formatPriceWithVat(
+  price: string | number,
+  currency = "€"
+): string {
+  return formatPrice(priceWithVat(price), currency);
+}
+
 export function addToCartUrl(product: Pick<WCProduct, "id" | "slug">): string {
   return `https://skinderma.sk/produkt/${product.slug}?add-to-cart=${product.id}`;
 }

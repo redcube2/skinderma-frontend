@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   addToCartUrl,
-  formatPrice,
+  formatPriceWithVat,
   getProduct,
   stripHtml,
 } from "@/lib/woocommerce";
@@ -110,17 +110,18 @@ export default async function ProductDetailPage({
             {product.on_sale && product.regular_price ? (
               <>
                 <span className="text-3xl font-bold text-gold">
-                  {formatPrice(product.price)}
+                  {formatPriceWithVat(product.price)}
                 </span>
                 <span className="text-lg text-brand-gray line-through">
-                  {formatPrice(product.regular_price)}
+                  {formatPriceWithVat(product.regular_price)}
                 </span>
               </>
             ) : (
               <span className="text-3xl font-bold text-gold">
-                {formatPrice(product.price)}
+                {formatPriceWithVat(product.price)}
               </span>
             )}
+            <span className="text-sm text-gray-400">s DPH</span>
           </div>
 
           {product.short_description && (

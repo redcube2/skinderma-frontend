@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
   title: "Kontakt",
-  description: "Kontaktné údaje Skinderma – kozmetika pre profesionálov.",
+  description:
+    "Kontaktné údaje Skinderma – Red Cube s.r.o., Komárno. Formulár pre reklamácie, odstúpenie a otázky.",
 };
 
 export default function ContactPage() {
@@ -14,42 +16,78 @@ export default function ContactPage() {
       <h1 className="mt-2 text-4xl font-bold text-navy md:text-5xl">
         Napíšte nám
       </h1>
-      <div className="mt-8 grid gap-10 lg:grid-cols-2">
-        <div className="space-y-4 text-brand-gray">
-          <p>
-            Máte otázku k produktom, objednávke alebo spolupráci? Ozvite sa nám
-            a radi vám pomôžeme.
-          </p>
+
+      <div className="mt-10 grid gap-10 lg:grid-cols-2">
+        <div className="space-y-6 text-brand-gray">
           <div>
-            <div className="font-semibold text-navy">E-mail</div>
-            <a
-              href="mailto:info@skinderma.sk"
-              className="text-gold hover:text-gold-dark"
-            >
-              info@skinderma.sk
-            </a>
+            <h2 className="text-lg font-semibold text-navy">Predávajúci</h2>
+            <div className="mt-2 space-y-0.5">
+              <div className="font-semibold text-navy">Red Cube s.r.o.</div>
+              <div>Nám. M.R. Štefánika 16</div>
+              <div>945 01 Komárno</div>
+              <div>Slovenská republika</div>
+            </div>
           </div>
+
           <div>
-            <div className="font-semibold text-navy">Web</div>
+            <h2 className="text-lg font-semibold text-navy">Identifikácia</h2>
+            <dl className="mt-2 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1 text-sm">
+              <dt className="font-medium text-navy">IČO:</dt>
+              <dd>44137265</dd>
+              <dt className="font-medium text-navy">DIČ:</dt>
+              <dd>2022614341</dd>
+              <dt className="font-medium text-navy">IČ DPH:</dt>
+              <dd>SK2022614341</dd>
+            </dl>
+          </div>
+
+          <div>
+            <h2 className="text-lg font-semibold text-navy">Kontakt</h2>
+            <div className="mt-2 space-y-1 text-sm">
+              <div>
+                <span className="font-medium text-navy">E-mail: </span>
+                <a
+                  href="mailto:info@skinderma.sk"
+                  className="text-gold hover:text-gold-dark"
+                >
+                  info@skinderma.sk
+                </a>
+              </div>
+              <div className="text-brand-gray">
+                Na bežné otázky odpovedáme do 24 hodín (pracovné dni
+                9:00 – 17:00).
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-cream-dark/60 bg-cream p-5 text-sm">
+            <div className="font-semibold text-navy">
+              Alternatívne riešenie sporov
+            </div>
+            <p className="mt-2">
+              Spotrebiteľ má právo obrátiť sa na platformu ARS Európskej
+              komisie:
+            </p>
             <a
-              href="https://skinderma.sk"
-              className="text-gold hover:text-gold-dark"
+              href="https://ec.europa.eu/consumers/odr"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-1 inline-block text-gold hover:text-gold-dark break-all"
             >
-              skinderma.sk
+              https://ec.europa.eu/consumers/odr
             </a>
           </div>
         </div>
-        <div className="rounded-2xl border border-cream-dark/60 bg-cream p-8">
-          <h2 className="text-lg font-semibold text-navy">Zákaznícky servis</h2>
+
+        <div>
+          <h2 className="text-lg font-semibold text-navy">
+            Sťažnosť / spätná väzba
+          </h2>
           <p className="mt-2 text-sm text-brand-gray">
-            Pracovné dni 9:00 – 17:00. Na bežné otázky odpovedáme do 24 hodín.
+            Napíšte nám reklamáciu, žiadosť o odstúpenie od zmluvy alebo
+            bežnú otázku. Odpovieme do 48 hodín.
           </p>
-          <a
-            href="mailto:info@skinderma.sk"
-            className="btn-gold mt-6"
-          >
-            Napísať e-mail
-          </a>
+          <ContactForm />
         </div>
       </div>
     </section>

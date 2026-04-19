@@ -10,21 +10,15 @@ type MenuItem = {
 
 export const menu: MenuItem[] = [
   { href: "/", label: "Domov" },
+  { href: "/produkty", label: "Obchod" },
   {
-    href: "/produkty",
-    label: "Obchod",
+    href: "/kategoria/starostlivost-o-plet",
+    label: "Starostlivosť o pleť",
     children: [
-      { href: "/kategoria/starostlivost-o-plet", label: "Starostlivosť o pleť" },
-      {
-        href: "/kategoria/pletove-kremy-a-pletove-emulzie",
-        label: "Pleťové krémy",
-      },
+      { href: "/kategoria/pletove-kremy-a-pletove-emulzie", label: "Pleťové krémy a pleťové emulzie" },
       { href: "/kategoria/pletove-sera", label: "Pleťové séra" },
-      {
-        href: "/kategoria/opalovacia-a-fotoprotektivna-linia",
-        label: "Opaľovacia línia",
-      },
-      { href: "/kategoria/starostlivost-o-telo", label: "Starostlivosť o telo" },
+      { href: "/kategoria/opalovacia-a-fotoprotektivna-linia", label: "Opaľovacia a fotoprotektívna línia" },
+      { href: "/kategoria/starostlivost-o-telo", label: "Starostlivosť o Telo" },
       { href: "/kategoria/nutrikozmetika", label: "Nutrikozmetika" },
       { href: "/kategoria/masky", label: "Masky" },
     ],
@@ -33,34 +27,25 @@ export const menu: MenuItem[] = [
     href: "/kategoria/pre-profesionalov",
     label: "Pre profesionálov",
     children: [
-      {
-        href: "/kategoria/profesionalne-ampulky",
-        label: "Profesionálne ampulky",
-      },
-      {
-        href: "/kategoria/profesionalne-roztoky-vialky",
-        label: "Profesionálne roztoky/vialky",
-      },
-      {
-        href: "/kategoria/profesionalne-kombinacie",
-        label: "Profesionálne kombinácie",
-      },
+      { href: "/kategoria/profesionalne-ampulky", label: "Profesionálne ampulky" },
+      { href: "/kategoria/profesionalne-roztoky-vialky", label: "Profesionálne roztoky / vialky" },
+      { href: "/kategoria/profesionalne-kombinacie", label: "Profesionálne kombinácie" },
       { href: "/kategoria/chemicke-peelingy", label: "Chemické peelingy" },
       { href: "/kategoria/kozmeticke-sety", label: "Kozmetické sety" },
       { href: "/kategoria/pletove-masky", label: "Pleťové masky" },
       { href: "/kategoria/exozomy", label: "Exozómy" },
     ],
   },
-  { href: "/o-nas", label: "O nás" },
+  { href: "/o-nas", label: "O Nás" },
   { href: "/kontakt", label: "Kontakt" },
   { href: "/blog", label: "Novinky" },
 ];
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-40 border-b border-cream-dark/60 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-[100] border-b border-cream-dark/60 bg-white">
       <div className="container-page flex h-20 items-center justify-between gap-6">
-        <Link href="/" aria-label="Skinderma – domov" className="shrink-0">
+        <Link href="/" aria-label="Skinderma – domov" className="shrink-0 min-w-0">
           <Image
             src="https://skinderma.sk/wp-content/uploads/2025/07/Logo-skinderma-cabecera-3.webp"
             alt="Skinderma"
@@ -71,7 +56,7 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-7 xl:flex">
           {menu.map((item) => (
             <div key={item.href} className="group relative">
               <Link
