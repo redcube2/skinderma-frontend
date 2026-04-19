@@ -22,8 +22,10 @@ export default function ProductCard({ product }: { product: WCProduct }) {
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-brand-gray">
-            bez obrázku
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-cream to-cream-dark p-6 text-center">
+            <span className="line-clamp-4 text-sm font-medium text-navy/70">
+              {product.name}
+            </span>
           </div>
         )}
         {category && (

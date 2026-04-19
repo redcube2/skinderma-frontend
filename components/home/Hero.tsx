@@ -1,45 +1,49 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-navy text-white">
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 20%, #DCA54A 0, transparent 40%), radial-gradient(circle at 80% 60%, #DCA54A 0, transparent 35%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(45deg, #DCA54A 0, #DCA54A 1px, transparent 1px, transparent 16px)",
-        }}
-      />
-      <div className="container-page relative flex min-h-[82vh] flex-col items-start justify-center gap-6 py-24">
-        <span className="animate-fade-in rounded-full border border-gold/50 bg-gold/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-          GMP certifikovaná kozmetika
-        </span>
-        <h1 className="max-w-3xl animate-fade-in text-4xl font-bold leading-tight text-balance text-white sm:text-5xl md:text-6xl">
-          Budúcnosť lekárskej kozmetiky
-        </h1>
-        <p className="max-w-2xl animate-fade-in text-lg text-cream/80 sm:text-xl">
-          GMP certifikované produkty pre profesionálov aj domáce použitie.
-          Klinicky overené, distribuované do 50+ krajín sveta.
-        </p>
-        <div className="mt-4 flex animate-fade-in flex-wrap gap-3">
-          <Link href="/produkty" className="btn-gold">
-            Preskúmať produkty
-          </Link>
-          <Link
-            href="/o-nas"
-            className="inline-flex items-center justify-center rounded-full border border-cream/40 px-6 py-3 font-semibold text-cream transition-colors hover:border-gold hover:text-gold"
-          >
-            O značke
-          </Link>
+    <section className="relative flex min-h-[90vh] items-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="https://skinderma.sk/wp-content/uploads/2025/09/serum-solution-scaled-1.jpg"
+          alt="Skinderma"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-navy/60" />
+      </div>
+
+      <div className="container-page relative z-10 py-24">
+        <div className="max-w-2xl">
+          <p className="mb-4 text-sm font-medium uppercase tracking-widest text-gold">
+            Lekárska kozmetika
+          </p>
+          <h1 className="mb-6 text-5xl font-light leading-tight text-white md:text-7xl">
+            Budúcnosť
+            <br />
+            <span className="text-gold">lekárskej kozmetiky</span>
+          </h1>
+          <p className="mb-8 max-w-xl text-lg text-white/80">
+            GMP certifikované produkty pre profesionálov aj domáce použitie.
+            Viac ako 50 krajín po celom svete.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Link
+              href="/produkty"
+              className="bg-gold px-8 py-3 font-medium text-white transition-colors hover:bg-gold-dark"
+            >
+              Preskúmať produkty
+            </Link>
+            <Link
+              href="/o-nas"
+              className="border border-white px-8 py-3 text-white transition-colors hover:bg-white/10"
+            >
+              O nás
+            </Link>
+          </div>
         </div>
       </div>
     </section>
