@@ -12,11 +12,8 @@ export default function Footer() {
           alt="Skinderma"
           width={280}
           height={61}
-          className="h-14 w-auto mb-2"
+          className="h-16 w-auto mb-10"
         />
-        <p className="text-xs tracking-[0.3em] uppercase text-gray-500 mb-10">
-          Medical Cosmetics
-        </p>
 
         {/* Links */}
         <nav className="flex flex-col items-center gap-3 mb-8">
@@ -55,7 +52,7 @@ export default function Footer() {
         {/* Social */}
         <div className="flex gap-5 mb-10">
           <a
-            href="https://www.instagram.com/skinderma.sk"
+            href="https://www.instagram.com/skinderma_sk"
             aria-label="Instagram"
             className="text-navy hover:text-gold transition-colors"
           >
@@ -64,7 +61,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            href="https://www.facebook.com/skinderma.sk"
+            href="https://www.facebook.com/SkindermaSK"
             aria-label="Facebook"
             className="text-navy hover:text-gold transition-colors"
           >

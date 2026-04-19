@@ -53,7 +53,16 @@ export default function ContactPage() {
                   info@skinderma.sk
                 </a>
               </div>
-              <div className="text-brand-gray">
+              <div className="mt-1">
+                <span className="font-medium text-navy">Telefón: </span>
+                <a
+                  href="tel:+421905108641"
+                  className="text-gold hover:text-gold-dark"
+                >
+                  +421 905 108 641
+                </a>
+              </div>
+              <div className="text-brand-gray mt-1">
                 Na bežné otázky odpovedáme do 24 hodín (pracovné dni
                 9:00 – 17:00).
               </div>
