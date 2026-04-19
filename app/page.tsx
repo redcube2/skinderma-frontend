@@ -5,6 +5,7 @@ import FeaturedProducts from "@/components/home/FeaturedProducts";
 import ParallaxSection from "@/components/home/ParallaxSection";
 import CategoryGrid from "@/components/home/CategoryGrid";
 import SkiniaPromo from "@/components/home/SkiniaPromo";
+import { B2BSection } from "@/components/home/B2BSection";
 import USPSection from "@/components/home/USPSection";
 import GallerySection from "@/components/home/GallerySection";
 import FAQSection from "@/components/home/FAQSection";
@@ -46,6 +47,9 @@ export default async function HomePage() {
       </FadeInSection>
       <FadeInSection>
         <SkiniaPromo />
+      </FadeInSection>
+      <FadeInSection>
+        <B2BSection />
       </FadeInSection>
       <FadeInSection delay={100}>
         <USPSection />
