@@ -3,46 +3,51 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[90vh] items-center">
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="https://skinderma.sk/wp-content/uploads/2025/09/serum-solution-scaled-1.jpg"
-          alt="Skinderma"
-          fill
-          sizes="100vw"
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
+    <section className="relative flex min-h-[100vh] items-center bg-black">
+      <div className="mx-auto w-full max-w-[1200px] px-6 py-20 md:px-10 md:py-0">
+        <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-20">
+          {/* Obrázok – hore na mobile, vpravo na desktope */}
+          <div className="relative order-1 aspect-square w-full max-h-[80vh] overflow-hidden md:order-2">
+            <Image
+              src="https://skinderma.sk/wp-content/uploads/2025/09/serum-solution-scaled-1.jpg"
+              alt="Skinderma produkty"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+              priority
+            />
+          </div>
 
-      <div className="container-page relative z-[1] py-24">
-        <div className="max-w-2xl">
-          <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[#e2e2cf]">
-            Lekárska kozmetika
-          </p>
-          <h1 className="mb-6 text-5xl font-light leading-tight text-white md:text-7xl">
-            Budúcnosť
-            <br />
-            <span className="text-[#e2e2cf]">lekárskej kozmetiky</span>
-          </h1>
-          <p className="mb-8 max-w-xl text-lg text-white/80">
-            GMP certifikované produkty pre profesionálov aj domáce použitie.
-            Viac ako 50 krajín po celom svete.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link
-              href="/produkty"
-              className="bg-black px-8 py-3 font-medium text-white transition-colors hover:bg-[#333333]"
-            >
-              Preskúmať produkty
-            </Link>
-            <Link
-              href="/o-nas"
-              className="border border-white px-8 py-3 text-white transition-colors hover:bg-white/10"
-            >
-              O nás
-            </Link>
+          {/* Text */}
+          <div className="order-2 md:order-1">
+            <p className="mb-6 text-xs uppercase tracking-[0.3em] text-[#646467]">
+              Medicínska kozmetika
+            </p>
+            <h1 className="mb-8 text-[clamp(44px,6vw,88px)] font-light leading-[1.05] text-white">
+              Budúcnosť
+              <br />
+              medicínskej
+              <br />
+              kozmetiky
+            </h1>
+            <p className="mb-12 max-w-md text-base leading-[1.8] text-[#b0b0b0]">
+              GMP certifikované produkty pre profesionálov aj domáce použitie.
+              Distribuované do viac ako 50 krajín sveta.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/produkty"
+                className="bg-white px-10 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-black transition-colors hover:bg-[#e2e2cf]"
+              >
+                Preskúmať
+              </Link>
+              <Link
+                href="/o-nas"
+                className="border border-[#646467] px-10 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-colors hover:border-white hover:bg-white/5"
+              >
+                O nás
+              </Link>
+            </div>
           </div>
         </div>
       </div>
