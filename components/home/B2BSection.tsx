@@ -20,9 +20,9 @@ export function B2BSection() {
   return (
     <section
       style={{
-        background: "#fafafa",
+        background: "#f5f4f0",
         padding: "100px 40px",
-        borderTop: "1px solid #e2e2cf",
+        borderTop: "1px solid #e8e4dc",
       }}
     >
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
@@ -121,17 +121,17 @@ export function B2BSection() {
             display: "grid",
             gridTemplateColumns: "1fr",
             gap: 1,
-            background: "#e2e2cf",
+            background: "#e8e4dc",
           }}
         >
           {items.map((item, i) => (
             <div
               key={i}
-              style={{ background: "#fafafa", padding: "48px 40px" }}
+              style={{ background: "#ffffff", padding: "48px 40px" }}
             >
               <div
                 style={{
-                  color: "#e2e2cf",
+                  color: "#e8e4dc",
                   fontSize: 48,
                   fontWeight: 300,
                   lineHeight: 1,

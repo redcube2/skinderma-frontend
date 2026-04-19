@@ -66,7 +66,7 @@ export default function StatsCounter() {
     <section
       ref={ref}
       style={{
-        background: "#000",
+        background: "#f5f4f0",
         padding: "96px 40px",
       }}
     >
@@ -84,7 +84,7 @@ export default function StatsCounter() {
           <div key={i}>
             <div
               style={{
-                color: "#fff",
+                color: "#000",
                 fontSize: "clamp(48px, 6vw, 80px)",
                 fontWeight: 300,
                 lineHeight: 1,
