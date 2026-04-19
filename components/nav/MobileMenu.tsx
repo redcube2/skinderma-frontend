@@ -24,7 +24,7 @@ export default function MobileMenu() {
     <div style={{ position: "fixed", inset: 0, zIndex: 99999 }}>
       {/* Overlay */}
       <div
-        style={{ position: "absolute", inset: 0, background: "rgba(15,23,42,0.5)" }}
+        style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)" }}
         onClick={() => setOpen(false)}
       />
       {/* Panel */}
@@ -46,7 +46,7 @@ export default function MobileMenu() {
           </Link>
           <button onClick={() => setOpen(false)} style={{
             border: "none", background: "none", cursor: "pointer",
-            padding: "8px", color: "#0F172A"
+            padding: "8px", color: "#000000"
           }}>
             <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -64,7 +64,7 @@ export default function MobileMenu() {
                   onClick={() => !item.children && setOpen(false)}
                   style={{
                     flex: 1, padding: "12px 12px", borderRadius: "8px",
-                    fontSize: "15px", fontWeight: 600, color: "#0F172A",
+                    fontSize: "15px", fontWeight: 600, color: "#000000",
                     textDecoration: "none", display: "block"
                   }}
                 >
@@ -75,7 +75,7 @@ export default function MobileMenu() {
                     onClick={() => setExpanded(expanded === item.href ? null : item.href)}
                     style={{
                       border: "none", background: "none", cursor: "pointer",
-                      padding: "8px", color: "#0F172A"
+                      padding: "8px", color: "#000000"
                     }}
                   >
                     <svg
@@ -88,7 +88,7 @@ export default function MobileMenu() {
                 )}
               </div>
               {item.children && expanded === item.href && (
-                <div style={{ marginLeft: "12px", paddingLeft: "12px", borderLeft: "2px solid #F0E6C5" }}>
+                <div style={{ marginLeft: "12px", paddingLeft: "12px", borderLeft: "2px solid #e2e2cf" }}>
                   {item.children.map((child) => (
                     <Link
                       key={child.href}
@@ -96,7 +96,7 @@ export default function MobileMenu() {
                       onClick={() => setOpen(false)}
                       style={{
                         display: "block", padding: "9px 12px", borderRadius: "6px",
-                        fontSize: "13px", color: "#4A4A4A", textDecoration: "none"
+                        fontSize: "13px", color: "#646467", textDecoration: "none"
                       }}
                     >
                       {child.label}
@@ -110,7 +110,7 @@ export default function MobileMenu() {
 
         <a href="https://skinderma.sk/kosik" style={{
           marginTop: "auto", paddingTop: "24px", display: "block",
-          background: "#DCA54A", color: "#fff", textAlign: "center",
+          background: "#000000", color: "#fff", textAlign: "center",
           padding: "14px", fontWeight: 600, fontSize: "14px",
           textDecoration: "none", borderRadius: "4px"
         }}>
@@ -128,8 +128,8 @@ export default function MobileMenu() {
         onClick={() => setOpen(true)}
         style={{
           display: "inline-flex", alignItems: "center", justifyContent: "center",
-          padding: "8px", borderRadius: "6px", border: "1.5px solid #DCA54A",
-          background: "#FAF5E5", cursor: "pointer", color: "#0F172A"
+          padding: "8px", borderRadius: "6px", border: "1.5px solid #000000",
+          background: "#f5f5f5", cursor: "pointer", color: "#000000"
         }}
         className="xl:hidden"
       >

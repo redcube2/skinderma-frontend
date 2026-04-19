@@ -43,7 +43,7 @@ export const menu: MenuItem[] = [
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-[100] border-b border-cream-dark/60 bg-white">
+    <header className="sticky top-0 z-[100] border-b border-[#e2e2cf] bg-white">
       <div className="container-page flex h-20 items-center justify-between gap-6">
         <Link href="/" aria-label="Skinderma – domov" className="shrink-0 min-w-0">
           <Image
@@ -61,7 +61,7 @@ export default function Navbar() {
             <div key={item.href} className="group relative">
               <Link
                 href={item.href}
-                className="inline-flex items-center gap-1 text-sm font-semibold text-navy transition-colors hover:text-gold"
+                className="inline-flex items-center gap-1 text-sm font-semibold text-[#646467] transition-colors hover:text-black"
               >
                 {item.label}
                 {item.children && (
@@ -82,12 +82,12 @@ export default function Navbar() {
               </Link>
               {item.children && (
                 <div className="invisible absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                  <div className="rounded-xl border border-cream-dark/60 bg-white py-2 shadow-lg">
+                  <div className="rounded-xl border border-[#e2e2cf] bg-white py-2 shadow-lg">
                     {item.children.map((child) => (
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="block px-4 py-2 text-sm text-navy transition-colors hover:bg-cream hover:text-gold"
+                        className="block px-4 py-2 text-sm text-[#646467] transition-colors hover:bg-[#f5f5f5] hover:text-black"
                       >
                         {child.label}
                       </Link>
@@ -103,7 +103,7 @@ export default function Navbar() {
           <a
             href="https://skinderma.sk/kosik"
             aria-label="Košík"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-navy transition-colors hover:bg-cream"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-black transition-colors hover:bg-[#f5f5f5]"
           >
             <svg
               className="h-6 w-6"

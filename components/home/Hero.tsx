@@ -13,18 +13,18 @@ export default function Hero() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-navy/60" />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
       <div className="container-page relative z-[1] py-24">
         <div className="max-w-2xl">
-          <p className="mb-4 text-sm font-medium uppercase tracking-widest text-gold">
+          <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[#e2e2cf]">
             Lekárska kozmetika
           </p>
           <h1 className="mb-6 text-5xl font-light leading-tight text-white md:text-7xl">
             Budúcnosť
             <br />
-            <span className="text-gold">lekárskej kozmetiky</span>
+            <span className="text-[#e2e2cf]">lekárskej kozmetiky</span>
           </h1>
           <p className="mb-8 max-w-xl text-lg text-white/80">
             GMP certifikované produkty pre profesionálov aj domáce použitie.
@@ -33,7 +33,7 @@ export default function Hero() {
           <div className="flex flex-wrap gap-4">
             <Link
               href="/produkty"
-              className="bg-gold px-8 py-3 font-medium text-white transition-colors hover:bg-gold-dark"
+              className="bg-black px-8 py-3 font-medium text-white transition-colors hover:bg-[#333333]"
             >
               Preskúmať produkty
             </Link>

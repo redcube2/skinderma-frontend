@@ -8,10 +8,10 @@ export default function ProductCard({ product }: { product: WCProduct }) {
   const category = product.categories?.[0];
 
   return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border border-cream-dark/60 bg-white shadow-sm transition-shadow hover:shadow-lg">
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-[#e2e2cf] bg-white shadow-sm transition-shadow hover:shadow-lg">
       <Link
         href={`/produkty/${product.slug}`}
-        className="relative block aspect-square overflow-hidden bg-cream"
+        className="relative block aspect-square overflow-hidden bg-[#e2e2cf]"
       >
         {image ? (
           <Image
@@ -22,19 +22,19 @@ export default function ProductCard({ product }: { product: WCProduct }) {
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-cream to-cream-dark p-6 text-center">
-            <span className="line-clamp-4 text-sm font-medium text-navy/70">
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#e2e2cf] to-[#dfdfdf] p-6 text-center">
+            <span className="line-clamp-4 text-sm font-medium text-black/70">
               {product.name}
             </span>
           </div>
         )}
         {category && (
-          <span className="absolute left-3 top-3 rounded-full bg-cream px-3 py-1 text-xs font-semibold uppercase tracking-wide text-navy">
+          <span className="absolute left-3 top-3 rounded-full bg-[#e2e2cf] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#646467]">
             {category.name}
           </span>
         )}
         {product.on_sale && (
-          <span className="absolute right-3 top-3 rounded-full bg-gold px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
+          <span className="absolute right-3 top-3 rounded-full bg-black px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
             Akcia
           </span>
         )}
@@ -42,7 +42,7 @@ export default function ProductCard({ product }: { product: WCProduct }) {
 
       <div className="flex flex-1 flex-col gap-3 p-5">
         <Link href={`/produkty/${product.slug}`}>
-          <h3 className="line-clamp-2 text-base font-semibold text-navy transition-colors group-hover:text-gold">
+          <h3 className="line-clamp-2 text-base font-semibold text-black transition-colors group-hover:text-[#646467]">
             {product.name}
           </h3>
         </Link>
@@ -50,17 +50,17 @@ export default function ProductCard({ product }: { product: WCProduct }) {
         <div className="flex items-baseline gap-2">
           {product.on_sale && product.regular_price ? (
             <>
-              <span className="text-lg font-bold text-gold">
+              <span className="text-lg font-bold text-black">
                 {formatPriceWithVat(product.price)}
               </span>
-              <span className="text-sm text-brand-gray line-through">
+              <span className="text-sm text-[#646467] line-through">
                 {formatPriceWithVat(product.regular_price)}
               </span>
               <span className="text-xs text-gray-400">s DPH</span>
             </>
           ) : (
             <>
-              <span className="text-lg font-bold text-gold">
+              <span className="text-lg font-bold text-black">
                 {formatPriceWithVat(product.price)}
               </span>
               <span className="text-xs text-gray-400">s DPH</span>

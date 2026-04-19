@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="mt-16 bg-[#F2F2F0] text-navy">
+    <footer className="mt-16 bg-[#f2f2f0] text-black">
       {/* Main footer */}
       <div className="flex flex-col items-center py-16 px-6 text-center">
         {/* Logo */}
@@ -19,31 +19,31 @@ export default function Footer() {
         <nav className="flex flex-col items-center gap-3 mb-8">
           <Link
             href="/dodanie"
-            className="text-base text-navy hover:text-gold transition-colors"
+            className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Dodanie a platba
           </Link>
           <Link
             href="/odstupenie"
-            className="text-base text-navy hover:text-gold transition-colors"
+            className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Odstúpenie od zmluvy
           </Link>
           <a
             href="https://skinderma.sk/obchodne-podmienky"
-            className="text-base text-navy hover:text-gold transition-colors"
+            className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Obchodné podmienky
           </a>
           <a
             href="https://skinderma.sk/reklamacny-poriadok"
-            className="text-base text-navy hover:text-gold transition-colors"
+            className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Reklamačný poriadok
           </a>
           <a
             href="https://skinderma.sk/ochrana-osobnych-udajov"
-            className="text-base text-navy hover:text-gold transition-colors"
+            className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Ochrana osobných údajov
           </a>
@@ -54,7 +54,7 @@ export default function Footer() {
           <a
             href="https://www.instagram.com/skinderma_sk"
             aria-label="Instagram"
-            className="text-navy hover:text-gold transition-colors"
+            className="text-[#646467] hover:text-black transition-colors"
           >
             <svg className="h-7 w-7" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.9.3 2.3.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.4.3 1.1.4 2.3.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.3 1.9-.4 2.3-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.4.2-1.1.3-2.3.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.9-.3-2.3-.4-.6-.2-1-.5-1.5-1-.5-.5-.8-.9-1-1.5-.2-.4-.3-1.1-.4-2.3C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.3-1.9.4-2.3.2-.6.5-1 1-1.5.5-.5.9-.8 1.5-1 .4-.2 1.1-.3 2.3-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1 .1-1.6.2-2 .4-.5.2-.8.4-1.2.8-.4.4-.6.7-.8 1.2-.2.3-.3.9-.4 2-.1 1.2-.1 1.5-.1 4.6s0 3.5.1 4.7c.1 1 .2 1.6.4 2 .2.5.4.8.8 1.2.4.4.7.6 1.2.8.4.2.9.3 2 .4 1.2.1 1.5.1 4.6.1s3.5 0 4.7-.1c1-.1 1.6-.2 2-.4.5-.2.8-.4 1.2-.8.4-.4.6-.7.8-1.2.2-.4.3-.9.4-2 .1-1.2.1-1.5.1-4.6s0-3.5-.1-4.7c-.1-1-.2-1.6-.4-2-.2-.5-.4-.8-.8-1.2-.4-.4-.7-.6-1.2-.8-.4-.2-.9-.3-2-.4-1.2-.1-1.5-.1-4.6-.1zm0 3.1a4.9 4.9 0 110 9.8 4.9 4.9 0 010-9.8zm0 1.8a3.1 3.1 0 100 6.2 3.1 3.1 0 000-6.2zm5.1-3.1a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" />
@@ -63,7 +63,7 @@ export default function Footer() {
           <a
             href="https://www.facebook.com/SkindermaSK"
             aria-label="Facebook"
-            className="text-navy hover:text-gold transition-colors"
+            className="text-[#646467] hover:text-black transition-colors"
           >
             <svg className="h-7 w-7" viewBox="0 0 24 24" fill="currentColor">
               <path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.2-1.5 1.5-1.5h1.6V4.4a21.6 21.6 0 00-2.4-.1c-2.3 0-3.9 1.4-3.9 4v2.2H8v3h2.3V21h3.2z" />
