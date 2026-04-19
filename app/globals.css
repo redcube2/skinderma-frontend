@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-quicksand), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer components {
+  .btn-gold {
+    @apply inline-flex items-center justify-center rounded-full bg-gold px-6 py-3 font-semibold text-white transition-colors hover:bg-gold-dark;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-full border border-gold px-6 py-3 font-semibold text-gold transition-colors hover:bg-gold hover:text-white;
+  }
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
