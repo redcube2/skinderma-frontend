@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[100vh] items-center bg-black">
+    <section className="relative flex min-h-[100vh] items-center bg-[#111111]">
       <div className="mx-auto w-full max-w-[1200px] px-6 py-20 md:px-10 md:py-0">
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-20">
           {/* Obrázok – hore na mobile, vpravo na desktope */}
@@ -30,7 +30,7 @@ export default function Hero() {
           {/* Text */}
           <div className="order-2 md:order-1">
             <p className="mb-6 text-xs uppercase tracking-[0.3em] text-[#646467]">
-              Medicínska kozmetika
+              Lekárska kozmetika
             </p>
             <h1 className="mb-8 text-[clamp(44px,6vw,88px)] font-light leading-[1.05] text-white">
               Budúcnosť
@@ -39,7 +39,7 @@ export default function Hero() {
               <br />
               kozmetiky
             </h1>
-            <p className="mb-12 max-w-md text-base leading-[1.8] text-[#b0b0b0]">
+            <p className="mb-12 max-w-md text-base leading-[1.8] text-[#999999]">
               GMP certifikované produkty pre profesionálov aj domáce použitie.
               Distribuované do viac ako 50 krajín sveta.
             </p>

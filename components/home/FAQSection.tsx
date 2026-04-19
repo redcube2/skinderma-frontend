@@ -13,11 +13,11 @@ const faqs = [
   },
   {
     q: "Aká je dodacia lehota?",
-    a: "Štandardná dodacia lehota je 2–5 pracovných dní. Pri objednávkach nad 200€ je doprava zdarma.",
+    a: "Produkty skladom doručujeme do 2–5 pracovných dní. Produkty, ktoré nie sú momentálne skladom a vyrábajú sa na objednávku, majú dodaciu lehotu približne 1 mesiac. Informáciu o dostupnosti konkrétneho produktu nájdete v detaile produktu, alebo nás kontaktujte.",
   },
   {
-    q: "Kde sa produkty vyrábajú?",
-    a: "Všetky produkty Skinderma sa vyrábajú v certifikovaných GMP laboratóriách podľa farmaceutických štandardov.",
+    q: "Kde sa produkty Skinderma vyrábajú?",
+    a: "Skinderma Medical Cosmetics je španielska značka. Všetky produkty sa vyrábajú v certifikovaných GMP laboratóriách v Španielsku podľa prísnych farmaceutických štandardov. Španielska kozmetika sa dlhodobo radí medzi európsku špičku v oblasti medicínskej estetiky.",
   },
   {
     q: "Môžem vrátiť produkt?",
@@ -26,6 +26,10 @@ const faqs = [
   {
     q: "Obsahujú produkty parabény alebo sulfáty?",
     a: "Skinderma formulácie sú navrhnuté bez zbytočných plnidiel. Každý produkt má uvedené úplné zloženie na etikete.",
+  },
+  {
+    q: "Získam prístup k softvéru Skinia.eu?",
+    a: "Áno – pri nákupe nad 200€ získate 1 mesiac prémiového prístupu k platforme Skinia.eu zdarma. Skinia je kompletný softvér pre správu salóna: klientske karty, AI protokoly, online rezervácie a homecare plány. Po skúšobnom mesiaci si môžete predplatné predĺžiť.",
   },
 ];
 
