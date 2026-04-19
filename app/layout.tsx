@@ -58,11 +58,27 @@ export default function RootLayout({
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Skinderma",
+    name: "Skinderma Medical Cosmetics",
     legalName: "Red Cube s.r.o.",
-    url: siteUrl,
-    logo: `${siteUrl}/logo.svg`,
-    sameAs: [] as string[],
+    url: "https://skinderma.sk",
+    logo: "https://skinderma.sk/wp-content/uploads/2025/07/Logo-skinderma-cabecera-3.webp",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Nám. M.R. Štefánika 16",
+      addressLocality: "Komárno",
+      postalCode: "945 01",
+      addressCountry: "SK",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+421905108641",
+      contactType: "customer service",
+      email: "info@skinderma.sk",
+    },
+    sameAs: [
+      "https://www.instagram.com/skinderma_sk",
+      "https://www.facebook.com/SkindermaSK",
+    ],
   };
 
   return (

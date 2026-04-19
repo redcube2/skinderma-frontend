@@ -7,14 +7,23 @@ export default function Hero() {
       <div className="mx-auto w-full max-w-[1200px] px-6 py-20 md:px-10 md:py-0">
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-20">
           {/* Obrázok – hore na mobile, vpravo na desktope */}
-          <div className="relative order-1 aspect-square w-full max-h-[80vh] overflow-hidden md:order-2">
+          <div className="relative order-1 aspect-square w-full max-h-[80vh] overflow-hidden bg-[#0a0a0a] md:order-2">
             <Image
               src="https://skinderma.sk/wp-content/uploads/2025/09/serum-solution-scaled-1.jpg"
-              alt="Skinderma produkty"
+              alt="Skinderma sérum"
               fill
               sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover"
+              className="object-cover object-center"
               priority
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(0,0,0,0.3) 0%, transparent 50%, rgba(0,0,0,0.6) 100%)",
+                animation: "shimmer 8s ease-in-out infinite",
+              }}
             />
           </div>
 

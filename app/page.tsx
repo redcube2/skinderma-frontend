@@ -1,10 +1,14 @@
 import Hero from "@/components/home/Hero";
 import MarqueeBanner from "@/components/home/MarqueeBanner";
+import StatsCounter from "@/components/home/StatsCounter";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import ParallaxSection from "@/components/home/ParallaxSection";
 import CategoryGrid from "@/components/home/CategoryGrid";
+import SkiniaPromo from "@/components/home/SkiniaPromo";
 import USPSection from "@/components/home/USPSection";
 import GallerySection from "@/components/home/GallerySection";
+import FAQSection from "@/components/home/FAQSection";
+import { FadeInSection } from "@/components/ui/FadeInSection";
 import {
   getCategories,
   getFeaturedProducts,
@@ -30,11 +34,28 @@ export default async function HomePage() {
     <>
       <Hero />
       <MarqueeBanner />
-      <FeaturedProducts products={products} />
+      <FadeInSection>
+        <StatsCounter />
+      </FadeInSection>
+      <FadeInSection delay={100}>
+        <FeaturedProducts products={products} />
+      </FadeInSection>
       <ParallaxSection />
-      <CategoryGrid categories={categories} />
-      <USPSection />
-      <GallerySection />
+      <FadeInSection delay={100}>
+        <CategoryGrid categories={categories} />
+      </FadeInSection>
+      <FadeInSection>
+        <SkiniaPromo />
+      </FadeInSection>
+      <FadeInSection delay={100}>
+        <USPSection />
+      </FadeInSection>
+      <FadeInSection>
+        <GallerySection />
+      </FadeInSection>
+      <FadeInSection delay={100}>
+        <FAQSection />
+      </FadeInSection>
     </>
   );
 }
