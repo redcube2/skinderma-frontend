@@ -56,14 +56,14 @@ export default function ProductCard({ product }: { product: WCProduct }) {
               <span className="text-sm text-[#646467] line-through">
                 {formatPriceWithVat(product.regular_price)}
               </span>
-              <span className="text-xs text-gray-400">s DPH</span>
+              <span className="text-xs text-[#646467]">s DPH</span>
             </>
           ) : (
             <>
               <span className="text-lg font-bold text-black">
                 {formatPriceWithVat(product.price)}
               </span>
-              <span className="text-xs text-gray-400">s DPH</span>
+              <span className="text-xs text-[#646467]">s DPH</span>
             </>
           )}
         </div>

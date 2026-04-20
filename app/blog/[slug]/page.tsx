@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatPostDate, getPost } from "@/lib/wordpress";
 import { stripHtml } from "@/lib/woocommerce";
+import { PostViewTracker } from "@/components/blog/PostViewTracker";
+import { getReadingTime } from "@/lib/readingTime";
 
 export const revalidate = 3600;
 
@@ -57,6 +59,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
   const media = post._embedded?.["wp:featuredmedia"]?.[0];
   const author = post._embedded?.author?.[0];
+  const readingTime = getReadingTime(post.content.rendered);
 
   return (
     <article className="container-page py-10 md:py-16">
@@ -81,6 +84,36 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           className="text-3xl font-bold text-navy md:text-5xl"
           dangerouslySetInnerHTML={{ __html: post.title.rendered }}
         />
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "16px",
+            alignItems: "center",
+            color: "#646467",
+            fontSize: 13,
+            marginTop: 16,
+          }}
+        >
+          <span>{formatPostDate(post.date)}</span>
+          <span style={{ color: "#e2e2cf" }}>·</span>
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+            {readingTime} min čítania
+          </span>
+          <span style={{ color: "#e2e2cf" }}>·</span>
+          <PostViewTracker postId={post.id} />
+        </div>
       </header>
 
       {media?.source_url && (
@@ -97,7 +130,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       )}
 
       <div
-        className="prose prose-lg max-w-3xl text-brand-gray"
+        className="prose prose-lg max-w-3xl prose-headings:text-black prose-headings:font-normal prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-[#e8e4dc] prose-h3:text-xl prose-h3:mt-8 prose-p:text-[#646467] prose-p:leading-relaxed prose-li:text-[#646467] prose-strong:text-black prose-a:text-black prose-a:underline prose-a:underline-offset-2 hover:prose-a:text-[#646467] prose-ul:my-4 prose-ol:my-4"
         dangerouslySetInnerHTML={{ __html: post.content.rendered }}
       />
     </article>

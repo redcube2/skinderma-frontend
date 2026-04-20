@@ -98,11 +98,15 @@ export default function FeaturedProducts({
                         <span className="text-xs text-[#646467] line-through">
                           {formatPriceWithVat(product.regular_price)}
                         </span>
+                        <span className="text-xs text-[#646467]">s DPH</span>
                       </>
                     ) : (
-                      <span className="text-lg font-semibold text-black">
-                        {formatPriceWithVat(product.price)}
-                      </span>
+                      <>
+                        <span className="text-lg font-semibold text-black">
+                          {formatPriceWithVat(product.price)}
+                        </span>
+                        <span className="text-xs text-[#646467]">s DPH</span>
+                      </>
                     )}
                   </div>
 

@@ -35,7 +35,7 @@ export default function Hero() {
             <h1 className="mb-8 text-[clamp(44px,6vw,88px)] font-light leading-[1.05] text-white">
               Budúcnosť
               <br />
-              medicínskej
+              lekárskej
               <br />
               kozmetiky
             </h1>

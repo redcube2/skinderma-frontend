@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { formatPostDate, getPosts } from "@/lib/wordpress";
+import { getReadingTime } from "@/lib/readingTime";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -54,9 +55,15 @@ export default async function BlogPage() {
                   ) : null}
                 </div>
                 <div className="flex flex-1 flex-col gap-2 p-5">
-                  <span className="text-xs font-semibold uppercase tracking-wide text-gold">
-                    {formatPostDate(p.date)}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold uppercase tracking-wide text-gold">
+                      {formatPostDate(p.date)}
+                    </span>
+                    <span className="text-xs text-[#646467]">·</span>
+                    <span className="text-xs text-[#646467]">
+                      {getReadingTime(p.content?.rendered || p.excerpt.rendered)} min čítania
+                    </span>
+                  </div>
                   <h2
                     className="line-clamp-2 text-lg font-semibold text-navy transition-colors group-hover:text-gold"
                     dangerouslySetInnerHTML={{ __html: p.title.rendered }}
