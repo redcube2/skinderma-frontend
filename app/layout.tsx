@@ -88,6 +88,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        {/* Development banner */}
+        <div style={{
+          background: "#000", color: "#e2e2cf", textAlign: "center",
+          padding: "10px 20px", fontSize: 12, letterSpacing: "0.15em",
+          textTransform: "uppercase"
+        }}>
+          Stránka je vo vývoji · Pre objednávky navštívte{" "}
+          <a href="https://skinderma.sk" style={{ color: "#fff", textDecoration: "underline" }}>
+            skinderma.sk
+          </a>
+        </div>
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
