@@ -3,6 +3,8 @@ import { Quicksand } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/nav/Navbar";
 import Footer from "@/components/footer/Footer";
+import { CartProvider } from "@/components/cart/CartProvider";
+import CartDrawer from "@/components/cart/CartDrawer";
 
 const quicksand = Quicksand({
   subsets: ["latin", "latin-ext"],
@@ -88,20 +90,23 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        {/* Development banner */}
-        <div style={{
-          background: "#000", color: "#e2e2cf", textAlign: "center",
-          padding: "10px 20px", fontSize: 12, letterSpacing: "0.15em",
-          textTransform: "uppercase"
-        }}>
-          Stránka je vo vývoji · Pre objednávky navštívte{" "}
-          <a href="https://skinderma.sk" style={{ color: "#fff", textDecoration: "underline" }}>
-            skinderma.sk
-          </a>
-        </div>
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CartProvider>
+          {/* Development banner */}
+          <div style={{
+            background: "#000", color: "#e2e2cf", textAlign: "center",
+            padding: "10px 20px", fontSize: 12, letterSpacing: "0.15em",
+            textTransform: "uppercase"
+          }}>
+            Stránka je vo vývoji · Pre objednávky navštívte{" "}
+            <a href="https://skinderma.sk" style={{ color: "#fff", textDecoration: "underline" }}>
+              skinderma.sk
+            </a>
+          </div>
+          <Navbar />
+          <CartDrawer />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

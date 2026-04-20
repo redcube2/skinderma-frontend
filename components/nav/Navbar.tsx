@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import MobileMenu from "./MobileMenu";
+import { CartIcon } from "@/components/cart/CartIcon";
 
 type MenuItem = {
   href: string;
@@ -100,27 +101,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href="https://skinderma.sk/kosik"
-            aria-label="Košík"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-black transition-colors hover:bg-[#f5f5f5]"
-          >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={1.8}
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M2.25 3h1.5l1.5 12.75a1.5 1.5 0 001.5 1.35h9.75a1.5 1.5 0 001.48-1.23L19.5 6h-14"
-              />
-              <circle cx="9" cy="20" r="1.25" />
-              <circle cx="17" cy="20" r="1.25" />
-            </svg>
-          </a>
+          <CartIcon />
           <MobileMenu />
         </div>
       </div>

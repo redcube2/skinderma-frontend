@@ -3,12 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  addToCartUrl,
   formatPriceWithVat,
   getProduct,
   priceWithVat,
   stripHtml,
 } from "@/lib/woocommerce";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
 
 export const revalidate = 3600;
 
@@ -195,9 +195,10 @@ export default async function ProductDetailPage({
           )}
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href={addToCartUrl(product)} className="btn-gold">
-              Pridať do košíka
-            </a>
+            <AddToCartButton
+              productId={product.id}
+              inStock={product.stock_status === "instock"}
+            />
             <a
               href={product.permalink}
               className="btn-outline"
