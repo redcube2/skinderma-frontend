@@ -11,11 +11,16 @@ export default function robots(): MetadataRoute.Robots {
     };
   }
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: ["/api/", "/_next/"],
-    },
+    rules: [
+      { userAgent: "*", allow: "/", disallow: ["/api/", "/_next/"] },
+      // Explicitne povol AI crawlery
+      { userAgent: "GPTBot", allow: "/" },
+      { userAgent: "ChatGPT-User", allow: "/" },
+      { userAgent: "Google-Extended", allow: "/" },
+      { userAgent: "PerplexityBot", allow: "/" },
+      { userAgent: "anthropic-ai", allow: "/" },
+      { userAgent: "ClaudeBot", allow: "/" },
+    ],
     sitemap: `${BASE}/sitemap.xml`,
   };
 }

@@ -18,6 +18,12 @@ export default function Footer() {
         {/* Links */}
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8">
           <Link
+            href="/o-skinderme"
+            className="text-base text-black hover:text-[#646467] transition-colors"
+          >
+            O Skinderme
+          </Link>
+          <Link
             href="/dodanie"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
