@@ -144,3 +144,61 @@ export function stripHtml(html: string): string {
     .replace(/&#8217;/g, "’")
     .trim();
 }
+
+const STORE_API = "https://skinderma.sk/wp-json/wc/store/v1";
+
+export interface StoreCartItem {
+  key: string;
+  id: number;
+  name: string;
+  quantity: number;
+  prices: { price: string; regular_price: string };
+  images: Array<{ src: string }>;
+}
+
+export interface StoreCart {
+  items: StoreCartItem[];
+  items_count: number;
+  totals: { total_price: string; currency_symbol: string; currency_minor_unit: number };
+  cart_token?: string;
+}
+
+function buildStoreHeaders(token?: string | null): HeadersInit {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  if (token) {
+    headers["Cart-Token"] = token;
+  }
+  return headers;
+}
+
+export async function storeAddToCart(
+  productId: number,
+  quantity = 1,
+  token?: string | null
+): Promise<{ cart: StoreCart; token: string }> {
+  const res = await fetch(`${STORE_API}/cart/add-item`, {
+    method: "POST",
+    headers: buildStoreHeaders(token),
+    body: JSON.stringify({ id: productId, quantity }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || "Failed to add to cart");
+  }
+
+  const cart: StoreCart = await res.json();
+  const newToken = res.headers.get("Cart-Token") || token || "";
+
+  return { cart, token: newToken };
+}
+
+export async function storeGetCart(token?: string | null): Promise<StoreCart> {
+  const res = await fetch(`${STORE_API}/cart`, {
+    headers: buildStoreHeaders(token),
+  });
+  if (!res.ok) throw new Error("Failed to get cart");
+  return res.json();
+}

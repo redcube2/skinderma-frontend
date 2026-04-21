@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { WCProduct } from "@/types/woocommerce";
-import { addToCartUrl, formatPriceWithVat } from "@/lib/woocommerce";
+import { formatPriceWithVat } from "@/lib/woocommerce";
+import { AddToCartBtn } from "@/components/cart/AddToCartBtn";
 
 export default function ProductCard({ product }: { product: WCProduct }) {
   const image = product.images?.[0];
@@ -68,12 +69,13 @@ export default function ProductCard({ product }: { product: WCProduct }) {
           )}
         </div>
 
-        <a
-          href={addToCartUrl(product)}
-          className="btn-gold mt-auto w-full text-sm"
-        >
-          Pridať do košíka
-        </a>
+        <div className="mt-auto pt-2">
+          <AddToCartBtn
+            productId={product.id}
+            productName={product.name}
+            inStock={product.stock_status === "instock"}
+          />
+        </div>
       </div>
     </div>
   );

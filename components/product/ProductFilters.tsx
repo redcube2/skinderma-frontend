@@ -20,34 +20,42 @@ export function ProductFilters({ products, categories }: Props) {
       const q = search.toLowerCase();
       result = result.filter(
         (p) =>
-          p.name?.toLowerCase().includes(q) ||
-          p.short_description?.toLowerCase().includes(q)
+          (p.name || "").toLowerCase().includes(q) ||
+          (p.short_description || "")
+            .replace(/<[^>]*>/g, "")
+            .toLowerCase()
+            .includes(q)
       );
     }
 
-    if (selectedCat) {
-      result = result.filter((p) =>
-        p.categories?.some((c) => c.id === selectedCat)
-      );
+    if (selectedCat !== null) {
+      result = result.filter((p) => {
+        const cats = p.categories || [];
+        return cats.some((c: { id: number }) => c.id === selectedCat);
+      });
     }
 
     if (sort === "price_asc") {
-      result.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+      result.sort(
+        (a, b) => parseFloat(a.price || "0") - parseFloat(b.price || "0")
+      );
     } else if (sort === "price_desc") {
-      result.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+      result.sort(
+        (a, b) => parseFloat(b.price || "0") - parseFloat(a.price || "0")
+      );
     } else if (sort === "newest") {
       result.sort(
         (a, b) =>
-          new Date(b.date_created).getTime() -
-          new Date(a.date_created).getTime()
+          new Date(b.date_created || 0).getTime() -
+          new Date(a.date_created || 0).getTime()
       );
     }
 
     return result;
   }, [products, search, selectedCat, sort]);
 
-  const relevantCats = categories.filter((c) =>
-    products.some((p) => p.categories?.some((pc) => pc.id === c.id))
+  const relevantCats = categories.filter(
+    (c) => c.count > 0 && c.slug !== "uncategorized"
   );
 
   const countLabel =
@@ -190,6 +198,19 @@ export function ProductFilters({ products, categories }: Props) {
         >
           Všetky
         </button>
+        {categories.length === 0 && (
+          <span
+            style={{
+              color: "#646467",
+              fontSize: 12,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              padding: "6px 4px",
+            }}
+          >
+            Načítavam kategórie…
+          </span>
+        )}
         {relevantCats.map((cat) => (
           <button
             key={cat.id}

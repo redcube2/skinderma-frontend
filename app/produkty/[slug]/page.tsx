@@ -8,7 +8,7 @@ import {
   priceWithVat,
   stripHtml,
 } from "@/lib/woocommerce";
-import { AddToCartButton } from "@/components/cart/AddToCartButton";
+import { AddToCartBtn } from "@/components/cart/AddToCartBtn";
 
 export const revalidate = 3600;
 
@@ -195,18 +195,31 @@ export default async function ProductDetailPage({
           )}
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <AddToCartButton
+            <AddToCartBtn
               productId={product.id}
+              productName={product.name}
               inStock={product.stock_status === "instock"}
+              style={{ padding: "16px 40px" }}
             />
-            <a
-              href={product.permalink}
-              className="btn-outline"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Detaily na skinderma.sk
-            </a>
+            {product.stock_status === "instock" && (
+              <a
+                href="/kosik"
+                style={{
+                  display: "inline-block",
+                  border: "1px solid #000",
+                  color: "#000",
+                  padding: "16px 40px",
+                  fontSize: 11,
+                  letterSpacing: "0.25em",
+                  textTransform: "uppercase",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                  fontFamily: "inherit",
+                }}
+              >
+                Zobraziť košík
+              </a>
+            )}
           </div>
 
           <div className="mt-6 flex items-center gap-2 text-sm">

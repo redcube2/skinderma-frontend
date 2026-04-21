@@ -108,7 +108,7 @@ export default function MobileMenu() {
           ))}
         </nav>
 
-        <a href="https://skinderma.sk/kosik" style={{
+        <a href="/kosik" style={{
           marginTop: "auto", paddingTop: "24px", display: "block",
           background: "#000000", color: "#fff", textAlign: "center",
           padding: "14px", fontWeight: 600, fontSize: "14px",

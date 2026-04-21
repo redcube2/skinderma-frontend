@@ -1,11 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { WCProduct } from "@/types/woocommerce";
-import {
-  addToCartUrl,
-  formatPriceWithVat,
-  stripHtml,
-} from "@/lib/woocommerce";
+import { formatPriceWithVat, stripHtml } from "@/lib/woocommerce";
+import { AddToCartBtn } from "@/components/cart/AddToCartBtn";
 
 export default function FeaturedProducts({
   products,
@@ -110,12 +107,13 @@ export default function FeaturedProducts({
                     )}
                   </div>
 
-                  <a
-                    href={addToCartUrl(product)}
-                    className="mt-2 inline-block border-b border-black pb-1 text-[11px] uppercase tracking-[0.3em] text-black self-start transition-opacity hover:opacity-60"
-                  >
-                    Do košíka
-                  </a>
+                  <div className="mt-2">
+                    <AddToCartBtn
+                      productId={product.id}
+                      productName={product.name}
+                      inStock={product.stock_status === "instock"}
+                    />
+                  </div>
                 </div>
               </div>
             );

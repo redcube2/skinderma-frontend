@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import MobileMenu from "./MobileMenu";
-import { CartIcon } from "@/components/cart/CartIcon";
+import { CartNavIcon } from "./CartNavIcon";
+
 
 type MenuItem = {
   href: string;
@@ -101,7 +102,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <CartIcon />
+          <CartNavIcon />
           <MobileMenu />
         </div>
       </div>
