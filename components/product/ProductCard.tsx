@@ -72,7 +72,6 @@ export default function ProductCard({ product }: { product: WCProduct }) {
         <div className="mt-auto pt-2">
           <AddToCartBtn
             productId={product.id}
-            productName={product.name}
             inStock={product.stock_status === "instock"}
           />
         </div>

@@ -1,72 +1,12 @@
-"use client";
-import { useState, useEffect } from "react";
-
-const STORAGE_KEY = "wc_cart_count";
-
 export function CartNavIcon() {
-  const [hasItems, setHasItems] = useState(false);
-  const [bounce, setBounce] = useState(false);
-
-  useEffect(() => {
-    const initial = parseInt(localStorage.getItem(STORAGE_KEY) || "0", 10);
-    setHasItems(initial > 0);
-
-    const handler = (e: Event) => {
-      const count = (e as CustomEvent).detail?.count ?? 0;
-      setHasItems(count > 0);
-      setBounce(true);
-      setTimeout(() => setBounce(false), 600);
-    };
-    window.addEventListener("cart-updated", handler);
-    return () => window.removeEventListener("cart-updated", handler);
-  }, []);
-
   return (
-    <a
-      href="/kosik"
-      aria-label="Košík"
-      data-cart-icon
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: 40,
-        height: 40,
-        borderRadius: "50%",
-        color: "#000",
-        transition: "background 0.2s",
-        textDecoration: "none",
-        position: "relative",
-      }}
-    >
-      <span
-        style={{
-          display: "inline-flex",
-          animation: bounce ? "cartBounce 0.6s ease" : "none",
-          transformOrigin: "center",
-        }}
-      >
-        {hasItems ? (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-          </svg>
-        ) : (
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={1.8}
-          >
-            <path
-              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        )}
-      </span>
+    <a href="/kosik" aria-label="Košík" data-cart-icon="true" style={{
+      display:"inline-flex",alignItems:"center",justifyContent:"center",
+      width:40,height:40,color:"#000",textDecoration:"none",
+    }}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
     </a>
   );
 }

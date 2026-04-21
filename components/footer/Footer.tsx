@@ -16,7 +16,7 @@ export default function Footer() {
         />
 
         {/* Links */}
-        <nav className="flex flex-col items-center gap-3 mb-8">
+        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8">
           <Link
             href="/dodanie"
             className="text-base text-black hover:text-[#646467] transition-colors"
@@ -29,24 +29,24 @@ export default function Footer() {
           >
             Odstúpenie od zmluvy
           </Link>
-          <a
-            href="https://skinderma.sk/obchodne-podmienky"
+          <Link
+            href="/vseobecne-obchodne-podmienky"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Obchodné podmienky
-          </a>
-          <a
-            href="https://skinderma.sk/reklamacny-poriadok"
+          </Link>
+          <Link
+            href="/reklamacny-poriadok"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Reklamačný poriadok
-          </a>
-          <a
-            href="https://skinderma.sk/ochrana-osobnych-udajov"
+          </Link>
+          <Link
+            href="/ochrana-osobnych-udajov"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Ochrana osobných údajov
-          </a>
+          </Link>
         </nav>
 
         {/* Social */}

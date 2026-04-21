@@ -45,7 +45,7 @@ export default function Hero() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/produkty"
+                href="https://skinderma.sk/obchod"
                 className="bg-white px-10 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-black transition-colors hover:bg-[#e2e2cf]"
               >
                 Preskúmať

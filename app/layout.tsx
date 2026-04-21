@@ -3,7 +3,6 @@ import { Quicksand } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/nav/Navbar";
 import Footer from "@/components/footer/Footer";
-import { CartToast } from "@/components/cart/CartToast";
 
 const quicksand = Quicksand({
   subsets: ["latin", "latin-ext"],
@@ -37,6 +36,9 @@ export const metadata: Metadata = {
     title: "Skinderma – Lekárska kozmetika",
     description:
       "GMP certifikovaná lekárska kozmetika. Peelingy, séra a profesionálne produkty pre zdravú pokožku.",
+  },
+  verification: {
+    google: "74mDStrMQJwZ1mFr_DtTgMwuJL6re0jY7t7F1VzQUb8",
   },
   robots: {
     index: true,
@@ -103,7 +105,6 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
-        <CartToast />
       </body>
     </html>
   );

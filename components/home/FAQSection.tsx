@@ -4,32 +4,36 @@ import { useRef, useState } from "react";
 
 const faqs = [
   {
+    q: "Aký je rozdiel medzi lekárskou kozmetikou a bežnou kozmetikou?",
+    a: "Lekárska kozmetika (dermokozmetika) sa vyznačuje vyššou koncentráciou aktívnych látok, vedecky podloženými formuláciami a klinickými štúdiami preukazujúcimi jej účinnosť. Je vyvíjaná v spolupráci s dermatológmi a je určená na riešenie špecifických kožných problémov, zatiaľ čo bežná kozmetika sa zameriava skôr na povrchovú starostlivosť a hydratáciu."
+  },
+  {
+    q: "Ako si môžem vybrať správne produkty pre môj typ pleti?",
+    a: "Pre optimálny výber produktov odporúčame využiť našu osobnú konzultáciu, kde vám naši odborníci pomôžu s diagnostikou pleti a odporučia ideálne riešenia na mieru. V popise každého produktu nájdete aj informácie o tom, pre aký typ pleti a problémy je určený."
+  },
+  {
+    q: "Môžem si produkty vyzdvihnúť osobne?",
+    a: "Áno, vybrané produkty si môžete osobne vyzdvihnúť v našom kozmetickom salóne SKIN Beauty House na adrese ul. Mieru 4235, Komárno alebo na adrese Nám. M. R. Štefánika 16, 945 01 Komárno, po predchádzajúcej dohode alebo potvrdení, že je vaša objednávka pripravená na vyzdvihnutie."
+  },
+  {
     q: "Čo je GMP certifikácia?",
-    a: "GMP (Good Manufacturing Practice) sú prísne farmaceutické výrobné normy, ktoré zaručujú maximálnu čistotu, bezpečnosť a konzistenciu každého produktu Skinderma.",
-  },
-  {
-    q: "Pre koho sú produkty Skinderma určené?",
-    a: "Skinderma ponúka produkty pre profesionálne estetické salóny aj pre domáce použitie. Niektoré série sú určené výlučne pre odborníkov.",
-  },
-  {
-    q: "Aká je dodacia lehota?",
-    a: "Produkty skladom doručujeme do 2–5 pracovných dní. Produkty, ktoré nie sú momentálne skladom a vyrábajú sa na objednávku, majú dodaciu lehotu približne 1 mesiac. Informáciu o dostupnosti konkrétneho produktu nájdete v detaile produktu, alebo nás kontaktujte.",
+    a: "GMP (Good Manufacturing Practice) sú prísne farmaceutické výrobné normy, ktoré zaručujú maximálnu čistotu, bezpečnosť a konzistenciu každého produktu Skinderma. Táto certifikácia je rovnaká ako pri výrobe liekov – garanciou najvyššej kvality."
   },
   {
     q: "Kde sa produkty Skinderma vyrábajú?",
-    a: "Skinderma Medical Cosmetics je španielska značka. Všetky produkty sa vyrábajú v certifikovaných GMP laboratóriách v Španielsku podľa prísnych farmaceutických štandardov. Španielska kozmetika sa dlhodobo radí medzi európsku špičku v oblasti medicínskej estetiky.",
+    a: "Skinderma Medical Cosmetics je španielska značka. Všetky produkty sa vyrábajú v certifikovaných GMP laboratóriách v Španielsku podľa prísnych farmaceutických štandardov. Španielska kozmetika sa dlhodobo radí medzi európsku špičku v oblasti medicínskej estetiky."
+  },
+  {
+    q: "Aká je dodacia lehota?",
+    a: "Produkty skladom doručujeme do 2–5 pracovných dní. Produkty, ktoré nie sú momentálne skladom a vyrábajú sa na objednávku, majú dodaciu lehotu približne 1 mesiac. Informáciu o dostupnosti nájdete v detaile produktu, alebo nás kontaktujte."
   },
   {
     q: "Môžem vrátiť produkt?",
-    a: "Áno – máte právo odstúpiť od zmluvy do 14 dní bez udania dôvodu. Výnimkou sú otvorené hygienické produkty.",
-  },
-  {
-    q: "Obsahujú produkty parabény alebo sulfáty?",
-    a: "Skinderma formulácie sú navrhnuté bez zbytočných plnidiel. Každý produkt má uvedené úplné zloženie na etikete.",
+    a: "Áno – máte právo odstúpiť od zmluvy do 14 dní bez udania dôvodu. Výnimkou sú otvorené hygienické produkty, pri ktorých bol porušený ochranný obal."
   },
   {
     q: "Získam prístup k softvéru Skinia.eu?",
-    a: "Áno – pri nákupe nad 200€ získate 1 mesiac prémiového prístupu k platforme Skinia.eu zdarma. Skinia je kompletný softvér pre správu salóna: klientske karty, AI protokoly, online rezervácie a homecare plány. Po skúšobnom mesiaci si môžete predplatné predĺžiť.",
+    a: "Áno – pri nákupe nad 200 € získate 1 mesiac prémiového prístupu k platforme Skinia.eu zdarma. Skinia je kompletný softvér pre správu salóna: klientske karty, AI protokoly, online rezervácie a homecare plány."
   },
 ];
 

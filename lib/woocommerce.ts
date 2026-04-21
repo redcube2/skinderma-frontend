@@ -115,7 +115,7 @@ export function formatPrice(price: string | number, currency = "€"): string {
   return `${n.toFixed(2).replace(".", ",")} ${currency}`;
 }
 
-export const VAT_RATE = 0.2;
+export const VAT_RATE = 0.23; // DPH Slovakia 23%
 
 export function priceWithVat(price: string | number): number {
   const n = typeof price === "string" ? parseFloat(price) : price;

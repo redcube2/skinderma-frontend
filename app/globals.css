@@ -79,3 +79,8 @@ section + section {
 .cart-icon-full path {
   fill: currentColor;
 }
+
+@media (max-width: 768px) {
+  .o-nas-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .o-nas-pillars { grid-template-columns: 1fr !important; }
+}

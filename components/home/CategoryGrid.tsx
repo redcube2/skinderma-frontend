@@ -40,7 +40,7 @@ export default function CategoryGrid({
             return (
               <Link
                 key={c.id}
-                href={`/kategoria/${c.slug}`}
+                href={`https://skinderma.sk/product-category/${c.slug}`}
                 className="group relative block aspect-[4/5] overflow-hidden bg-black"
               >
                 <Image

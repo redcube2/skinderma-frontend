@@ -24,7 +24,7 @@ export default function FeaturedProducts({
             </h2>
           </div>
           <Link
-            href="/produkty"
+            href="https://skinderma.sk/obchod"
             className="border-b border-black pb-1 text-[11px] uppercase tracking-[0.3em] text-black transition-opacity hover:opacity-60"
           >
             Všetky produkty
@@ -110,7 +110,6 @@ export default function FeaturedProducts({
                   <div className="mt-2">
                     <AddToCartBtn
                       productId={product.id}
-                      productName={product.name}
                       inStock={product.stock_status === "instock"}
                     />
                   </div>
