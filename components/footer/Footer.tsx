@@ -48,10 +48,10 @@ export default function Footer() {
             Reklamačný poriadok
           </Link>
           <Link
-            href="/pre-profesionalov"
+            href="/partnerstvo"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
-            Pre profesionálov
+            Partnerstvo
           </Link>
           <Link
             href="/ochrana-osobnych-udajov"

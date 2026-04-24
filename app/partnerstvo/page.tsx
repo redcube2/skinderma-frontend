@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import PartnerContactForm from "./PartnerContactForm";
 
 export const metadata: Metadata = {
-  title: "Pre profesionálov – Partnerstvo | Skinderma",
+  title: "Partnerstvo – Spolupráca so salónmi | Skinderma",
   description:
-    "Staňte sa partnerským salónom Skinderma. Profesionálne ceny, školenia, certifikované produkty a dedikovaný account manager pre kozmetické salóny.",
+    "Staňte sa partnerským salónom Skinderma. Získajte exkluzívne partnerské ceny, školenia, certifikované produkty a dedikovaný account manager pre váš salón.",
   alternates: {
-    canonical: "https://www.skinderma.sk/pre-profesionalov",
+    canonical: "https://www.skinderma.sk/partnerstvo",
   },
   openGraph: {
-    title: "Pre profesionálov – Partnerstvo | Skinderma",
+    title: "Partnerstvo – Spolupráca so salónmi | Skinderma",
     description:
-      "Staňte sa partnerským salónom Skinderma. Profesionálne ceny, školenia, certifikované produkty a dedikovaný account manager pre kozmetické salóny.",
-    url: "https://www.skinderma.sk/pre-profesionalov",
+      "Staňte sa partnerským salónom Skinderma. Získajte exkluzívne partnerské ceny, školenia, certifikované produkty a dedikovaný account manager pre váš salón.",
+    url: "https://www.skinderma.sk/partnerstvo",
     siteName: "Skinderma",
     locale: "sk_SK",
     type: "website",
@@ -60,7 +60,7 @@ const STEPS = [
   },
 ] as const;
 
-export default function PreProfesionalovPage() {
+export default function PartnerstvoPage() {
   return (
     <div>
       {/* ── HERO ── */}
@@ -73,7 +73,7 @@ export default function PreProfesionalovPage() {
             Pre kozmetické salóny
           </p>
           <h1 className="mt-4 text-4xl font-bold text-navy md:text-5xl lg:text-6xl max-w-3xl leading-tight">
-            Spolupráca s kozmetickými salónmi
+            Partnerstvo so Skinderma
           </h1>
           <p className="mt-6 max-w-2xl text-base text-brand-gray leading-relaxed">
             Staňte sa partnerským salónom Skinderma a ponúknite svojim klientom
