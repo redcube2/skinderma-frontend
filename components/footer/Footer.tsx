@@ -24,6 +24,12 @@ export default function Footer() {
             O Skinderme
           </Link>
           <Link
+            href="/pre-profesionalov"
+            className="text-base text-black hover:text-[#646467] transition-colors"
+          >
+            Pre profesionálov
+          </Link>
+          <Link
             href="/dodanie"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
