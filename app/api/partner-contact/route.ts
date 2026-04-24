@@ -224,14 +224,16 @@ export async function POST(req: NextRequest) {
 
     await Promise.all([
       resend.emails.send({
-        from: "Skinderma Web <info@skinderma.sk>",
-        to: "info@skinderma.sk",
+        from: "Skinderma Partneri <noreply@skinderma.sk>",
+        to: ["info@skinderma.sk"],
+        replyTo: email,
         subject: `🤝 Nová žiadosť o partnerstvo — ${salonName}`,
         html: notificationHtml(formData),
       }),
       resend.emails.send({
-        from: "Skinderma <info@skinderma.sk>",
-        to: email,
+        from: "Skinderma <noreply@skinderma.sk>",
+        to: [email],
+        replyTo: "info@skinderma.sk",
         subject: "Vaša žiadosť o partnerstvo — Skinderma",
         html: confirmationHtml(salonName),
       }),
