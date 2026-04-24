@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAllProductSlugs, getCategories } from "@/lib/woocommerce";
 import { getPosts } from "@/lib/wordpress";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://skinderma.sk";
+const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.skinderma.sk";
 
 export const revalidate = 3600;
 

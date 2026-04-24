@@ -1,5 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Link",
+            value: [
+              '<https://www.skinderma.sk/sitemap.xml>; rel="sitemap"; type="application/xml"',
+              '<https://www.skinderma.sk/llms.txt>; rel="describedby"; type="text/plain"',
+              '<https://skinderma.sk/llms.txt>; rel="describedby"; type="text/plain"',
+              '<https://www.skinderma.sk/.well-known/api-catalog>; rel="https://www.iana.org/assignments/relation/api-catalog"',
+            ].join(", "),
+          },
+          {
+            key: "Content-Signal",
+            value: "ai-train=no, search=yes, ai-input=yes",
+          },
+        ],
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "skinderma.sk" },

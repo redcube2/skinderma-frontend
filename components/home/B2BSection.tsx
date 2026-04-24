@@ -81,7 +81,7 @@ export function B2BSection() {
             }}
           >
             <a
-              href="/kontakt"
+              href="/partnerstvo"
               style={{
                 background: "#000",
                 color: "#fff",

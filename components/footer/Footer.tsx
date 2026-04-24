@@ -48,6 +48,12 @@ export default function Footer() {
             Reklamačný poriadok
           </Link>
           <Link
+            href="/partnerstvo"
+            className="text-base text-black hover:text-[#646467] transition-colors"
+          >
+            Partnerstvo
+          </Link>
+          <Link
             href="/ochrana-osobnych-udajov"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
