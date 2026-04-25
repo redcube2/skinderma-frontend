@@ -1,3 +1,4 @@
+"use client";
 import { Check } from "lucide-react";
 
 const BENEFITS = [
@@ -136,12 +137,7 @@ export function DiagnostikaPromoBanner() {
             transition: "background 0.2s ease",
             marginBottom: 20,
           }}
-          onMouseEnter={(e) =>
-            ((e.target as HTMLElement).style.background = "#333")
-          }
-          onMouseLeave={(e) =>
-            ((e.target as HTMLElement).style.background = "#000")
-          }
+          className="diagnostika-cta"
         >
           Rezervovať diagnostiku
         </a>
@@ -161,3 +157,4 @@ export function DiagnostikaPromoBanner() {
     </section>
   );
 }
+
