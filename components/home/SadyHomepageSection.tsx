@@ -1,12 +1,20 @@
 "use client";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import {
+  Droplets,
+  Sparkles,
+  Target,
+  Flower,
+  Clock,
+  ChevronRight,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 type Sada = {
-  id: string;
+  icon: LucideIcon;
   title: string;
-  description: string;
   accentColor: string;
+  description: string;
   bundlePrice: string;
   originalPrice: string;
   savings: string;
@@ -15,52 +23,52 @@ type Sada = {
 
 const SADY: Sada[] = [
   {
-    id: "sucha",
+    icon: Droplets,
     title: "Suchá pleť",
+    accentColor: "#D6EAF8",
     description: "Hydratačná rutina pre pleť, ktorá vyžaduje viac vlhkosti.",
-    accentColor: "#5DADE2",
     bundlePrice: "139,25 €",
     originalPrice: "150,52 €",
     savings: "11,27 €",
     href: "/produkt/sada-sucha-plet",
   },
   {
-    id: "mastna",
+    icon: Sparkles,
     title: "Mastná pleť",
+    accentColor: "#D5F5E3",
     description:
       "Vyrovná produkciu kožného mazu, sťahuje póry, redukuje lesk.",
-    accentColor: "#58D68D",
     bundlePrice: "155,33 €",
     originalPrice: "167,92 €",
     savings: "12,59 €",
     href: "/produkt/sada-mastna-plet",
   },
   {
-    id: "aknozna",
+    icon: Target,
     title: "Aknózna pleť",
+    accentColor: "#FDEBD0",
     description: "Cielená starostlivosť pre pleť so sklonom k akné.",
-    accentColor: "#F39C12",
     bundlePrice: "156,45 €",
     originalPrice: "169,14 €",
     savings: "12,69 €",
     href: "/produkt/sada-aknozna-plet",
   },
   {
-    id: "citliva",
+    icon: Flower,
     title: "Citlivá pleť",
+    accentColor: "#FADBD8",
     description: "Upokojuje začervenanie, posilňuje ochrannú bariéru.",
-    accentColor: "#EC7063",
     bundlePrice: "176,48 €",
     originalPrice: "190,79 €",
     savings: "14,31 €",
     href: "/produkt/sada-citliva-plet",
   },
   {
-    id: "antiaging",
+    icon: Clock,
     title: "Anti-aging",
+    accentColor: "#E8DAEF",
     description:
       "Komplexná starostlivosť proti známkam starnutia, pre pleť 40+.",
-    accentColor: "#AF7AC5",
     bundlePrice: "142,80 €",
     originalPrice: "154,38 €",
     savings: "11,58 €",
@@ -126,133 +134,150 @@ export function SadyHomepageSection() {
         </div>
 
         {/* Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(5, 1fr)",
-            gap: 20,
-          }}
-          className="sady-grid"
-        >
-          {SADY.map((sada) => (
-            <Link
-              key={sada.id}
-              href={sada.href}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                background: "#fff",
-                border: "1px solid #e8e4dc",
-                borderRadius: 8,
-                overflow: "hidden",
-                textDecoration: "none",
-                color: "inherit",
-                transition: "transform 0.2s ease, box-shadow 0.2s ease",
-              }}
-              className="sada-tile"
-            >
-              {/* Accent bar */}
-              <div
+        <div className="sady-grid">
+          {SADY.map((sada) => {
+            const Icon = sada.icon;
+            return (
+              <Link
+                key={sada.href}
+                href={sada.href}
                 style={{
-                  height: 6,
-                  background: sada.accentColor,
-                  flexShrink: 0,
-                }}
-              />
-
-              {/* Content */}
-              <div
-                style={{
-                  padding: "24px 20px 20px",
                   display: "flex",
                   flexDirection: "column",
-                  gap: 12,
-                  flex: 1,
+                  background: "#fff",
+                  border: "1px solid #e8e4dc",
+                  borderRadius: 8,
+                  overflow: "hidden",
+                  textDecoration: "none",
+                  color: "inherit",
                 }}
+                className="sada-tile"
               >
-                <h3
+                {/* Pastel accent bar */}
+                <div
                   style={{
-                    fontSize: 16,
-                    fontWeight: 700,
-                    color: "#000",
-                    margin: 0,
+                    height: 6,
+                    background: sada.accentColor,
+                    flexShrink: 0,
                   }}
-                >
-                  {sada.title}
-                </h3>
+                />
 
-                <p
+                {/* Content */}
+                <div
                   style={{
-                    fontSize: 13,
-                    color: "#646467",
-                    lineHeight: 1.5,
-                    margin: 0,
+                    padding: "24px 20px 20px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 10,
                     flex: 1,
                   }}
                 >
-                  {sada.description}
-                </p>
-
-                {/* Pricing */}
-                <div style={{ marginTop: "auto" }}>
+                  {/* Icon + Title */}
                   <div
                     style={{
-                      fontSize: 22,
-                      fontWeight: 700,
-                      color: "#000",
-                      lineHeight: 1,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 12,
+                      marginBottom: 4,
                     }}
                   >
-                    {sada.bundlePrice}
+                    <Icon
+                      size={28}
+                      strokeWidth={1.5}
+                      style={{ color: "#374151", flexShrink: 0 }}
+                    />
+                    <h3
+                      style={{
+                        fontSize: 16,
+                        fontWeight: 700,
+                        color: "#000",
+                        margin: 0,
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {sada.title}
+                    </h3>
                   </div>
-                  <div
+
+                  {/* Description */}
+                  <p
                     style={{
                       fontSize: 13,
-                      color: "#9ca3af",
-                      textDecoration: "line-through",
-                      marginTop: 4,
+                      color: "#646467",
+                      lineHeight: 1.5,
+                      margin: 0,
+                      flex: 1,
                     }}
                   >
-                    {sada.originalPrice}
+                    {sada.description}
+                  </p>
+
+                  {/* Pricing */}
+                  <div style={{ marginTop: 8 }}>
+                    <div
+                      style={{
+                        fontSize: 22,
+                        fontWeight: 700,
+                        color: "#000",
+                        lineHeight: 1,
+                      }}
+                    >
+                      {sada.bundlePrice}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 13,
+                        color: "#9ca3af",
+                        textDecoration: "line-through",
+                        marginTop: 4,
+                      }}
+                    >
+                      {sada.originalPrice}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 12,
+                        color: "#16a34a",
+                        marginTop: 4,
+                        fontWeight: 500,
+                      }}
+                    >
+                      Úspora: {sada.savings}
+                    </div>
                   </div>
+
+                  {/* CTA row */}
                   <div
                     style={{
-                      fontSize: 12,
-                      color: "#16a34a",
-                      marginTop: 4,
-                      fontWeight: 500,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 4,
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: "#000",
+                      marginTop: 8,
+                      paddingTop: 12,
+                      borderTop: "1px solid #f0ece4",
                     }}
                   >
-                    Úspora: {sada.savings}
+                    Zobraziť sadu
+                    <ChevronRight size={14} />
                   </div>
                 </div>
-
-                {/* CTA */}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 4,
-                    fontSize: 13,
-                    fontWeight: 600,
-                    color: "#000",
-                    marginTop: 8,
-                    paddingTop: 12,
-                    borderTop: "1px solid #f0ece4",
-                  }}
-                >
-                  Zobraziť sadu
-                  <ChevronRight size={14} />
-                </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       </div>
 
       <style jsx>{`
         .sady-grid {
+          display: grid;
           grid-template-columns: repeat(5, 1fr);
+          gap: 20px;
+        }
+        .sada-tile {
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .sada-tile:hover {
           transform: scale(1.03);
@@ -260,12 +285,12 @@ export function SadyHomepageSection() {
         }
         @media (max-width: 1024px) {
           .sady-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
+            grid-template-columns: repeat(3, 1fr);
           }
         }
         @media (max-width: 768px) {
           .sady-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr;
           }
         }
       `}</style>
