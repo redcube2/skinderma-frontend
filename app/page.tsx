@@ -1,5 +1,7 @@
 import Hero from "@/components/home/Hero";
 import MarqueeBanner from "@/components/home/MarqueeBanner";
+import { SadyHomepageSection } from "@/components/home/SadyHomepageSection";
+import { DiagnostikaPromoBanner } from "@/components/home/DiagnostikaPromoBanner";
 import StatsCounter from "@/components/home/StatsCounter";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import ParallaxSection from "@/components/home/ParallaxSection";
@@ -34,6 +36,7 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
+      <SadyHomepageSection />
       <MarqueeBanner />
       <FadeInSection>
         <StatsCounter />
@@ -60,6 +63,7 @@ export default async function HomePage() {
       <FadeInSection delay={100}>
         <FAQSection />
       </FadeInSection>
+      <DiagnostikaPromoBanner />
     </>
   );
 }
