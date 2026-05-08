@@ -5,6 +5,13 @@ interface Props {
 }
 
 export function AddToCartBtn({ productId, inStock, label = "Do košíka" }: Props) {
+  console.log('AddToCartBtn productId:', productId, typeof productId);
+
+  if (!productId) {
+    console.warn('AddToCartBtn: missing productId!');
+    return null;
+  }
+
   if (!inStock) {
     return (
       <span style={{ background:"#e2e2cf",color:"#646467",border:"none",padding:"14px 32px",fontSize:11,letterSpacing:"0.25em",textTransform:"uppercase",fontWeight:600,fontFamily:"inherit",cursor:"not-allowed",display:"inline-block" }}>
