@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { WCProduct } from "@/types/woocommerce";
-import { formatPriceWithVat, stripHtml } from "@/lib/woocommerce";
+import { formatPriceWithVat, formatPrice, stripHtml } from "@/lib/woocommerce";
 import { AddToCartBtn } from "@/components/cart/AddToCartBtn";
 
 export default function FeaturedProducts({
@@ -86,23 +86,29 @@ export default function FeaturedProducts({
                     </h3>
                   </Link>
 
-                  <div className="mt-auto flex items-baseline gap-2 pt-2">
+                  <div className="mt-auto flex flex-col gap-0.5 pt-2">
                     {product.on_sale && product.regular_price ? (
                       <>
-                        <span className="text-lg font-semibold text-black">
-                          {formatPriceWithVat(product.price)}
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-lg font-semibold text-black">
+                            {formatPrice(product.price)}
+                          </span>
+                          <span className="text-xs text-[#646467] line-through">
+                            {formatPrice(product.regular_price)}
+                          </span>
+                        </div>
+                        <span className="text-xs text-[#646467]">
+                          (s DPH {formatPriceWithVat(product.price)})
                         </span>
-                        <span className="text-xs text-[#646467] line-through">
-                          {formatPriceWithVat(product.regular_price)}
-                        </span>
-                        <span className="text-xs text-[#646467]">s DPH</span>
                       </>
                     ) : (
                       <>
                         <span className="text-lg font-semibold text-black">
-                          {formatPriceWithVat(product.price)}
+                          {formatPrice(product.price)}
                         </span>
-                        <span className="text-xs text-[#646467]">s DPH</span>
+                        <span className="text-xs text-[#646467]">
+                          (s DPH {formatPriceWithVat(product.price)})
+                        </span>
                       </>
                     )}
                   </div>

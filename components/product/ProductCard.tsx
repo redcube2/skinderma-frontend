@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { WCProduct } from "@/types/woocommerce";
-import { formatPriceWithVat } from "@/lib/woocommerce";
+import { formatPriceWithVat, formatPrice } from "@/lib/woocommerce";
 import { AddToCartBtn } from "@/components/cart/AddToCartBtn";
 
 export default function ProductCard({ product }: { product: WCProduct }) {
@@ -48,23 +48,29 @@ export default function ProductCard({ product }: { product: WCProduct }) {
           </h3>
         </Link>
 
-        <div className="flex items-baseline gap-2">
+        <div className="flex flex-col gap-0.5">
           {product.on_sale && product.regular_price ? (
             <>
-              <span className="text-lg font-bold text-black">
-                {formatPriceWithVat(product.price)}
+              <div className="flex items-baseline gap-2">
+                <span className="text-lg font-bold text-black">
+                  {formatPrice(product.price)}
+                </span>
+                <span className="text-sm text-[#646467] line-through">
+                  {formatPrice(product.regular_price)}
+                </span>
+              </div>
+              <span className="text-xs text-[#646467]">
+                (s DPH {formatPriceWithVat(product.price)})
               </span>
-              <span className="text-sm text-[#646467] line-through">
-                {formatPriceWithVat(product.regular_price)}
-              </span>
-              <span className="text-xs text-[#646467]">s DPH</span>
             </>
           ) : (
             <>
               <span className="text-lg font-bold text-black">
-                {formatPriceWithVat(product.price)}
+                {formatPrice(product.price)}
               </span>
-              <span className="text-xs text-[#646467]">s DPH</span>
+              <span className="text-xs text-[#646467]">
+                (s DPH {formatPriceWithVat(product.price)})
+              </span>
             </>
           )}
         </div>
