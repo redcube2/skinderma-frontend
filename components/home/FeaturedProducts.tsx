@@ -114,10 +114,12 @@ export default function FeaturedProducts({
                   </div>
 
                   <div className="mt-2">
-                    <AddToCartBtn
-                      productId={product.id}
-                      inStock={product.stock_status === "instock"}
-                    />
+                    <a
+                      href="https://skinderma.sk/obchod"
+                      style={{ background:"#000",color:"#fff",border:"none",padding:"14px 32px",fontSize:11,letterSpacing:"0.25em",textTransform:"uppercase",fontWeight:600,fontFamily:"inherit",cursor:"pointer",display:"inline-block",textDecoration:"none" }}
+                    >
+                      Prejsť do obchodu
+                    </a>
                   </div>
                 </div>
               </div>
