@@ -11,7 +11,7 @@ interface Props {
 export function AddToCartBtn({ productId, inStock, label = "Do košíka" }: Props) {
   const handleClick = () => {
     if (!inStock) return;
-    window.location.href = `https://skinderma.sk/kosik?add-to-cart=${productId}`;
+    window.location.href = `/kosik?add-to-cart=${productId}`;
   };
 
   if (!inStock) {
