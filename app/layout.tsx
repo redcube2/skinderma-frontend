@@ -167,11 +167,11 @@ export default function RootLayout({
           padding: "10px 20px", fontSize: 12, letterSpacing: "0.15em",
           textTransform: "uppercase"
         }}>
-          Web vo vývoji · Pre objednávky volajte{" "}
+          Kontakt:{" "}
           <a href="tel:+421905108641" style={{ color: "#fff", textDecoration: "underline" }}>
             +421 905 108 641
           </a>
-          {" alebo napíšte na "}
+          {" · "}
           <a href="mailto:info@skinderma.sk" style={{ color: "#fff", textDecoration: "underline" }}>
             info@skinderma.sk
           </a>
