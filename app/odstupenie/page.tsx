@@ -32,10 +32,17 @@ export default function WithdrawalPage() {
           <div>
             <h2 className="text-lg font-semibold text-navy">Výnimka</h2>
             <p className="mt-2">
-              Právo na odstúpenie sa nevzťahuje na tovar, ktorý bol
-              otvorený alebo použitý, a vzhľadom na hygienickú povahu nie
-              je možné jeho vrátenie – v súlade s § 7 ods. 6 zákona
-              č. 102/2014 Z. z.
+              Právo na odstúpenie sa nevzťahuje na tovar v ochrannom obale,
+              ktorý nie je vhodné vrátiť z dôvodu ochrany zdravia alebo
+              z hygienických dôvodov, ak bol jeho ochranný obal po dodaní
+              porušený. Úplný zoznam výnimiek je v{" "}
+              <a
+                href="https://skinderma.sk/obchodne-podmienky/"
+                className="text-gold hover:text-gold-dark"
+              >
+                Obchodných podmienkach, čl. V
+              </a>
+              .
             </p>
           </div>
 
@@ -50,7 +57,14 @@ export default function WithdrawalPage() {
                 >
                   info@skinderma.sk
                 </a>{" "}
-                alebo vyplňte formulár.
+                alebo vyplňte formulár nižšie. Použiť môžete aj{" "}
+                <a
+                  href="https://skinderma.sk/vzorovy-formular-na-odstupenie-od-zmluvy/"
+                  className="text-gold hover:text-gold-dark"
+                >
+                  vzorový formulár na odstúpenie od zmluvy
+                </a>
+                ; jeho použitie nie je povinné.
               </li>
               <li>
                 Vráťte tovar neporušený a nepoužitý, ideálne v pôvodnom
