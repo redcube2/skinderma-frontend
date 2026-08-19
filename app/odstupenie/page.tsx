@@ -93,10 +93,11 @@ export default function WithdrawalPage() {
 
         <div>
           <h2 className="text-lg font-semibold text-navy">
-            Formulár na odstúpenie
+            Odstúpenie online
           </h2>
           <p className="mt-2 text-sm text-brand-gray">
-            Vyplňte žiadosť a my vás budeme kontaktovať s ďalšími krokmi.
+            Od zmluvy môžete odstúpiť priamo tu — vyplnením a odoslaním tohto
+            formulára. Potvrdenie o prijatí vám obratom pošleme e-mailom.
           </p>
           <WithdrawalForm />
         </div>
