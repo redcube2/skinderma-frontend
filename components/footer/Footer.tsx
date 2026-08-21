@@ -54,12 +54,12 @@ export default function Footer() {
           >
             Partnerstvo
           </Link>
-          <Link
+          <a
             href="/ochrana-osobnych-udajov"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Ochrana osobných údajov
-          </Link>
+          </a>
         </nav>
 
         {/* Social */}

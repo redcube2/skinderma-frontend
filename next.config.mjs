@@ -52,6 +52,7 @@ const nextConfig = {
         // Online formuláre pluginu "Spotrebiteľské práva pre WooCommerce"
         { source: "/odstupenie", destination: "https://skinderma.sk/odstupenie-od-zmluvy/" },
         { source: "/reklamacia", destination: "https://skinderma.sk/reklamacia/" },
+        { source: "/ochrana-osobnych-udajov", destination: "https://skinderma.sk/zasady-ochrany-osobnych-udajov/" },
         // WP assets pre Woo stránky
         { source: "/wp-content/:path*", destination: "https://skinderma.sk/wp-content/:path*" },
         { source: "/wp-includes/:path*", destination: "https://skinderma.sk/wp-includes/:path*" },
