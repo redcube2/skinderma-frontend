@@ -70,12 +70,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
       priority: 0.3,
     },
-    {
-      url: `${BASE}/odstupenie`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
+    // Právne stránky tu zámerne nie sú: /odstupenie, /reklamacia,
+    // /vseobecne-obchodne-podmienky a /reklamacny-poriadok sú rewrite na WP
+    // a kanonickú URL si nesie apex (skinderma.sk), ktorý ich má vo vlastnom
+    // sitemape. Uvádzať ich aj tu = duplicitná URL s cudzím canonical.
     ...productUrls,
     ...categoryUrls,
     ...postUrls,
