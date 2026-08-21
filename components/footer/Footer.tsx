@@ -29,13 +29,13 @@ export default function Footer() {
           >
             Dodanie a platba
           </Link>
-          <Link
+          {/* Rewrite na WP (skinderma.sk) — plain <a>, nie <Link> */}
+          <a
             href="/odstupenie"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Odstúpenie od zmluvy
-          </Link>
-          {/* Rewrite na WP (skinderma.sk) — plain <a>, nie <Link> */}
+          </a>
           <a
             href="/vseobecne-obchodne-podmienky"
             className="text-base text-black hover:text-[#646467] transition-colors"

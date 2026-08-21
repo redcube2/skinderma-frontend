@@ -49,6 +49,9 @@ const nextConfig = {
         // Právne dokumenty → WP je jediný zdroj pravdy (URL zostáva www.skinderma.sk)
         { source: "/vseobecne-obchodne-podmienky", destination: "https://skinderma.sk/obchodne-podmienky/" },
         { source: "/reklamacny-poriadok", destination: "https://skinderma.sk/reklamacny-poriadok/" },
+        // Online formuláre pluginu "Spotrebiteľské práva pre WooCommerce"
+        { source: "/odstupenie", destination: "https://skinderma.sk/odstupenie-od-zmluvy/" },
+        { source: "/reklamacia", destination: "https://skinderma.sk/reklamacia/" },
         // WP assets pre Woo stránky
         { source: "/wp-content/:path*", destination: "https://skinderma.sk/wp-content/:path*" },
         { source: "/wp-includes/:path*", destination: "https://skinderma.sk/wp-includes/:path*" },
