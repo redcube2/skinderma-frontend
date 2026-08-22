@@ -1,0 +1,11 @@
+# skinderma-frontend
+- Path: /Users/openclaw/.openclaw/workspace/skinderma-frontend
+- Stack: Next.js 14, React 18, TypeScript, Tailwind CSS 3, Resend
+- Active branch: main
+- Dev: npm run dev
+- Build: npm run build
+- Test: (unknown)
+- Standing rules: skinderma.sk schema fixy: len WP apex cez Yoast, nikdy v Next.js
+- Never-touch: (unknown)
+- DB rules: (unknown)
+- Notes: Next.js frontend bootstrapnuty cez Create Next App pre Skinderma web. Repo pouziva globalne git hooky cez `/Users/openclaw/.config/git/hooks` (`post-merge`, `post-merge.bak`, `pre-push`).

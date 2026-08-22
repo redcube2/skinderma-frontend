@@ -29,36 +29,37 @@ export default function Footer() {
           >
             Dodanie a platba
           </Link>
-          <Link
+          {/* Rewrite na WP (skinderma.sk) — plain <a>, nie <Link> */}
+          <a
             href="/odstupenie"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Odstúpenie od zmluvy
-          </Link>
-          <Link
+          </a>
+          <a
             href="/vseobecne-obchodne-podmienky"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Obchodné podmienky
-          </Link>
-          <Link
+          </a>
+          <a
             href="/reklamacny-poriadok"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Reklamačný poriadok
-          </Link>
+          </a>
           <Link
             href="/partnerstvo"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Partnerstvo
           </Link>
-          <Link
+          <a
             href="/ochrana-osobnych-udajov"
             className="text-base text-black hover:text-[#646467] transition-colors"
           >
             Ochrana osobných údajov
-          </Link>
+          </a>
         </nav>
 
         {/* Social */}

@@ -46,6 +46,13 @@ const nextConfig = {
         { source: "/moj-ucet/:path*", destination: "https://skinderma.sk/moj-ucet/:path*" },
         { source: "/objednavka-prijata/:path*", destination: "https://skinderma.sk/objednavka-prijata/:path*" },
         { source: "/order-received/:path*", destination: "https://skinderma.sk/order-received/:path*" },
+        // Právne dokumenty → WP je jediný zdroj pravdy (URL zostáva www.skinderma.sk)
+        { source: "/vseobecne-obchodne-podmienky", destination: "https://skinderma.sk/obchodne-podmienky/" },
+        { source: "/reklamacny-poriadok", destination: "https://skinderma.sk/reklamacny-poriadok/" },
+        // Online formuláre pluginu "Spotrebiteľské práva pre WooCommerce"
+        { source: "/odstupenie", destination: "https://skinderma.sk/odstupenie-od-zmluvy/" },
+        { source: "/reklamacia", destination: "https://skinderma.sk/reklamacia/" },
+        { source: "/ochrana-osobnych-udajov", destination: "https://skinderma.sk/zasady-ochrany-osobnych-udajov/" },
         // WP assets pre Woo stránky
         { source: "/wp-content/:path*", destination: "https://skinderma.sk/wp-content/:path*" },
         { source: "/wp-includes/:path*", destination: "https://skinderma.sk/wp-includes/:path*" },
