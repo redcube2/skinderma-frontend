@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { localizedPath, type Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
-export default function Footer() {
+export default function Footer({ locale }: { locale: Locale }) {
+  const dict = getDictionary(locale);
+  const p = (segment: string) => localizedPath(locale, segment);
+  const linkClass =
+    "text-base text-black hover:text-[#646467] transition-colors";
+
   return (
     <footer className="mt-16 bg-[#f2f2f0] text-black">
       {/* Main footer */}
@@ -17,48 +24,28 @@ export default function Footer() {
 
         {/* Links */}
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8">
-          <Link
-            href="/o-skinderme"
-            className="text-base text-black hover:text-[#646467] transition-colors"
-          >
-            O Skinderme
+          <Link href={p("/o-skinderme")} className={linkClass}>
+            {dict.footer.aboutLink}
           </Link>
-          <Link
-            href="/dodanie"
-            className="text-base text-black hover:text-[#646467] transition-colors"
-          >
-            Dodanie a platba
+          {/* Delivery + legal docs live on the WP apex and are Slovak-only —
+              plain <a>, never locale-prefixed. */}
+          <a href="/dodanie" className={linkClass}>
+            {dict.footer.delivery}
+          </a>
+          <a href="/odstupenie" className={linkClass}>
+            {dict.footer.withdrawal}
+          </a>
+          <a href="/vseobecne-obchodne-podmienky" className={linkClass}>
+            {dict.footer.terms}
+          </a>
+          <a href="/reklamacny-poriadok" className={linkClass}>
+            {dict.footer.complaints}
+          </a>
+          <Link href={p("/partnerstvo")} className={linkClass}>
+            {dict.footer.partnership}
           </Link>
-          {/* Rewrite na WP (skinderma.sk) — plain <a>, nie <Link> */}
-          <a
-            href="/odstupenie"
-            className="text-base text-black hover:text-[#646467] transition-colors"
-          >
-            Odstúpenie od zmluvy
-          </a>
-          <a
-            href="/vseobecne-obchodne-podmienky"
-            className="text-base text-black hover:text-[#646467] transition-colors"
-          >
-            Obchodné podmienky
-          </a>
-          <a
-            href="/reklamacny-poriadok"
-            className="text-base text-black hover:text-[#646467] transition-colors"
-          >
-            Reklamačný poriadok
-          </a>
-          <Link
-            href="/partnerstvo"
-            className="text-base text-black hover:text-[#646467] transition-colors"
-          >
-            Partnerstvo
-          </Link>
-          <a
-            href="/ochrana-osobnych-udajov"
-            className="text-base text-black hover:text-[#646467] transition-colors"
-          >
-            Ochrana osobných údajov
+          <a href="/ochrana-osobnych-udajov" className={linkClass}>
+            {dict.footer.privacy}
           </a>
         </nav>
 
@@ -88,8 +75,10 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-gray-300 bg-[#E8E8E6]">
         <div className="flex flex-col items-center gap-1 py-5 px-6 text-center text-xs text-gray-500">
-          <span>Red cube s.r.o. | IČO: 44137265 | DIČ: 2022614341 | IČ DPH: SK2022614341</span>
-          <span>© {new Date().getFullYear()} Skinderma. Powered by Red cube s.r.o.</span>
+          <span>{dict.footer.company}</span>
+          <span>
+            © {new Date().getFullYear()} {dict.footer.rights}. {dict.footer.poweredBy}
+          </span>
         </div>
       </div>
     </footer>

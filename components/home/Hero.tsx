@@ -1,7 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Fragment } from "react";
+import { localizedPath, type Locale } from "@/lib/i18n/config";
+import type { Dictionary } from "@/lib/i18n/dictionaries";
 
-export default function Hero() {
+export default function Hero({
+  dict,
+  locale,
+}: {
+  dict: Dictionary["home"]["hero"];
+  locale: Locale;
+}) {
   return (
     <section className="relative flex min-h-[100vh] items-center bg-[#111111]">
       <div className="mx-auto w-full max-w-[1200px] px-6 py-20 md:px-10 md:py-0">
@@ -10,7 +19,7 @@ export default function Hero() {
           <div className="relative order-1 aspect-square w-full max-h-[80vh] overflow-hidden bg-[#0a0a0a] md:order-2">
             <Image
               src="https://skinderma.sk/wp-content/uploads/2025/09/serum-solution-scaled-1.jpg"
-              alt="Skinderma sérum"
+              alt={dict.imageAlt}
               fill
               sizes="(min-width: 768px) 50vw, 100vw"
               className="object-cover object-center"
@@ -30,31 +39,31 @@ export default function Hero() {
           {/* Text */}
           <div className="order-2 md:order-1">
             <p className="mb-6 text-xs uppercase tracking-[0.3em] text-[#646467]">
-              Lekárska kozmetika
+              {dict.eyebrow}
             </p>
             <h1 className="mb-8 text-[clamp(44px,6vw,88px)] font-light leading-[1.05] text-white">
-              Budúcnosť
-              <br />
-              lekárskej
-              <br />
-              kozmetiky
+              {dict.titleLines.map((line, i) => (
+                <Fragment key={i}>
+                  {i > 0 && <br />}
+                  {line}
+                </Fragment>
+              ))}
             </h1>
             <p className="mb-12 max-w-md text-base leading-[1.8] text-[#999999]">
-              GMP certifikované produkty pre profesionálov aj domáce použitie.
-              Distribuované do viac ako 50 krajín sveta.
+              {dict.lead}
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
                 href="https://skinderma.sk/obchod"
                 className="bg-white px-10 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-black transition-colors hover:bg-[#e2e2cf]"
               >
-                Preskúmať
+                {dict.ctaExplore}
               </Link>
               <Link
-                href="/o-nas"
+                href={localizedPath(locale, "/o-nas")}
                 className="border border-[#646467] px-10 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-colors hover:border-white hover:bg-white/5"
               >
-                O nás
+                {dict.ctaAbout}
               </Link>
             </div>
           </div>

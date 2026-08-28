@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Fragment } from "react";
+import { buildAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
   title: "O Skinderma Medical Cosmetics | Fakty a informácie",
   description:
     "Fakty o Skinderma Medical Cosmetics – španielska lekárska kozmetika, GMP certifikácia, distribúcia na Slovensku cez Red Cube s.r.o.",
-  alternates: { canonical: "https://www.skinderma.sk/o-skinderme" },
+  alternates: buildAlternates("sk", "/o-skinderme"),
 };
 
 const facts: Array<[string, string]> = [

@@ -1,13 +1,33 @@
 "use client";
 import { Check } from "lucide-react";
 
-const BENEFITS = [
+type DiagnostikaDict = {
+  eyebrow: string;
+  title: string;
+  body: string;
+  benefits: string[];
+  cta: string;
+  address: string;
+};
+
+const DEFAULT_BENEFITS = [
   "Profesionálna AI analýza pleti (Maicet Pro)",
   "Personalizované odporúčanie produktov podľa typu pleti",
   "Zdarma pri nákupe domácej rutiny alebo produktov Skinderma",
 ];
 
-export function DiagnostikaPromoBanner() {
+export function DiagnostikaPromoBanner({ dict }: { dict?: DiagnostikaDict }) {
+  const eyebrow = dict?.eyebrow ?? "Salón SKIN Beauty House, Komárno";
+  const title =
+    dict?.title ?? "Diagnostika pleti zdarma pri nákupe domácej rutiny";
+  const body =
+    dict?.body ??
+    "Nie ste si istá, ktorá rutina je pre vás vhodná? Príďte do salónu SKIN Beauty House v Komárne — naša kozmetička urobí profesionálnu analýzu pleti pomocou AI analyzátora Maicet Pro a odporučí vám správnu starostlivosť.";
+  const benefits = dict?.benefits ?? DEFAULT_BENEFITS;
+  const cta = dict?.cta ?? "Rezervovať diagnostiku";
+  const address =
+    dict?.address ??
+    "SKIN Beauty House • Ul. Mieru 4235, Komárno • Tel: 0905 108 641";
   return (
     <section
       style={{
@@ -41,7 +61,7 @@ export function DiagnostikaPromoBanner() {
             marginBottom: 20,
           }}
         >
-          Salón SKIN Beauty House, Komárno
+          {eyebrow}
         </p>
 
         {/* Heading */}
@@ -55,7 +75,7 @@ export function DiagnostikaPromoBanner() {
             lineHeight: 1.25,
           }}
         >
-          Diagnostika pleti zdarma pri nákupe domácej rutiny
+          {title}
         </h2>
 
         {/* Description */}
@@ -68,10 +88,7 @@ export function DiagnostikaPromoBanner() {
             margin: "0 auto 40px",
           }}
         >
-          Nie ste si istá, ktorá rutina je pre vás vhodná? Príďte do salónu
-          SKIN Beauty House v Komárne — naša kozmetička urobí profesionálnu
-          analýzu pleti pomocou AI analyzátora Maicet Pro a odporučí vám
-          správnu starostlivosť.
+          {body}
         </p>
 
         {/* Benefits */}
@@ -85,7 +102,7 @@ export function DiagnostikaPromoBanner() {
             textAlign: "left",
           }}
         >
-          {BENEFITS.map((benefit) => (
+          {benefits.map((benefit) => (
             <div
               key={benefit}
               style={{
@@ -139,7 +156,7 @@ export function DiagnostikaPromoBanner() {
           }}
           className="diagnostika-cta"
         >
-          Rezervovať diagnostiku
+          {cta}
         </a>
 
         {/* Address */}
@@ -150,8 +167,7 @@ export function DiagnostikaPromoBanner() {
             letterSpacing: "0.05em",
           }}
         >
-          SKIN Beauty House &bull; Ul. Mieru 4235, Komárno &bull; Tel: 0905 108
-          641
+          {address}
         </p>
       </div>
     </section>

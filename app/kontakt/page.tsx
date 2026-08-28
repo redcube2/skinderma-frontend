@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import ContactForm from "./ContactForm";
+import { buildAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
   title: "Kontakt | Skinderma",
   description:
     "Kontaktné údaje Skinderma – Red Cube s.r.o., Komárno. Formulár pre reklamácie, odstúpenie a otázky.",
-  alternates: { canonical: "https://www.skinderma.sk/kontakt" },
+  alternates: buildAlternates("sk", "/kontakt"),
 };
 
 export default function ContactPage() {

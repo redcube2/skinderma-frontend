@@ -4,12 +4,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { menu } from "./Navbar";
+import type { MenuItem } from "./Navbar";
+import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
+import type { Locale } from "@/lib/i18n/config";
 
-export default function MobileMenu() {
+type Props = {
+  items: MenuItem[];
+  locale: Locale;
+  segment: string;
+  langLabel: string;
+  openLabel: string;
+  closeLabel: string;
+  cartLabel: string;
+  homeAria: string;
+};
+
+export default function MobileMenu({
+  items,
+  locale,
+  segment,
+  langLabel,
+  openLabel,
+  closeLabel,
+  cartLabel,
+  homeAria,
+}: Props) {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const menu = items;
 
   useEffect(() => {
     setMounted(true);
@@ -37,14 +60,14 @@ export default function MobileMenu() {
       }}>
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "32px" }}>
-          <Link href="/" onClick={() => setOpen(false)}>
+          <Link href={menu[0]?.href ?? "/"} aria-label={homeAria} onClick={() => setOpen(false)}>
             <Image
               src="https://skinderma.sk/wp-content/uploads/2025/07/Logo-skinderma-cabecera-3.webp"
               alt="Skinderma" width={150} height={38}
               style={{ height: "38px", width: "auto" }}
             />
           </Link>
-          <button onClick={() => setOpen(false)} style={{
+          <button aria-label={closeLabel} onClick={() => setOpen(false)} style={{
             border: "none", background: "none", cursor: "pointer",
             padding: "8px", color: "#000000"
           }}>
@@ -59,17 +82,31 @@ export default function MobileMenu() {
           {menu.map((item) => (
             <div key={item.href}>
               <div style={{ display: "flex", alignItems: "center" }}>
-                <Link
-                  href={item.href}
-                  onClick={() => !item.children && setOpen(false)}
-                  style={{
-                    flex: 1, padding: "12px 12px", borderRadius: "8px",
-                    fontSize: "15px", fontWeight: 600, color: "#000000",
-                    textDecoration: "none", display: "block"
-                  }}
-                >
-                  {item.label}
-                </Link>
+                {item.external ? (
+                  <a
+                    href={item.href}
+                    onClick={() => !item.children && setOpen(false)}
+                    style={{
+                      flex: 1, padding: "12px 12px", borderRadius: "8px",
+                      fontSize: "15px", fontWeight: 600, color: "#000000",
+                      textDecoration: "none", display: "block"
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    href={item.href}
+                    onClick={() => !item.children && setOpen(false)}
+                    style={{
+                      flex: 1, padding: "12px 12px", borderRadius: "8px",
+                      fontSize: "15px", fontWeight: 600, color: "#000000",
+                      textDecoration: "none", display: "block"
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                )}
                 {item.children && (
                   <button
                     onClick={() => setExpanded(expanded === item.href ? null : item.href)}
@@ -90,7 +127,7 @@ export default function MobileMenu() {
               {item.children && expanded === item.href && (
                 <div style={{ marginLeft: "12px", paddingLeft: "12px", borderLeft: "2px solid #e2e2cf" }}>
                   {item.children.map((child) => (
-                    <Link
+                    <a
                       key={child.href}
                       href={child.href}
                       onClick={() => setOpen(false)}
@@ -100,7 +137,7 @@ export default function MobileMenu() {
                       }}
                     >
                       {child.label}
-                    </Link>
+                    </a>
                   ))}
                 </div>
               )}
@@ -108,13 +145,23 @@ export default function MobileMenu() {
           ))}
         </nav>
 
+        <div style={{ marginTop: "24px", paddingTop: "20px", borderTop: "1px solid #e2e2cf" }}>
+          <LanguageSwitcher
+            locale={locale}
+            segment={segment}
+            label={langLabel}
+            variant="menu"
+            onNavigate={() => setOpen(false)}
+          />
+        </div>
+
         <a href="/kosik" style={{
           marginTop: "auto", paddingTop: "24px", display: "block",
           background: "#000000", color: "#fff", textAlign: "center",
           padding: "14px", fontWeight: 600, fontSize: "14px",
           textDecoration: "none", borderRadius: "4px"
         }}>
-          Košík
+          {cartLabel}
         </a>
       </div>
     </div>
@@ -124,7 +171,7 @@ export default function MobileMenu() {
     <>
       <button
         type="button"
-        aria-label="Otvoriť menu"
+        aria-label={openLabel}
         onClick={() => setOpen(true)}
         style={{
           display: "inline-flex", alignItems: "center", justifyContent: "center",

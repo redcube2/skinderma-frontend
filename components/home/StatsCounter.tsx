@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const stats = [
+const STATS = [
   { value: 50, suffix: "+", label: "Krajín sveta" },
   { value: 83, suffix: "", label: "Produktov" },
   { value: 15, suffix: "+", label: "Rokov vývoja" },
@@ -47,9 +47,14 @@ function Counter({
   );
 }
 
-export default function StatsCounter() {
+export default function StatsCounter({ labels }: { labels?: string[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const [start, setStart] = useState(false);
+
+  const stats = STATS.map((s, i) => ({
+    ...s,
+    label: labels?.[i] ?? s.label,
+  }));
 
   useEffect(() => {
     const observer = new IntersectionObserver(

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { buildAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
   title: "O nás | Skinderma Medical Cosmetics",
   description:
     "Skinderma Medical Cosmetics – španielska lekárska kozmetika distribuovaná na Slovensku spoločnosťou Red Cube s.r.o.",
-  alternates: { canonical: "https://www.skinderma.sk/o-nas" },
+  alternates: buildAlternates("sk", "/o-nas"),
 };
 
 export default function ONasPage() {

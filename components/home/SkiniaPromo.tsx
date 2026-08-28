@@ -1,17 +1,52 @@
-export default function SkiniaPromo() {
-  const bullets = [
+type SkiniaDict = {
+  eyebrow: string;
+  titleLines: string[];
+  bodyHtml: string;
+  bullets: string[];
+  platformLabel: string;
+  platformTitle: string;
+  features: { title: string; desc: string }[];
+  offerLabel: string;
+  offerValue: string;
+  ctaSkinia: string;
+  ctaProducts: string;
+};
+
+const DEFAULT_DICT: SkiniaDict = {
+  eyebrow: "Exkluzívna ponuka",
+  titleLines: ["Profesionálne nástroje", "pre váš salón"],
+  bodyHtml:
+    "Pri nákupe Skinderma produktov nad <strong>200€</strong> získate <strong>dopravu zdarma</strong> a <strong>1 mesiac softvéru Skinia zdarma</strong> — kompletný systém pre správu klientov, AI protokoly a online rezervácie.",
+  bullets: [
     "Doprava zdarma pri objednávke nad 200€",
     "1 mesiac Skinia softvéru zdarma",
     "Správa klientov, AI protokoly, online booking",
     "Bez záväzkov — zrušenie kedykoľvek",
-  ];
+  ],
+  platformLabel: "Skinia Platform",
+  platformTitle: "AI-powered salón softvér",
+  features: [
+    { title: "Klientsky manažment", desc: "Karty klientov, história, súhlasy" },
+    {
+      title: "AI Protokoly",
+      desc: "Personalizované ošetrenia na základe analýzy pleti",
+    },
+    { title: "Online booking", desc: "Rezervácie 24/7, automatické notifikácie" },
+    {
+      title: "Homecare plány",
+      desc: "Produktové odporúčania pre domácu starostlivosť",
+    },
+  ],
+  offerLabel: "Pri nákupe nad 200€",
+  offerValue: "1 mesiac ZDARMA",
+  ctaSkinia: "Pozrieť Skinia.eu",
+  ctaProducts: "Objednať produkty",
+};
 
-  const features = [
-    { icon: "◆", title: "Klientsky manažment", desc: "Karty klientov, história, súhlasy" },
-    { icon: "◆", title: "AI Protokoly", desc: "Personalizované ošetrenia na základe analýzy pleti" },
-    { icon: "◆", title: "Online booking", desc: "Rezervácie 24/7, automatické notifikácie" },
-    { icon: "◆", title: "Homecare plány", desc: "Produktové odporúčania pre domácu starostlivosť" },
-  ];
+export default function SkiniaPromo({ dict }: { dict?: SkiniaDict }) {
+  const d = dict ?? DEFAULT_DICT;
+  const bullets = d.bullets;
+  const features = d.features.map((f) => ({ ...f, icon: "◆" }));
 
   return (
     <section
@@ -42,7 +77,7 @@ export default function SkiniaPromo() {
               marginBottom: 16,
             }}
           >
-            Exkluzívna ponuka
+            {d.eyebrow}
           </p>
           <h2
             style={{
@@ -53,24 +88,23 @@ export default function SkiniaPromo() {
               marginBottom: 24,
             }}
           >
-            Profesionálne nástroje
-            <br />
-            pre váš salón
+            {d.titleLines.map((line, i) => (
+              <span key={i}>
+                {i > 0 && <br />}
+                {line}
+              </span>
+            ))}
           </h2>
           <p
+            className="skinia-body"
             style={{
               color: "#646467",
               lineHeight: 1.8,
               marginBottom: 40,
               maxWidth: 480,
             }}
-          >
-            Pri nákupe Skinderma produktov nad{" "}
-            <strong style={{ color: "#fff" }}>200€</strong> získate{" "}
-            <strong style={{ color: "#fff" }}>dopravu zdarma</strong> a{" "}
-            <strong style={{ color: "#fff" }}>1 mesiac softvéru Skinia zdarma</strong> —
-            kompletný systém pre správu klientov, AI protokoly a online rezervácie.
-          </p>
+            dangerouslySetInnerHTML={{ __html: d.bodyHtml }}
+          />
           <div
             style={{
               display: "flex",
@@ -110,7 +144,7 @@ export default function SkiniaPromo() {
                 fontWeight: 600,
               }}
             >
-              Pozrieť Skinia.eu
+              {d.ctaSkinia}
             </a>
             <a
               href="/produkty"
@@ -124,7 +158,7 @@ export default function SkiniaPromo() {
                 textDecoration: "none",
               }}
             >
-              Objednať produkty
+              {d.ctaProducts}
             </a>
           </div>
         </div>
@@ -147,10 +181,10 @@ export default function SkiniaPromo() {
                 marginBottom: 8,
               }}
             >
-              Skinia Platform
+              {d.platformLabel}
             </div>
             <div style={{ fontSize: 24, color: "#fff", fontWeight: 300 }}>
-              AI-powered salón softvér
+              {d.platformTitle}
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -192,16 +226,17 @@ export default function SkiniaPromo() {
                 textTransform: "uppercase",
               }}
             >
-              Pri nákupe nad 200€
+              {d.offerLabel}
             </div>
             <div style={{ color: "#fff", fontSize: 20, fontWeight: 300, marginTop: 4 }}>
-              1 mesiac ZDARMA
+              {d.offerValue}
             </div>
           </div>
         </div>
       </div>
 
       <style>{`
+        .skinia-body strong { color: #fff; font-weight: 700; }
         @media (min-width: 900px) {
           .skinia-grid {
             grid-template-columns: 1fr 1fr;

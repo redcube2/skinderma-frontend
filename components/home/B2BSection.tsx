@@ -1,21 +1,52 @@
-export function B2BSection() {
-  const items = [
-    {
-      number: "01",
-      title: "Exkluzívne ceny",
-      desc: "Ako registrovaný partner získate prístup k špeciálnym velkoobchodným cenám pre profesionálne nákupy.",
-    },
-    {
-      number: "02",
-      title: "Prednostné zásobovanie",
-      desc: "Prioritné spracovanie objednávok, rezervácia produktov pred vypredaním a rýchlejšie dodanie.",
-    },
-    {
-      number: "03",
-      title: "Odborná podpora",
-      desc: "Vzdelávanie o produktoch, protokoloch a aplikačných technikách. Marketingové materiály pre váš salón.",
-    },
+import { localizedPath, type Locale } from "@/lib/i18n/config";
+
+type B2BDict = {
+  eyebrow: string;
+  titleLines: string[];
+  body: string;
+  ctaRegister: string;
+  ctaContact: string;
+  note: string;
+  items: { title: string; desc: string }[];
+};
+
+const DEFAULT_ITEMS = [
+  {
+    title: "Exkluzívne ceny",
+    desc: "Ako registrovaný partner získate prístup k špeciálnym velkoobchodným cenám pre profesionálne nákupy.",
+  },
+  {
+    title: "Prednostné zásobovanie",
+    desc: "Prioritné spracovanie objednávok, rezervácia produktov pred vypredaním a rýchlejšie dodanie.",
+  },
+  {
+    title: "Odborná podpora",
+    desc: "Vzdelávanie o produktoch, protokoloch a aplikačných technikách. Marketingové materiály pre váš salón.",
+  },
+];
+
+export function B2BSection({
+  dict,
+  locale = "sk",
+}: {
+  dict?: B2BDict;
+  locale?: Locale;
+}) {
+  const eyebrow = dict?.eyebrow ?? "Pre profesionálov";
+  const titleLines = dict?.titleLines ?? [
+    "Ste kozmetičkou",
+    "alebo prevádzkovateľom salóna?",
   ];
+  const body =
+    dict?.body ??
+    "Skinderma ponúka špeciálne podmienky pre registrovaných profesionálnych partnerov — vrátane exkluzívnych cien, prednostného zásobovania a odbornej podpory.";
+  const ctaRegister = dict?.ctaRegister ?? "Zaregistrovať sa ako partner";
+  const ctaContact = dict?.ctaContact ?? "Kontaktovať nás";
+  const note = dict?.note ?? "Registrácia je bezplatná a nezáväzná.";
+  const items = (dict?.items ?? DEFAULT_ITEMS).map((it, i) => ({
+    ...it,
+    number: String(i + 1).padStart(2, "0"),
+  }));
 
   return (
     <section
@@ -44,7 +75,7 @@ export function B2BSection() {
               marginBottom: 16,
             }}
           >
-            Pre profesionálov
+            {eyebrow}
           </p>
           <h2
             style={{
@@ -55,9 +86,12 @@ export function B2BSection() {
               marginBottom: 24,
             }}
           >
-            Ste kozmetičkou
-            <br />
-            alebo prevádzkovateľom salóna?
+            {titleLines.map((line, i) => (
+              <span key={i}>
+                {i > 0 && <br />}
+                {line}
+              </span>
+            ))}
           </h2>
           <p
             style={{
@@ -68,7 +102,7 @@ export function B2BSection() {
               margin: "0 auto 48px",
             }}
           >
-            Skinderma ponúka špeciálne podmienky pre registrovaných profesionálnych partnerov — vrátane exkluzívnych cien, prednostného zásobovania a odbornej podpory.
+            {body}
           </p>
 
           <div
@@ -81,7 +115,7 @@ export function B2BSection() {
             }}
           >
             <a
-              href="/partnerstvo"
+              href={localizedPath(locale, "/partnerstvo")}
               style={{
                 background: "#000",
                 color: "#fff",
@@ -93,10 +127,10 @@ export function B2BSection() {
                 fontWeight: 600,
               }}
             >
-              Zaregistrovať sa ako partner
+              {ctaRegister}
             </a>
             <a
-              href="/kontakt"
+              href={localizedPath(locale, "/kontakt")}
               style={{
                 border: "1px solid #000",
                 color: "#000",
@@ -107,11 +141,11 @@ export function B2BSection() {
                 textDecoration: "none",
               }}
             >
-              Kontaktovať nás
+              {ctaContact}
             </a>
           </div>
           <p style={{ color: "#b0b0b0", fontSize: 12 }}>
-            Registrácia je bezplatná a nezáväzná.
+            {note}
           </p>
         </div>
 

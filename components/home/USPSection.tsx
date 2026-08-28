@@ -1,4 +1,6 @@
-const items = [
+type UspItem = { label: string; title: string; desc: string };
+
+const DEFAULT_ITEMS: UspItem[] = [
   {
     label: "GMP Certified",
     title: "GMP certifikácia",
@@ -16,12 +18,13 @@ const items = [
   },
 ];
 
-export default function USPSection() {
+export default function USPSection({ items }: { items?: UspItem[] }) {
+  const list = items && items.length > 0 ? items : DEFAULT_ITEMS;
   return (
     <section style={{ background: "#f0ede8" }} className="py-24 md:py-32">
       <div className="mx-auto w-full max-w-[1200px] px-6 md:px-10">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-3 md:gap-12">
-          {items.map((item) => (
+          {list.map((item) => (
             <div key={item.label} className="border-t border-[#d8d4cc] pt-10">
               <p className="mb-6 text-[10px] uppercase tracking-[0.4em] text-[#646467]">
                 {item.label}

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import PartnerContactForm from "./PartnerContactForm";
+import { buildAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
   title: "Partnerstvo – Spolupráca so salónmi | Skinderma",
   description:
     "Staňte sa partnerským salónom Skinderma. Získajte exkluzívne partnerské ceny, školenia, certifikované produkty a dedikovaný account manager pre váš salón.",
-  alternates: {
-    canonical: "https://www.skinderma.sk/partnerstvo",
-  },
+  alternates: buildAlternates("sk", "/partnerstvo"),
   openGraph: {
     title: "Partnerstvo – Spolupráca so salónmi | Skinderma",
     description:

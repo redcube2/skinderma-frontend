@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatPostDate, getPosts } from "@/lib/wordpress";
 import { getReadingTime } from "@/lib/readingTime";
+import { buildAlternates } from "@/lib/i18n/metadata";
 
 export const dynamic = "force-dynamic";
 
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Články o starostlivosti o pleť, ošetreniach a novinkách zo sveta lekárskej kozmetiky Skinderma.",
+  alternates: buildAlternates("sk", "/blog"),
 };
 
 export default async function BlogPage() {

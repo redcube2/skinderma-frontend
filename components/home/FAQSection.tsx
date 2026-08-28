@@ -2,7 +2,13 @@
 
 import { useRef, useState } from "react";
 
-const faqs = [
+type FaqDict = {
+  eyebrow: string;
+  title: string;
+  items: { q: string; a: string }[];
+};
+
+const DEFAULT_FAQS = [
   {
     q: "Aký je rozdiel medzi lekárskou kozmetikou a bežnou kozmetikou?",
     a: "Lekárska kozmetika (dermokozmetika) sa vyznačuje vyššou koncentráciou aktívnych látok, vedecky podloženými formuláciami a klinickými štúdiami preukazujúcimi jej účinnosť. Je vyvíjaná v spolupráci s dermatológmi a je určená na riešenie špecifických kožných problémov, zatiaľ čo bežná kozmetika sa zameriava skôr na povrchovú starostlivosť a hydratáciu."
@@ -102,7 +108,10 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-export default function FAQSection() {
+export default function FAQSection({ dict }: { dict?: FaqDict }) {
+  const eyebrow = dict?.eyebrow ?? "Časté otázky";
+  const title = dict?.title ?? "Odpovede, ktoré hľadáte";
+  const faqs = dict?.items ?? DEFAULT_FAQS;
   return (
     <section
       style={{
@@ -120,7 +129,7 @@ export default function FAQSection() {
             marginBottom: 16,
           }}
         >
-          Časté otázky
+          {eyebrow}
         </p>
         <h2
           style={{
@@ -131,7 +140,7 @@ export default function FAQSection() {
             marginBottom: 56,
           }}
         >
-          Odpovede, ktoré hľadáte
+          {title}
         </h2>
         <div>
           {faqs.map((item, i) => (
