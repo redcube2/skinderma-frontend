@@ -173,9 +173,9 @@ const hu: Dictionary = {
       eyebrow: "Exkluzív ajánlat",
       titleLines: ["Professzionális eszközök", "az Ön szalonjának"],
       bodyHtml:
-        "A Skinderma termékek <strong>200€</strong> feletti vásárlása esetén <strong>ingyenes szállítást</strong> és <strong>1 hónap Skinia szoftvert ingyen</strong> kap — teljes rendszer az ügyfélkezeléshez, AI protokollokhoz és online foglaláshoz.",
+        "A Skinderma termékek <strong>200 €</strong> feletti vásárlása esetén <strong>ingyenes szállítást</strong> és <strong>1 hónap Skinia szoftvert ingyen</strong> kap — teljes rendszer az ügyfélkezeléshez, AI protokollokhoz és online foglaláshoz.",
       bullets: [
-        "Ingyenes szállítás 200€ feletti rendelés esetén",
+        "Ingyenes szállítás 200 € feletti rendelés esetén",
         "1 hónap Skinia szoftver ingyen",
         "Ügyfélkezelés, AI protokollok, online foglalás",
         "Kötelezettség nélkül — bármikor lemondható",
@@ -200,7 +200,7 @@ const hu: Dictionary = {
           desc: "Termékajánlások az otthoni ápoláshoz",
         },
       ],
-      offerLabel: "200€ feletti vásárlás esetén",
+      offerLabel: "200 € feletti vásárlás esetén",
       offerValue: "1 hónap INGYEN",
       ctaSkinia: "Skinia.eu megtekintése",
       ctaProducts: "Termékek rendelése",
@@ -308,7 +308,7 @@ const hu: Dictionary = {
     heroEyebrow: "Rólunk",
     heroTitleLines: ["Az orvosi kozmetika", "jövője"],
     quote:
-      "„A Skindermánál hisszük, hogy a szépség a tudomány és az egyéni gondoskodás eredménye. Áttörő megoldásokat kínálunk az egészséges és ragyogó bőrért.“",
+      "„A Skindermánál hisszük, hogy a szépség a tudomány és az egyéni gondoskodás eredménye. Áttörő megoldásokat kínálunk az egészséges és ragyogó bőrért.”",
     quoteAuthor: "SKINDERMA MEDICAL COSMETICS",
     brandHeading: "A Skinderma márkáról",
     brandParagraphs: [
@@ -318,7 +318,7 @@ const hu: Dictionary = {
     ],
     founderLabel: "Az alapítótól",
     founderQuote:
-      "„A Red Cube s.r.o.-val mindig is nemcsak termékeket, hanem átfogó know-how-t és támogatást szerettünk volna nyújtani a kozmetikai szakembereknek. A Skindermával való együttműködéssel megvalósítjuk ezt a víziót – hozzáférhetővé tesszük a csúcsminőségű orvosi kozmetikát és a technológiákat, amelyek valóban jobbá teszik az életet. Az Ön elégedettsége és bizalma számunkra a legnagyobb jutalom.“",
+      "„A Red Cube s.r.o.-val mindig is nemcsak termékeket, hanem átfogó know-how-t és támogatást szerettünk volna nyújtani a kozmetikai szakembereknek. A Skindermával való együttműködéssel megvalósítjuk ezt a víziót – hozzáférhetővé tesszük a csúcsminőségű orvosi kozmetikát és a technológiákat, amelyek valóban jobbá teszik az életet. Az Ön elégedettsége és bizalma számunkra a legnagyobb jutalom.”",
     founderName: "Ing. Ramón Novosád",
     founderRole: "Alapító · Red Cube s.r.o.",
     pillars: [
@@ -364,8 +364,10 @@ const hu: Dictionary = {
       "Az általános kérdésekre 24 órán belül válaszolunk (munkanapokon 9:00 – 17:00).",
     adrHeading: "Alternatív vitarendezés",
     adrText:
-      "A fogyasztónak joga van az Európai Bizottság online vitarendezési (ODR) platformjához fordulni:",
-    adrLinkLabel: "https://ec.europa.eu/consumers/odr",
+      "Ha nem elégedett a reklamáció elintézésével, jogában áll alternatív vitarendezési eljárást kezdeményezni. Az eladó szlovák társaság, ezért az ARS-szervezetek jegyzékét a Szlovák Köztársaság Gazdasági Minisztériuma vezeti:",
+    adrLinkLabel: "Az ARS-szervezetek jegyzéke – Szlovák Gazdasági Minisztérium",
+    adrLinkHref:
+      "https://www.mhsr.sk/obchod/ochrana-spotrebitela/alternativne-riesenie-spotrebitelskych-sporov-1",
     formHeading: "Panasz / visszajelzés",
     formIntro:
       "Írjon nekünk reklamációt, elállási kérelmet vagy általános kérdést. 48 órán belül válaszolunk.",
@@ -406,7 +408,7 @@ const hu: Dictionary = {
       ],
       ["Forgalmazás", "50+ ország világszerte"],
       ["Szlovák forgalmazó", "Red Cube s.r.o., Komárno"],
-      ["Forgalmazó cégjegyzékszáma (IČO)", "44137265"],
+      ["Forgalmazó azonosítója (IČO)", "44137265"],
       ["Adószám (IČ DPH)", "SK2022614341"],
       ["Cím", "Nám. M.R. Štefánika 16, 945 01 Komárno, Szlovákia"],
       ["Kapcsolat", "+421 905 108 641 | info@skinderma.sk"],
@@ -531,13 +533,15 @@ const hu: Dictionary = {
     contactHelpAfter: " számon.",
     form: {
       required: "Kötelező mező",
-      icoLength: "Az IČO-nak pontosan 8 számjegyből kell állnia",
+      icoInvalid:
+        "Adja meg az adószámot (12345678-2-41) vagy a cégjegyzékszámot (01-09-123456).",
+      icoPattern: "^\\d{8}$|^\\d{10,11}$",
       invalidEmail: "Érvénytelen e-mail-cím",
       consentRequired: "A hozzájárulás kötelező",
       salonName: "Szalon neve *",
       salonNamePlaceholder: "Pl. Beauty Studio Budapest",
-      ico: "IČO (cégazonosító) *",
-      icoPlaceholder: "12345678",
+      ico: "Adószám vagy cégjegyzékszám *",
+      icoPlaceholder: "12345678-2-41",
       address: "Telephely címe *",
       addressPlaceholder: "Pl. Fő utca 12, 1011 Budapest",
       contactPerson: "Kapcsolattartó személy *",

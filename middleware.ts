@@ -6,6 +6,7 @@ import {
   defaultLocale,
   isLocale,
   parsePathname,
+  stripDefaultLocalePrefix,
   type Locale,
 } from "@/lib/i18n/config";
 import {
@@ -17,6 +18,7 @@ import {
  * i18n middleware.
  *
  * Responsibilities:
+ *  0. 301 an explicit "/sk" prefix away — Slovak is served prefix-less.
  *  1. Tag every content request with the active locale + pathname so the root
  *     layout can render <html lang> and the localized <link rel="alternate">
  *     cluster (Server Components cannot read the URL directly).
@@ -50,6 +52,15 @@ const PARSE_ACCEPT_LANGUAGE = (header: string | null): Locale | null => {
 
 export function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
+
+  // ---- 0. "/sk/..." is not a shape we serve -> drop the prefix -------------
+  const unprefixed = stripDefaultLocalePrefix(pathname);
+  if (unprefixed) {
+    const url = req.nextUrl.clone();
+    url.pathname = unprefixed;
+    return NextResponse.redirect(url, 301);
+  }
+
   const { locale, segment } = parsePathname(pathname);
 
   // ---- 2. localized vanity slug -> canonical (per active locale) ------------

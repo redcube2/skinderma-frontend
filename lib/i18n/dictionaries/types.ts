@@ -170,6 +170,7 @@ export interface Dictionary {
     adrHeading: string;
     adrText: string;
     adrLinkLabel: string;
+    adrLinkHref: string;
     formHeading: string;
     formIntro: string;
     form: ContactFormDict;
@@ -255,7 +256,14 @@ export interface ContactFormDict {
 
 export interface PartnerFormDict {
   required: string;
-  icoLength: string;
+  /** Message shown when the company identifier does not match `icoPattern`. */
+  icoInvalid: string;
+  /**
+   * Regex source (not a literal) matched against the identifier with spaces,
+   * hyphens, dots and slashes removed. SK/CZ use an 8-digit IČO; a Hungarian
+   * salon has an 11-digit adószám or a 10-digit cégjegyzékszám instead.
+   */
+  icoPattern: string;
   invalidEmail: string;
   consentRequired: string;
   salonName: string;

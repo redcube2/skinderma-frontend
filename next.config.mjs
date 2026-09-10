@@ -1,4 +1,117 @@
 /** @type {import('next').NextConfig} */
+
+// --- skinderma.cz / skinderma.hu -------------------------------------------
+// Both ccTLDs are registered but hold no site of their own. They fold into the
+// localized sub-paths on www.skinderma.sk with a single 301 hop, so all the SEO
+// weight stays on one domain and /cs + /hu keep the canonical.
+//
+// These rules only fire once the domains are added to this Vercel project and
+// their DNS points at Vercel. Add them WITHOUT Vercel's built-in
+// "redirect to primary domain" option — that would send skinderma.cz/x to
+// www.skinderma.sk/x (Slovak) and never reach the mapping below.
+const CONTENT_SITE = "https://www.skinderma.sk";
+const SHOP_SITE = "https://skinderma.sk";
+
+// Commerce stays on the WooCommerce apex in Slovak, whichever domain it is
+// reached from.
+const CCTLD_COMMERCE_PREFIXES = [
+  "/obchod",
+  "/produkt",
+  "/produkty",
+  "/product-category",
+  "/kategoria",
+  "/kosik",
+  "/pokladna",
+  "/moj-ucet",
+  "/objednavka-prijata",
+  "/order-received",
+];
+
+// Old-domain path -> localized sub-path. Includes the vanity slugs from
+// lib/i18n/routes.ts (SLUG_ALIASES) so a link in either language lands in one
+// hop instead of two.
+const CCTLD_CONTENT_MAP = {
+  cs: {
+    "/": "/cs",
+    "/domu": "/cs",
+    "/o-nas": "/cs/o-nas",
+    "/kontakt": "/cs/kontakt",
+    "/kontakty": "/cs/kontakt",
+    "/o-skinderme": "/cs/o-skinderme",
+    "/blog": "/cs/blog",
+    "/novinky": "/cs/blog",
+    "/partnerstvo": "/cs/partnerstvo",
+    "/partnerstvi": "/cs/partnerstvo",
+    "/spoluprace": "/cs/partnerstvo",
+    "/cookies": "/cs/cookies",
+  },
+  hu: {
+    "/": "/hu",
+    "/fooldal": "/hu",
+    "/o-nas": "/hu/o-nas",
+    "/rolunk": "/hu/o-nas",
+    "/kontakt": "/hu/kontakt",
+    "/kapcsolat": "/hu/kontakt",
+    "/o-skinderme": "/hu/o-skinderme",
+    "/a-skindermarol": "/hu/o-skinderme",
+    "/blog": "/hu/blog",
+    "/hirek": "/hu/blog",
+    "/partnerstvo": "/hu/partnerstvo",
+    "/partnerseg": "/hu/partnerstvo",
+    "/cookies": "/hu/cookies",
+    "/sutik": "/hu/cookies",
+  },
+};
+
+/** Every 301 for one ccTLD, most specific first, catch-all last. */
+function ccTldRedirects(host, locale) {
+  const has = [{ type: "host", value: `(www\\.)?${host}` }];
+  const rules = [];
+
+  for (const prefix of CCTLD_COMMERCE_PREFIXES) {
+    rules.push({
+      source: prefix,
+      has,
+      destination: `${SHOP_SITE}${prefix}`,
+      // 301, not Next's default 308 — GSC change-of-address and every SEO
+      // tool in the chain expects a plain permanent redirect.
+      statusCode: 301,
+    });
+    rules.push({
+      source: `${prefix}/:path*`,
+      has,
+      destination: `${SHOP_SITE}${prefix}/:path*`,
+      // 301, not Next's default 308 — GSC change-of-address and every SEO
+      // tool in the chain expects a plain permanent redirect.
+      statusCode: 301,
+    });
+  }
+
+  for (const [from, to] of Object.entries(CCTLD_CONTENT_MAP[locale])) {
+    rules.push({
+      source: from,
+      has,
+      destination: `${CONTENT_SITE}${to}`,
+      // 301, not Next's default 308 — GSC change-of-address and every SEO
+      // tool in the chain expects a plain permanent redirect.
+      statusCode: 301,
+    });
+  }
+
+  // Anything unmapped is a link to a page that never existed on these domains
+  // -> soft landing on the localized home page rather than a 404.
+  rules.push({
+    source: "/:path*",
+    has,
+    destination: `${CONTENT_SITE}/${locale}`,
+    // 301, not Next's default 308 — GSC change-of-address and every SEO
+    // tool in the chain expects a plain permanent redirect.
+    statusCode: 301,
+  });
+
+  return rules;
+}
+
 const nextConfig = {
   async headers() {
     return [
@@ -28,6 +141,12 @@ const nextConfig = {
       { protocol: "https", hostname: "skindermacosmetics.com" },
       { protocol: "https", hostname: "secure.gravatar.com" },
     ],
+  },
+  async redirects() {
+    return [
+      ...ccTldRedirects("skinderma\\.cz", "cs"),
+      ...ccTldRedirects("skinderma\\.hu", "hu"),
+    ];
   },
   async rewrites() {
     return {
@@ -62,4 +181,5 @@ const nextConfig = {
   },
 };
 
+export { CCTLD_CONTENT_MAP };
 export default nextConfig;

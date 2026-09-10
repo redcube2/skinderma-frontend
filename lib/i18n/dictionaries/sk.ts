@@ -172,9 +172,9 @@ const sk: Dictionary = {
       eyebrow: "Exkluzívna ponuka",
       titleLines: ["Profesionálne nástroje", "pre váš salón"],
       bodyHtml:
-        "Pri nákupe Skinderma produktov nad <strong>200€</strong> získate <strong>dopravu zdarma</strong> a <strong>1 mesiac softvéru Skinia zdarma</strong> — kompletný systém pre správu klientov, AI protokoly a online rezervácie.",
+        "Pri nákupe Skinderma produktov nad <strong>200 €</strong> získate <strong>dopravu zdarma</strong> a <strong>1 mesiac softvéru Skinia zdarma</strong> — kompletný systém pre správu klientov, AI protokoly a online rezervácie.",
       bullets: [
-        "Doprava zdarma pri objednávke nad 200€",
+        "Doprava zdarma pri objednávke nad 200 €",
         "1 mesiac Skinia softvéru zdarma",
         "Správa klientov, AI protokoly, online booking",
         "Bez záväzkov — zrušenie kedykoľvek",
@@ -199,7 +199,7 @@ const sk: Dictionary = {
           desc: "Produktové odporúčania pre domácu starostlivosť",
         },
       ],
-      offerLabel: "Pri nákupe nad 200€",
+      offerLabel: "Pri nákupe nad 200 €",
       offerValue: "1 mesiac ZDARMA",
       ctaSkinia: "Pozrieť Skinia.eu",
       ctaProducts: "Objednať produkty",
@@ -362,9 +362,13 @@ const sk: Dictionary = {
     hours:
       "Na bežné otázky odpovedáme do 24 hodín (pracovné dni 9:00 – 17:00).",
     adrHeading: "Alternatívne riešenie sporov",
+    // Platforma RSO/ODR Európskej komisie bola vypnutá 20. 7. 2025. VOP na WP
+    // preto odkazujú na zoznam subjektov ARS vedený MH SR — držíme rovnaké znenie.
     adrText:
-      "Spotrebiteľ má právo obrátiť sa na platformu ARS Európskej komisie:",
-    adrLinkLabel: "https://ec.europa.eu/consumers/odr",
+      "Ak nie ste spokojní s vybavením reklamácie, máte právo podať návrh na začatie alternatívneho riešenia sporu. Zoznam subjektov ARS vedie Ministerstvo hospodárstva SR:",
+    adrLinkLabel: "Zoznam subjektov ARS – Ministerstvo hospodárstva SR",
+    adrLinkHref:
+      "https://www.mhsr.sk/obchod/ochrana-spotrebitela/alternativne-riesenie-spotrebitelskych-sporov-1",
     formHeading: "Sťažnosť / spätná väzba",
     formIntro:
       "Napíšte nám reklamáciu, žiadosť o odstúpenie od zmluvy alebo bežnú otázku. Odpovieme do 48 hodín.",
@@ -530,7 +534,8 @@ const sk: Dictionary = {
     contactHelpAfter: ".",
     form: {
       required: "Povinné pole",
-      icoLength: "IČO musí mať presne 8 číslic",
+      icoInvalid: "IČO musí mať presne 8 číslic",
+      icoPattern: "^\\d{8}$",
       invalidEmail: "Neplatná e-mailová adresa",
       consentRequired: "Súhlas je povinný",
       salonName: "Názov salónu *",

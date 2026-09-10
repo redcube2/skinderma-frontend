@@ -110,6 +110,21 @@ export function localizedPath(locale: Locale, segment: string): string {
   return "/" + locale + seg;
 }
 
+/**
+ * Strip an explicit "/sk" prefix, which is not a URL shape we serve — the
+ * default locale lives at the bare path. Returns the prefix-less pathname, or
+ * null when the pathname is not /sk-prefixed.
+ *   "/sk/o-nas" -> "/o-nas"
+ *   "/sk"       -> "/"
+ *   "/cs/o-nas" -> null
+ */
+export function stripDefaultLocalePrefix(pathname: string): string | null {
+  const prefix = "/" + defaultLocale;
+  if (pathname === prefix) return "/";
+  if (pathname.startsWith(prefix + "/")) return pathname.slice(prefix.length);
+  return null;
+}
+
 /** Absolute URL for a locale-neutral segment in a given locale. */
 export function localizedUrl(locale: Locale, segment: string): string {
   const path = localizedPath(locale, segment);

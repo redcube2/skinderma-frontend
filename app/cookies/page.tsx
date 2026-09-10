@@ -4,6 +4,9 @@ import { buildAlternates } from "@/lib/i18n/metadata";
 export const metadata: Metadata = {
   title: "Cookies | Skinderma",
   alternates: buildAlternates("sk", "/cookies"),
+    // Placeholder until the real cookie notice exists — keep it out of the
+    // index so we do not publish an empty page in three languages.
+    robots: { index: false, follow: true },
 };
 
 export default function Cookies() {

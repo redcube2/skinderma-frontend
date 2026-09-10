@@ -86,7 +86,7 @@ const cs: Dictionary = {
     partnership: "Partnerství",
     privacy: "Ochrana osobních údajů",
     company:
-      "Red cube s.r.o. | IČO: 44137265 | DIČ: 2022614341 | IČ DPH: SK2022614341",
+      "Red cube s.r.o. | IČO: 44137265 | DIČ (SK): 2022614341 | IČ DPH (DIČ): SK2022614341",
     rights: "Skinderma",
     poweredBy: "Powered by Red cube s.r.o.",
   },
@@ -173,9 +173,9 @@ const cs: Dictionary = {
       eyebrow: "Exkluzivní nabídka",
       titleLines: ["Profesionální nástroje", "pro váš salon"],
       bodyHtml:
-        "Při nákupu produktů Skinderma nad <strong>200€</strong> získáte <strong>dopravu zdarma</strong> a <strong>1 měsíc softwaru Skinia zdarma</strong> — kompletní systém pro správu klientů, AI protokoly a online rezervace.",
+        "Při nákupu produktů Skinderma nad <strong>200 €</strong> získáte <strong>dopravu zdarma</strong> a <strong>1 měsíc softwaru Skinia zdarma</strong> — kompletní systém pro správu klientů, AI protokoly a online rezervace.",
       bullets: [
-        "Doprava zdarma při objednávce nad 200€",
+        "Doprava zdarma při objednávce nad 200 €",
         "1 měsíc softwaru Skinia zdarma",
         "Správa klientů, AI protokoly, online booking",
         "Bez závazků — zrušení kdykoli",
@@ -200,7 +200,7 @@ const cs: Dictionary = {
           desc: "Produktová doporučení pro domácí péči",
         },
       ],
-      offerLabel: "Při nákupu nad 200€",
+      offerLabel: "Při nákupu nad 200 €",
       offerValue: "1 měsíc ZDARMA",
       ctaSkinia: "Prohlédnout Skinia.eu",
       ctaProducts: "Objednat produkty",
@@ -364,8 +364,10 @@ const cs: Dictionary = {
       "Na běžné dotazy odpovídáme do 24 hodin (pracovní dny 9:00 – 17:00).",
     adrHeading: "Alternativní řešení sporů",
     adrText:
-      "Spotřebitel má právo obrátit se na platformu ODR Evropské komise:",
-    adrLinkLabel: "https://ec.europa.eu/consumers/odr",
+      "Nejste-li spokojeni s vyřízením reklamace, máte právo podat návrh na zahájení alternativního řešení sporu. Prodávající je slovenská společnost, seznam subjektů ARS proto vede Ministerstvo hospodářství SR:",
+    adrLinkLabel: "Seznam subjektů ARS – Ministerstvo hospodářství SR",
+    adrLinkHref:
+      "https://www.mhsr.sk/obchod/ochrana-spotrebitela/alternativne-riesenie-spotrebitelskych-sporov-1",
     formHeading: "Stížnost / zpětná vazba",
     formIntro:
       "Napište nám reklamaci, žádost o odstoupení od smlouvy nebo běžný dotaz. Odpovíme do 48 hodin.",
@@ -531,7 +533,8 @@ const cs: Dictionary = {
     contactHelpAfter: ".",
     form: {
       required: "Povinné pole",
-      icoLength: "IČO musí mít přesně 8 číslic",
+      icoInvalid: "IČO musí mít přesně 8 číslic",
+      icoPattern: "^\\d{8}$",
       invalidEmail: "Neplatná e-mailová adresa",
       consentRequired: "Souhlas je povinný",
       salonName: "Název salonu *",

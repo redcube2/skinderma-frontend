@@ -12,12 +12,17 @@ import {
   isLocale,
   defaultLocale,
   locales,
+  stripDefaultLocalePrefix,
 } from "../lib/i18n/config.ts";
 import {
   switchableSegment,
   isCommerceSegment,
   resolveAlias,
+  ROUTE_SEGMENTS,
 } from "../lib/i18n/routes.ts";
+import { CCTLD_CONTENT_MAP } from "../next.config.mjs";
+import { getDictionary } from "../lib/i18n/dictionaries/index.ts";
+import { normalizeCompanyId } from "../lib/companyId.ts";
 import { buildAlternates } from "../lib/i18n/metadata.ts";
 
 test("defaultLocale is Slovak and served prefix-less", () => {
@@ -41,6 +46,50 @@ test("parsePathname splits locale and locale-neutral segment", () => {
     locale: "sk",
     segment: "/blog/clanok",
   });
+});
+
+test("an explicit /sk prefix is stripped, other locales are left alone", () => {
+  assert.equal(stripDefaultLocalePrefix("/sk/o-nas"), "/o-nas");
+  assert.equal(stripDefaultLocalePrefix("/sk"), "/");
+  assert.equal(stripDefaultLocalePrefix("/sk/"), "/");
+  assert.equal(stripDefaultLocalePrefix("/cs/o-nas"), null);
+  assert.equal(stripDefaultLocalePrefix("/skinderma"), null);
+  assert.equal(stripDefaultLocalePrefix("/"), null);
+});
+
+test("every localized route is mapped for skinderma.cz / skinderma.hu", () => {
+  // Adding a localized route without a ccTLD mapping would silently drop that
+  // page to the locale home page after the 301.
+  for (const locale of ["cs", "hu"]) {
+    const map = CCTLD_CONTENT_MAP[locale];
+    for (const segment of Object.values(ROUTE_SEGMENTS)) {
+      assert.equal(
+        map[segment],
+        localizedPath(locale, segment),
+        `${locale}: ${segment} is missing from CCTLD_CONTENT_MAP`
+      );
+    }
+  }
+});
+
+test("the partner form accepts the company id each market actually has", () => {
+  const accepts = (locale, value) =>
+    new RegExp(getDictionary(locale).partnership.form.icoPattern).test(
+      normalizeCompanyId(value)
+    );
+
+  for (const locale of ["sk", "cs"]) {
+    assert.ok(accepts(locale, "12345678"), `${locale} IČO`);
+    assert.ok(accepts(locale, "123 456 78"), `${locale} IČO with spaces`);
+    assert.ok(!accepts(locale, "1234567"), `${locale} too short`);
+    assert.ok(!accepts(locale, "12345678-2-41"), `${locale} is not HU`);
+  }
+
+  assert.ok(accepts("hu", "12345678"), "törzsszám");
+  assert.ok(accepts("hu", "12345678-2-41"), "adószám");
+  assert.ok(accepts("hu", "01-09-123456"), "cégjegyzékszám");
+  assert.ok(!accepts("hu", "1234"), "too short");
+  assert.ok(!accepts("hu", "abcdefgh"), "not digits");
 });
 
 test("isLocale guards the locale union", () => {

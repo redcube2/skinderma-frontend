@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { PartnerFormDict } from "@/lib/i18n/dictionaries";
+import { normalizeCompanyId } from "@/lib/companyId";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -48,8 +49,10 @@ export default function PartnerContactForm({
     if (!salonName.trim()) errs.salonName = dict.required;
     if (!ico.trim()) {
       errs.ico = dict.required;
-    } else if (!/^\d{8}$/.test(ico.trim())) {
-      errs.ico = dict.icoLength;
+    } else if (!new RegExp(dict.icoPattern).test(normalizeCompanyId(ico))) {
+      // The identifier is not the same shape in every market, so the accepted
+      // pattern travels with the dictionary rather than being hard-coded here.
+      errs.ico = dict.icoInvalid;
     }
     if (!address.trim()) errs.address = dict.required;
     if (!contactPerson.trim()) errs.contactPerson = dict.required;

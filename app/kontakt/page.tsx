@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "./ContactForm";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 import { buildAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
@@ -10,6 +11,11 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  // The ARS block is the one piece of legal-adjacent copy on this page that has
+  // to stay in lockstep with the WP terms, so it reads from the dictionary
+  // instead of being duplicated inline.
+  const adr = getDictionary("sk").contact;
+
   return (
     <section className="container-page py-12 md:py-16">
       <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
@@ -72,20 +78,15 @@ export default function ContactPage() {
           </div>
 
           <div className="rounded-2xl border border-cream-dark/60 bg-cream p-5 text-sm">
-            <div className="font-semibold text-navy">
-              Alternatívne riešenie sporov
-            </div>
-            <p className="mt-2">
-              Spotrebiteľ má právo obrátiť sa na platformu ARS Európskej
-              komisie:
-            </p>
+            <div className="font-semibold text-navy">{adr.adrHeading}</div>
+            <p className="mt-2">{adr.adrText}</p>
             <a
-              href="https://ec.europa.eu/consumers/odr"
+              href={adr.adrLinkHref}
               target="_blank"
               rel="noreferrer"
               className="mt-1 inline-block text-gold hover:text-gold-dark break-all"
             >
-              https://ec.europa.eu/consumers/odr
+              {adr.adrLinkLabel}
             </a>
           </div>
         </div>

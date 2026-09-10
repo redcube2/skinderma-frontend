@@ -67,7 +67,7 @@ export default function ContactPageView({ locale }: { locale: Locale }) {
             <div className="font-semibold text-navy">{t.adrHeading}</div>
             <p className="mt-2">{t.adrText}</p>
             <a
-              href="https://ec.europa.eu/consumers/odr"
+              href={t.adrLinkHref}
               target="_blank"
               rel="noreferrer"
               className="mt-1 inline-block text-gold hover:text-gold-dark break-all"

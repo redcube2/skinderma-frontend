@@ -70,7 +70,7 @@ function notificationHtml(body: {
 
               <table cellpadding="0" cellspacing="0" width="100%" style="border-top:1px solid #eee;padding-top:16px;">
                 ${row("Názov salónu:", body.salonName)}
-                ${row("IČO:", body.ico)}
+                ${row("IČO / adószám:", body.ico)}
                 ${row("Adresa prevádzky:", body.address)}
                 ${row("Kontaktná osoba:", body.contactPerson)}
                 ${body.position ? row("Pozícia:", body.position) : ""}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { normalizeCompanyId } from "@/lib/companyId";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -37,7 +38,7 @@ export default function PartnerContactForm() {
     if (!salonName.trim()) errs.salonName = "Povinné pole";
     if (!ico.trim()) {
       errs.ico = "Povinné pole";
-    } else if (!/^\d{8}$/.test(ico.trim())) {
+    } else if (!/^\d{8}$/.test(normalizeCompanyId(ico))) {
       errs.ico = "IČO musí mať presne 8 číslic";
     }
     if (!address.trim()) errs.address = "Povinné pole";

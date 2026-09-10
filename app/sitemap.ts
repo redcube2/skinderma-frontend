@@ -22,7 +22,8 @@ const CONTENT_ROUTE_META: Partial<
   contact: { changeFrequency: "monthly", priority: 0.5 },
   oSkinderme: { changeFrequency: "monthly", priority: 0.4 },
   partnership: { changeFrequency: "monthly", priority: 0.4 },
-  cookies: { changeFrequency: "monthly", priority: 0.2 },
+  // `cookies` is deliberately absent: the page is still a placeholder in all
+  // three locales and is noindex until it carries a real cookie notice.
 };
 
 function localizedContentEntries(now: Date): MetadataRoute.Sitemap {

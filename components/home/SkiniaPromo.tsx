@@ -16,9 +16,9 @@ const DEFAULT_DICT: SkiniaDict = {
   eyebrow: "Exkluzívna ponuka",
   titleLines: ["Profesionálne nástroje", "pre váš salón"],
   bodyHtml:
-    "Pri nákupe Skinderma produktov nad <strong>200€</strong> získate <strong>dopravu zdarma</strong> a <strong>1 mesiac softvéru Skinia zdarma</strong> — kompletný systém pre správu klientov, AI protokoly a online rezervácie.",
+    "Pri nákupe Skinderma produktov nad <strong>200 €</strong> získate <strong>dopravu zdarma</strong> a <strong>1 mesiac softvéru Skinia zdarma</strong> — kompletný systém pre správu klientov, AI protokoly a online rezervácie.",
   bullets: [
-    "Doprava zdarma pri objednávke nad 200€",
+    "Doprava zdarma pri objednávke nad 200 €",
     "1 mesiac Skinia softvéru zdarma",
     "Správa klientov, AI protokoly, online booking",
     "Bez záväzkov — zrušenie kedykoľvek",
@@ -37,7 +37,7 @@ const DEFAULT_DICT: SkiniaDict = {
       desc: "Produktové odporúčania pre domácu starostlivosť",
     },
   ],
-  offerLabel: "Pri nákupe nad 200€",
+  offerLabel: "Pri nákupe nad 200 €",
   offerValue: "1 mesiac ZDARMA",
   ctaSkinia: "Pozrieť Skinia.eu",
   ctaProducts: "Objednať produkty",

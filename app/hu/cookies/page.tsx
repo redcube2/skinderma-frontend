@@ -8,12 +8,17 @@ const SEGMENT = "/cookies";
 
 export function generateMetadata(): Metadata {
   const t = getDictionary(LOCALE).cookies;
-  return buildPageMetadata({
-    locale: LOCALE,
-    segment: SEGMENT,
-    title: t.metaTitle,
-    description: t.body,
-  });
+  return {
+    ...buildPageMetadata({
+      locale: LOCALE,
+      segment: SEGMENT,
+      title: t.metaTitle,
+      description: t.body,
+    }),
+    // Placeholder until the real cookie notice exists — keep it out of the
+    // index so we do not publish an empty page in three languages.
+    robots: { index: false, follow: true },
+  };
 }
 
 export default function Page() {
