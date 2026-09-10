@@ -23,16 +23,20 @@ const IMAGES = [
   },
 ];
 
-export default function GallerySection() {
+export default function GallerySection({
+  dict,
+}: {
+  dict?: { eyebrow: string; title: string };
+}) {
   return (
     <section className="bg-[#fefefe] py-24 md:py-32">
       <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
         <div className="mb-16 text-center">
           <p className="mb-4 text-[11px] uppercase tracking-[0.4em] text-[#646467]">
-            Galéria
+            {dict?.eyebrow ?? "Galéria"}
           </p>
           <h2 className="text-[clamp(32px,4vw,56px)] font-light leading-tight text-black">
-            Produkty v detaile
+            {dict?.title ?? "Produkty v detaile"}
           </h2>
         </div>
 

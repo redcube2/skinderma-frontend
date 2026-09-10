@@ -12,6 +12,8 @@ import USPSection from "@/components/home/USPSection";
 import GallerySection from "@/components/home/GallerySection";
 import FAQSection from "@/components/home/FAQSection";
 import { FadeInSection } from "@/components/ui/FadeInSection";
+import { defaultLocale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 import {
   getCategories,
   getFeaturedProducts,
@@ -33,9 +35,11 @@ export default async function HomePage() {
           () => []
         );
 
+  const home = getDictionary(defaultLocale).home;
+
   return (
     <>
-      <Hero />
+      <Hero dict={home.hero} locale={defaultLocale} />
       <SadyHomepageSection />
       <MarqueeBanner />
       <FadeInSection>

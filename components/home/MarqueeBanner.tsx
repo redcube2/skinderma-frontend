@@ -7,8 +7,9 @@ const ITEMS = [
   "Medicínska kozmetika",
 ];
 
-export default function MarqueeBanner() {
-  const loop = [...ITEMS, ...ITEMS];
+export default function MarqueeBanner({ items }: { items?: string[] }) {
+  const source = items && items.length > 0 ? items : ITEMS;
+  const loop = [...source, ...source];
   return (
     <div className="overflow-hidden border-y border-[#e8e4dc] bg-[#f5f4f0] py-4">
       <div className="flex whitespace-nowrap will-change-transform [animation:marquee_30s_linear_infinite]">

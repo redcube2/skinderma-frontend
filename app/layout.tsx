@@ -4,6 +4,17 @@ import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/nav/Navbar";
 import Footer from "@/components/footer/Footer";
+import {
+  SITE_URL,
+  defaultLocale,
+  localeHreflang,
+  localeHtmlLang,
+  localeOgLocale,
+  locales,
+} from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { buildAlternates } from "@/lib/i18n/metadata";
+import { getRequestLocale, getRequestRoute } from "@/lib/i18n/request";
 
 const quicksand = Quicksand({
   subsets: ["latin", "latin-ext"],
@@ -14,51 +25,61 @@ const quicksand = Quicksand({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://skinderma.sk";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: "Skinderma – Lekárska kozmetika | GMP certifikované produkty",
-    template: "%s | Skinderma",
-  },
-  description:
-    "SKINDERMA Medical Cosmetics – profesionálna lekárska kozmetika pre salóny aj domáce použitie. GMP certifikované produkty distribuované do 50+ krajín.",
-  alternates: { canonical: siteUrl },
-  openGraph: {
-    type: "website",
-    locale: "sk_SK",
-    url: siteUrl,
-    siteName: "Skinderma",
-    title: "Skinderma – Lekárska kozmetika | GMP certifikované produkty",
-    description:
-      "GMP certifikovaná lekárska kozmetika. Peelingy, séra a profesionálne produkty pre zdravú pokožku.",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Skinderma – Lekárska kozmetika",
-    description:
-      "GMP certifikovaná lekárska kozmetika. Peelingy, séra a profesionálne produkty pre zdravú pokožku.",
-  },
-  verification: {
-    google: "74mDStrMQJwZ1mFr_DtTgMwuJL6re0jY7t7F1VzQUb8",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export function generateMetadata(): Metadata {
+  const { locale, segment } = getRequestRoute();
+  const dict = getDictionary(locale);
+  const isHome = segment === "/";
+
+  return {
+    metadataBase: new URL(siteUrl),
+    title: {
+      default: dict.meta.homeTitle,
+      template: dict.meta.titleTemplate,
+    },
+    description: dict.meta.description,
+    // Only the home route owns its alternates here; deeper pages set their own
+    // via lib/i18n/metadata so Slovak-only routes stay untouched.
+    ...(isHome ? { alternates: buildAlternates(locale, "/") } : {}),
+    openGraph: {
+      type: "website",
+      locale: localeOgLocale[locale],
+      alternateLocale: locales
+        .filter((l) => l !== locale)
+        .map((l) => localeOgLocale[l]),
+      url: isHome ? `${SITE_URL}${locale === defaultLocale ? "" : "/" + locale}` : undefined,
+      siteName: "Skinderma",
+      title: dict.meta.ogTitle,
+      description: dict.meta.ogDescription,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.meta.ogTitle,
+      description: dict.meta.ogDescription,
+    },
+    verification: {
+      google: "74mDStrMQJwZ1mFr_DtTgMwuJL6re0jY7t7F1VzQUb8",
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
     },
-  },
-};
+  };
+}
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = getRequestLocale();
+  const dict = getDictionary(locale);
   const jsonLdGraph = {
     "@context": "https://schema.org",
     "@graph": [
@@ -141,7 +162,7 @@ export default function RootLayout({
         description:
           "Officiálna stránka Skinderma Medical Cosmetics pre slovenský trh. GMP certifikované produkty pre profesionálov aj domáce použitie.",
         publisher: { "@id": "https://www.skinderma.sk/#organization" },
-        inLanguage: "sk-SK",
+        inLanguage: localeHreflang[locale],
         potentialAction: {
           "@type": "SearchAction",
           target: {
@@ -155,7 +176,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="sk" className={quicksand.variable}>
+    <html lang={localeHtmlLang[locale]} className={quicksand.variable}>
       <body className="flex min-h-screen flex-col bg-white text-navy antialiased">
         <script
           type="application/ld+json"
@@ -167,7 +188,7 @@ export default function RootLayout({
           padding: "10px 20px", fontSize: 12, letterSpacing: "0.15em",
           textTransform: "uppercase"
         }}>
-          Kontakt:{" "}
+          {dict.banner.contactLabel}{" "}
           <a href="tel:+421905108641" style={{ color: "#fff", textDecoration: "underline" }}>
             +421 905 108 641
           </a>
@@ -176,9 +197,9 @@ export default function RootLayout({
             info@skinderma.sk
           </a>
         </div>
-        <Navbar />
+        <Navbar locale={locale} />
         <main className="flex-1">{children}</main>
-        <Footer />
+        <Footer locale={locale} />
         {/* Hotjar Tracking */}
         <Script id="hotjar" strategy="afterInteractive">{`
           (function(h,o,t,j,a,r){
