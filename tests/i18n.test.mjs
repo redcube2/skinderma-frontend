@@ -92,6 +92,23 @@ test("the partner form accepts the company id each market actually has", () => {
   assert.ok(!accepts("hu", "abcdefgh"), "not digits");
 });
 
+test("a query string never hides the home route", () => {
+  // middleware sets the pathname header as `pathname + search`; campaign links
+  // always carry one, and Facebook appends ?fbclid= on its own. If the segment
+  // keeps the query, app/layout.tsx stops seeing the home route and drops the
+  // canonical + hreflang cluster.
+  assert.deepEqual(parsePathname("/hu?utm_source=fb"), {
+    locale: "hu",
+    segment: "/",
+  });
+  assert.deepEqual(parsePathname("/?fbclid=abc"), { locale: "sk", segment: "/" });
+  assert.deepEqual(parsePathname("/cs/kontakt?utm_medium=cpc"), {
+    locale: "cs",
+    segment: "/kontakt",
+  });
+  assert.deepEqual(parsePathname("/cs#kotva"), { locale: "cs", segment: "/" });
+});
+
 test("isLocale guards the locale union", () => {
   assert.ok(isLocale("cs"));
   assert.ok(!isLocale("en"));
