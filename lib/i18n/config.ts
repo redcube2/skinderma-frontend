@@ -73,15 +73,22 @@ export function isLocale(value: string | undefined | null): value is Locale {
 
 /**
  * Split a pathname into its locale and the locale-neutral segment.
- *   "/cs/o-nas" -> { locale: "cs", segment: "/o-nas" }
- *   "/o-nas"    -> { locale: "sk", segment: "/o-nas" }
- *   "/"         -> { locale: "sk", segment: "/" }
+ *   "/cs/o-nas"   -> { locale: "cs", segment: "/o-nas" }
+ *   "/o-nas"      -> { locale: "sk", segment: "/o-nas" }
+ *   "/"           -> { locale: "sk", segment: "/" }
+ *   "/hu?utm=fb"  -> { locale: "hu", segment: "/" }
  */
 export function parsePathname(pathname: string): {
   locale: Locale;
   segment: string;
 } {
-  const clean = pathname.replace(/\/+$/, "") || "/";
+  // The middleware header carries `pathname + search`, and campaign links always
+  // arrive with something attached (`?utm_source=…`, Facebook's own `?fbclid=`).
+  // Without stripping it the segment never equals "/", the home route stops
+  // looking like the home route, and app/layout.tsx drops its canonical and the
+  // whole hreflang cluster.
+  const bare = pathname.split(/[?#]/)[0];
+  const clean = bare.replace(/\/+$/, "") || "/";
   const parts = clean.split("/");
   const maybeLocale = parts[1];
 
