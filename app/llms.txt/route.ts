@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getPosts } from "@/lib/wordpress";
+import { FREE_SHIPPING_THRESHOLD } from "@/lib/delivery";
 
 export const revalidate = 3600;
 
@@ -72,7 +73,7 @@ export async function GET() {
     `- Produkty sú určené **výhradne pre profesionálov** (salóny, kliniky, estetici)`,
     `- E-shop funguje na headless architektúre: frontend (${BASE}) + WooCommerce backend (${APEX})`,
     `- Kanonické URL produktov: ${APEX}/product/[slug]`,
-    `- Doprava: SPS Balíkovo a osobný odber v Komárne (Slovensko); SPS/DPD do Česka a Maďarska, doprava zdarma tam len nad 200 € s DPH`,
+    `- Doprava: SPS Balíkovo a osobný odber v Komárne (Slovensko); SPS/DPD do Česka a Maďarska, doprava zdarma tam len nad ${FREE_SHIPPING_THRESHOLD} s DPH`,
     `- Platby: bankový prevod, kartou online (ComGate); platba na dobierku nie je dostupná`,
     `- Vrátenie tovaru: do 30 dní`,
     `- Sitemap (www): ${BASE}/sitemap.xml`,

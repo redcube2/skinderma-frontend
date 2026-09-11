@@ -469,6 +469,45 @@ const hu: Dictionary = {
     body: "A tartalom hamarosan elérhető lesz.",
   },
 
+  delivery: {
+    metaTitle: "Szállítás és fizetés | Skinderma",
+    metaDescription:
+      "Szállítás és fizetés a Skindermánál: SPS / DPD Csehországba és Magyarországra, ingyenes szállítás meghatározott rendelési érték felett, fizetés banki átutalással vagy online bankkártyával a ComGate rendszerén keresztül. Az árak euróban.",
+    eyebrow: "Információk",
+    title: "Szállítás és fizetés",
+    intro:
+      "A rendeléseket munkanapokon dolgozzuk fel. Minden ár euróban (EUR) értendő, minden piacon.",
+    shippingHeading: "Szállítás",
+    paymentHeading: "Fizetés",
+    countrySk: "Szlovákia",
+    countryCzHu: "Csehország és Magyarország",
+    free: "Ingyenes",
+    methods: {
+      spsPickupPoint: { label: "SPS Balíkovo – átvételi pont" },
+      localPickup: {
+        label: "Személyes átvétel – Nám. M. R. Štefánika 16, Komárno",
+      },
+      courier: {
+        label: "SPS / DPD – házhozszállítás",
+        note: "Rendelésenkénti ár.",
+      },
+    },
+    payments: {
+      bankTransfer: { label: "Banki átutalás" },
+      card: {
+        label: "Online bankkártyás fizetés – ComGate",
+        note: "Visa, Mastercard",
+      },
+    },
+    noFreeShippingSk: "Szlovákiában az ingyenes szállítás nem érvényes.",
+    freeShippingCzHu:
+      "Az ingyenes szállítás csak a {threshold} feletti, áfával számított rendelésekre vonatkozik. Utánvétes fizetés nem elérhető.",
+    noCod: "Utánvétes fizetés egyik országban sem elérhető.",
+    timeHeading: "Szállítási idő",
+    timeBody:
+      "A raktáron lévő termékeket 2 – 5 munkanapon belül kézbesítjük. A rendelésre készülő termékek szállítási ideje körülbelül egy hónap.",
+  },
+
   partnership: {
     metaTitle: "Partnerség – Együttműködés szalonokkal | Skinderma",
     metaDescription:

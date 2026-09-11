@@ -18,6 +18,7 @@ export type RouteKey =
   | "oSkinderme"
   | "cookies"
   | "partnership"
+  | "delivery"
   | "blog";
 
 export const ROUTE_SEGMENTS: Record<RouteKey, string> = {
@@ -27,6 +28,7 @@ export const ROUTE_SEGMENTS: Record<RouteKey, string> = {
   oSkinderme: "/o-skinderme",
   cookies: "/cookies",
   partnership: "/partnerstvo",
+  delivery: "/dodanie",
   blog: "/blog",
 };
 
@@ -44,6 +46,8 @@ export const SLUG_ALIASES: Partial<Record<Locale, Record<string, string>>> = {
     "/kontakty": "/kontakt",
     "/novinky": "/blog",
     "/spoluprace": "/partnerstvo",
+    "/doruceni": "/dodanie",
+    "/doruceni-a-platba": "/dodanie",
   },
   hu: {
     "/rolunk": "/o-nas",
@@ -53,6 +57,8 @@ export const SLUG_ALIASES: Partial<Record<Locale, Record<string, string>>> = {
     "/partnerseg": "/partnerstvo",
     "/a-skindermarol": "/o-skinderme",
     "/sutik": "/cookies",
+    "/szallitas": "/dodanie",
+    "/szallitas-es-fizetes": "/dodanie",
   },
 };
 
@@ -79,7 +85,9 @@ export const COMMERCE_PREFIXES = [
   "/odstupenie",
   "/reklamacia",
   "/ochrana-osobnych-udajov",
-  "/dodanie",
+  // NOTE: /dodanie is deliberately NOT here. Unlike the legal documents it is
+  // our own Next.js page and exists in all three locales, so locale-prefixing
+  // it is correct — listing it would 301 /cs/dodanie away to the Slovak one.
 ];
 
 export function isCommerceSegment(segment: string): boolean {

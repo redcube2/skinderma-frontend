@@ -3,7 +3,7 @@ import DeliveryPage from "@/components/pages/DeliveryPage";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { buildPageMetadata } from "@/lib/i18n/metadata";
 
-const LOCALE = "sk" as const;
+const LOCALE = "cs" as const;
 const SEGMENT = "/dodanie";
 
 export function generateMetadata(): Metadata {

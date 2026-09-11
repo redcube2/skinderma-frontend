@@ -1,3 +1,5 @@
+import type { PaymentMethodId, ShippingMethodId } from "@/lib/delivery";
+
 /**
  * Shape of a per-locale content dictionary.
  *
@@ -195,6 +197,33 @@ export interface Dictionary {
     metaTitle: string;
     title: string;
     body: string;
+  };
+
+  /**
+   * Shipping/payment page. Prices and the method list are NOT here — they live
+   * once in lib/delivery.ts. This carries only the names and the prose, so a
+   * price change never means editing three dictionaries.
+   */
+  delivery: {
+    metaTitle: string;
+    metaDescription: string;
+    eyebrow: string;
+    title: string;
+    intro: string;
+    shippingHeading: string;
+    paymentHeading: string;
+    countrySk: string;
+    countryCzHu: string;
+    /** Shown instead of a price when a method costs nothing. */
+    free: string;
+    methods: Record<ShippingMethodId, { label: string; note?: string }>;
+    payments: Record<PaymentMethodId, { label: string; note?: string }>;
+    noFreeShippingSk: string;
+    /** Contains THRESHOLD_TOKEN; run through withThreshold() before rendering. */
+    freeShippingCzHu: string;
+    noCod: string;
+    timeHeading: string;
+    timeBody: string;
   };
 
   partnership: {

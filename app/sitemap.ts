@@ -22,6 +22,7 @@ const CONTENT_ROUTE_META: Partial<
   contact: { changeFrequency: "monthly", priority: 0.5 },
   oSkinderme: { changeFrequency: "monthly", priority: 0.4 },
   partnership: { changeFrequency: "monthly", priority: 0.4 },
+  delivery: { changeFrequency: "monthly", priority: 0.3 },
   // `cookies` is deliberately absent: the page is still a placeholder in all
   // three locales and is noindex until it carries a real cookie notice.
 };
@@ -87,12 +88,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "daily",
       priority: 0.9,
-    },
-    {
-      url: `${BASE}/dodanie`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.3,
     },
     // Právne stránky tu zámerne nie sú: /odstupenie, /reklamacia,
     // /vseobecne-obchodne-podmienky a /reklamacny-poriadok sú rewrite na WP
