@@ -20,7 +20,7 @@ const shippingCzHu: Row[] = [
   {
     label: "SPS / DPD – doručenie na adresu",
     value: "6,00 €",
-    note: "Cena za objednávku. Doprava zdarma pri objednávke nad 200 € s DPH.",
+    note: "Cena za objednávku.",
   },
 ];
 
@@ -32,6 +32,24 @@ const payment: Row[] = [
     note: "Visa, Mastercard",
   },
 ];
+
+function DeliveryRow({ row }: { row: Row }) {
+  return (
+    <li className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-x-4 sm:gap-y-1">
+      <div className="min-w-0">
+        <div className="break-words font-medium text-navy">{row.label}</div>
+        {row.note && (
+          <div className="break-words text-xs text-brand-gray">
+            {row.note}
+          </div>
+        )}
+      </div>
+      <div className="font-semibold text-gold sm:text-right">
+        {row.value}
+      </div>
+    </li>
+  );
+}
 
 export default function DeliveryPage() {
   return (
@@ -56,18 +74,7 @@ export default function DeliveryPage() {
           </h3>
           <ul className="mt-3 divide-y divide-cream-dark/60">
             {shippingSk.map((r) => (
-              <li
-                key={r.label}
-                className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3"
-              >
-                <div>
-                  <div className="font-medium text-navy">{r.label}</div>
-                  {r.note && (
-                    <div className="text-xs text-brand-gray">{r.note}</div>
-                  )}
-                </div>
-                <div className="font-semibold text-gold">{r.value}</div>
-              </li>
+              <DeliveryRow key={r.label} row={r} />
             ))}
           </ul>
           <p className="mt-2 text-xs text-brand-gray">
@@ -81,18 +88,7 @@ export default function DeliveryPage() {
           </h3>
           <ul className="mt-3 divide-y divide-cream-dark/60">
             {shippingCzHu.map((r) => (
-              <li
-                key={r.label}
-                className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3"
-              >
-                <div>
-                  <div className="font-medium text-navy">{r.label}</div>
-                  {r.note && (
-                    <div className="text-xs text-brand-gray">{r.note}</div>
-                  )}
-                </div>
-                <div className="font-semibold text-gold">{r.value}</div>
-              </li>
+              <DeliveryRow key={r.label} row={r} />
             ))}
           </ul>
           <p className="mt-2 text-xs text-brand-gray">
@@ -106,18 +102,7 @@ export default function DeliveryPage() {
         <h2 className="text-xl font-semibold text-navy">Platba</h2>
         <ul className="mt-4 divide-y divide-cream-dark/60">
           {payment.map((r) => (
-            <li
-              key={r.label}
-              className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3"
-            >
-              <div>
-                <div className="font-medium text-navy">{r.label}</div>
-                {r.note && (
-                  <div className="text-xs text-brand-gray">{r.note}</div>
-                )}
-              </div>
-              <div className="font-semibold text-gold">{r.value}</div>
-            </li>
+            <DeliveryRow key={r.label} row={r} />
           ))}
         </ul>
         <p className="mt-2 text-xs text-brand-gray">

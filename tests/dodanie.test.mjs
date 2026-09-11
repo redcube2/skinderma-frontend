@@ -39,14 +39,29 @@ test("dodanie page: the free-shipping threshold is scoped to the Czech/Hungarian
   const skHeading = dodanieSrc.indexOf("Slovensko\n");
   const czHuHeading = dodanieSrc.indexOf("Česko a Maďarsko");
   const skDisclaimer = dodanieSrc.indexOf("Doprava zdarma sa na Slovensku neuplatňuje");
-  // "200 € s DPH" also appears once in the shippingCzHu data array (above the
-  // component); only the occurrence after the CZ/HU heading matters here.
   const freeShippingRuleInJsx = dodanieSrc.indexOf("200 € s DPH", czHuHeading);
   assert.ok(skHeading > -1 && czHuHeading > -1);
   assert.ok(skHeading < skDisclaimer && skDisclaimer < czHuHeading,
     "the 'free shipping does not apply' note must sit inside the Slovakia block");
   assert.ok(czHuHeading < freeShippingRuleInJsx,
     "the 200 EUR free-shipping rule must sit inside the Czech/Hungarian block, after its heading");
+});
+
+test("dodanie page: the 200 EUR free-shipping rule is stated exactly once, not duplicated in the row note", () => {
+  const occurrences = dodanieSrc.split("200 € s DPH").length - 1;
+  assert.equal(occurrences, 1,
+    "the free-shipping threshold must be stated once (in the CZ/HU summary paragraph), not repeated in the row note");
+  assert.doesNotMatch(dodanieSrc, /note:\s*"Cena za objednávku\. Doprava zdarma/,
+    "the shippingCzHu row note must not restate the free-shipping rule already covered by the summary paragraph");
+});
+
+test("dodanie page: delivery rows use a min-w-0 stacking layout so long labels/notes/prices don't overflow on narrow screens", () => {
+  assert.match(dodanieSrc, /className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-\[1fr_auto\][^"]*"/,
+    "row layout must stack in a single column on mobile and switch to a two-column grid at sm+");
+  assert.match(dodanieSrc, /<div className="min-w-0">/,
+    "the label/note wrapper must have min-w-0 so its text can shrink and wrap instead of overflowing");
+  assert.match(dodanieSrc, /break-words font-medium text-navy/,
+    "row labels must break long words instead of overflowing the row");
 });
 
 test("dodanie page: only bank transfer and ComGate online card are offered, no cash on delivery", () => {
