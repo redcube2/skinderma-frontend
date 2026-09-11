@@ -44,6 +44,9 @@ const CCTLD_CONTENT_MAP = {
     "/partnerstvi": "/cs/partnerstvo",
     "/spoluprace": "/cs/partnerstvo",
     "/cookies": "/cs/cookies",
+    "/dodanie": "/cs/dodanie",
+    "/doruceni": "/cs/dodanie",
+    "/doruceni-a-platba": "/cs/dodanie",
   },
   hu: {
     "/": "/hu",
@@ -60,6 +63,9 @@ const CCTLD_CONTENT_MAP = {
     "/partnerseg": "/hu/partnerstvo",
     "/cookies": "/hu/cookies",
     "/sutik": "/hu/cookies",
+    "/dodanie": "/hu/dodanie",
+    "/szallitas": "/hu/dodanie",
+    "/szallitas-es-fizetes": "/hu/dodanie",
   },
 };
 

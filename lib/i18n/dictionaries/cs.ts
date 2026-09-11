@@ -469,6 +469,42 @@ const cs: Dictionary = {
     body: "Obsah bude doplněn.",
   },
 
+  delivery: {
+    metaTitle: "Doručení a platba | Skinderma",
+    metaDescription:
+      "Doručení a platba ve Skinderma: SPS / DPD do Česka a Maďarska, doprava zdarma nad stanovenou hodnotou objednávky, platba bankovním převodem nebo kartou online přes ComGate. Ceny v EUR.",
+    eyebrow: "Informace",
+    title: "Doručení a platba",
+    intro:
+      "Objednávky zpracováváme v pracovních dnech. Všechny ceny jsou uvedeny v EUR pro každý trh.",
+    shippingHeading: "Doručení",
+    paymentHeading: "Platba",
+    countrySk: "Slovensko",
+    countryCzHu: "Česko a Maďarsko",
+    free: "Zdarma",
+    methods: {
+      spsPickupPoint: { label: "SPS Balíkovo – výdejní místo" },
+      localPickup: {
+        label: "Osobní odběr – Nám. M. R. Štefánika 16, Komárno",
+      },
+      courier: {
+        label: "SPS / DPD – doručení na adresu",
+        note: "Cena za objednávku.",
+      },
+    },
+    payments: {
+      bankTransfer: { label: "Bankovní převod" },
+      card: { label: "Kartou online – ComGate", note: "Visa, Mastercard" },
+    },
+    noFreeShippingSk: "Na Slovensku se doprava zdarma neuplatňuje.",
+    freeShippingCzHu:
+      "Doprava zdarma platí jen pro objednávky nad {threshold} s DPH. Platba na dobírku není dostupná.",
+    noCod: "Platba na dobírku není dostupná v žádné zemi.",
+    timeHeading: "Dodací lhůta",
+    timeBody:
+      "Zboží skladem doručujeme do 2 – 5 pracovních dnů. Zboží objednané na požádání dodáváme přibližně do jednoho měsíce.",
+  },
+
   partnership: {
     metaTitle: "Partnerství – Spolupráce se salony | Skinderma",
     metaDescription:

@@ -27,11 +27,11 @@ export default function Footer({ locale }: { locale: Locale }) {
           <Link href={p("/o-skinderme")} className={linkClass}>
             {dict.footer.aboutLink}
           </Link>
-          {/* Delivery + legal docs live on the WP apex and are Slovak-only —
-              plain <a>, never locale-prefixed. */}
-          <a href="/dodanie" className={linkClass}>
+          <Link href={p("/dodanie")} className={linkClass}>
             {dict.footer.delivery}
-          </a>
+          </Link>
+          {/* The legal docs below live on the WP apex and are Slovak-only —
+              plain <a>, never locale-prefixed. */}
           <a href="/odstupenie" className={linkClass}>
             {dict.footer.withdrawal}
           </a>
