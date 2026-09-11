@@ -3,31 +3,53 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Dodanie a platba",
   description:
-    "Spôsoby doručenia a platby v Skinderma: Slovenská pošta, Packeta, osobný odber, kartou online, prevodom, dobierkou.",
+    "Doručenie a platba v Skinderma: SPS Balíkovo a osobný odber v Komárne na Slovensku, SPS/DPD do Česka a Maďarska, platba bankovým prevodom alebo kartou online cez ComGate. Ceny v EUR.",
 };
 
 type Row = { label: string; value: string; note?: string };
 
-const shipping: Row[] = [
+const shippingSk: Row[] = [
+  { label: "SPS Balíkovo – výdajné miesto", value: "3,00 €" },
   {
-    label: "Slovenská pošta",
-    value: "3,90 €",
-    note: "2 – 4 pracovné dni",
-  },
-  { label: "Packeta", value: "3,50 €", note: "2 – 3 pracovné dni" },
-  {
-    label: "Osobný odber – Komárno",
+    label: "Osobný odber – Nám. M. R. Štefánika 16, Komárno",
     value: "Zdarma",
-    note: "Po dohode",
   },
-  { label: "Doprava zdarma", value: "od 80 €", note: "Pri objednávke nad 80 €" },
+];
+
+const shippingCzHu: Row[] = [
+  {
+    label: "SPS / DPD – doručenie na adresu",
+    value: "6,00 €",
+    note: "Cena za objednávku.",
+  },
 ];
 
 const payment: Row[] = [
-  { label: "Kartou online", value: "Zdarma", note: "Visa, Mastercard" },
   { label: "Bankový prevod", value: "Zdarma" },
-  { label: "Dobierka", value: "+1,50 €" },
+  {
+    label: "Kartou online – ComGate",
+    value: "Zdarma",
+    note: "Visa, Mastercard",
+  },
 ];
+
+function DeliveryRow({ row }: { row: Row }) {
+  return (
+    <li className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-x-4 sm:gap-y-1">
+      <div className="min-w-0">
+        <div className="break-words font-medium text-navy">{row.label}</div>
+        {row.note && (
+          <div className="break-words text-xs text-brand-gray">
+            {row.note}
+          </div>
+        )}
+      </div>
+      <div className="font-semibold text-gold sm:text-right">
+        {row.value}
+      </div>
+    </li>
+  );
+}
 
 export default function DeliveryPage() {
   return (
@@ -39,57 +61,60 @@ export default function DeliveryPage() {
         Dodanie a platba
       </h1>
       <p className="mt-4 max-w-2xl text-brand-gray">
-        Objednávky spracúvame v pracovných dňoch. Priemerná doba dodania je
-        2 – 5 pracovných dní od prijatia platby.
+        Objednávky spracúvame v pracovných dňoch. Všetky ceny sú uvedené v EUR
+        pre každý trh.
       </p>
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-2">
-        <div className="rounded-2xl border border-cream-dark/60 bg-white p-6 shadow-sm">
-          <h2 className="text-xl font-semibold text-navy">Dodanie</h2>
-          <ul className="mt-4 divide-y divide-cream-dark/60">
-            {shipping.map((r) => (
-              <li
-                key={r.label}
-                className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3"
-              >
-                <div>
-                  <div className="font-medium text-navy">{r.label}</div>
-                  {r.note && (
-                    <div className="text-xs text-brand-gray">{r.note}</div>
-                  )}
-                </div>
-                <div className="font-semibold text-gold">{r.value}</div>
-              </li>
+      <div className="mt-10 rounded-2xl border border-cream-dark/60 bg-white p-6 shadow-sm">
+        <h2 className="text-xl font-semibold text-navy">Dodanie</h2>
+
+        <div className="mt-6">
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-gray">
+            Slovensko
+          </h3>
+          <ul className="mt-3 divide-y divide-cream-dark/60">
+            {shippingSk.map((r) => (
+              <DeliveryRow key={r.label} row={r} />
             ))}
           </ul>
+          <p className="mt-2 text-xs text-brand-gray">
+            Doprava zdarma sa na Slovensku neuplatňuje.
+          </p>
         </div>
 
-        <div className="rounded-2xl border border-cream-dark/60 bg-white p-6 shadow-sm">
-          <h2 className="text-xl font-semibold text-navy">Platba</h2>
-          <ul className="mt-4 divide-y divide-cream-dark/60">
-            {payment.map((r) => (
-              <li
-                key={r.label}
-                className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3"
-              >
-                <div>
-                  <div className="font-medium text-navy">{r.label}</div>
-                  {r.note && (
-                    <div className="text-xs text-brand-gray">{r.note}</div>
-                  )}
-                </div>
-                <div className="font-semibold text-gold">{r.value}</div>
-              </li>
+        <div className="mt-8">
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-gray">
+            Česko a Maďarsko
+          </h3>
+          <ul className="mt-3 divide-y divide-cream-dark/60">
+            {shippingCzHu.map((r) => (
+              <DeliveryRow key={r.label} row={r} />
             ))}
           </ul>
+          <p className="mt-2 text-xs text-brand-gray">
+            Doprava zdarma platí len pre objednávky nad 200 € s DPH. Platba na
+            dobierku nie je dostupná.
+          </p>
         </div>
+      </div>
+
+      <div className="mt-8 rounded-2xl border border-cream-dark/60 bg-white p-6 shadow-sm">
+        <h2 className="text-xl font-semibold text-navy">Platba</h2>
+        <ul className="mt-4 divide-y divide-cream-dark/60">
+          {payment.map((r) => (
+            <DeliveryRow key={r.label} row={r} />
+          ))}
+        </ul>
+        <p className="mt-2 text-xs text-brand-gray">
+          Platba na dobierku nie je dostupná v žiadnej krajine.
+        </p>
       </div>
 
       <div className="mt-10 rounded-2xl bg-cream p-6 text-sm text-brand-gray">
         <div className="font-semibold text-navy">Doba dodania</div>
         <p className="mt-1">
-          Štandardná doba dodania je 2 – 5 pracovných dní. V prípade
-          predobjednávky vás budeme informovať e-mailom.
+          Tovar skladom doručujeme do 2 – 5 pracovných dní. Tovar objednaný na
+          požiadanie dodávame približne do jedného mesiaca.
         </p>
       </div>
     </section>
