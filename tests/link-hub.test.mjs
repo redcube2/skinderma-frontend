@@ -7,11 +7,11 @@ const safeDestination = (href) => href.startsWith("/") || /^https:\/\//.test(hre
 test("link hub has the three approved primary destinations", () => {
   assert.equal(primaryLinks.length, 3);
   assert.deepEqual(primaryLinks.map(({ label, href }) => [label, href]), [
-    ["Objavte produkty Skinderma", "/obchod"],
-    ["Rezervujte si termín v Skin Beauty House", "https://beautyhouse.sk/rezervuj-si-termin/"],
+    ["Objavte produkty SKINDERMA", "/obchod"],
     ["Pre kozmetičky a salóny — školenia a partnerstvo", "/partnerstvo"],
+    ["Rezervujte si termín v Skin Beauty House", "https://beautyhouse.sk/rezervuj-si-termin/"],
   ]);
-  assert.equal(primaryLinks[1].emphasized, true);
+  assert.equal(primaryLinks[2].emphasized, true);
   assert.ok(primaryLinks.every((item) => safeDestination(item.href)));
 });
 
