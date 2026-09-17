@@ -80,6 +80,7 @@ export default function RootLayout({
 }) {
   const locale = getRequestLocale();
   const dict = getDictionary(locale);
+  const isLinkHub = locale === defaultLocale && getRequestRoute().segment === "/link";
   const jsonLdGraph = {
     "@context": "https://schema.org",
     "@graph": [
@@ -178,39 +179,47 @@ export default function RootLayout({
   return (
     <html lang={localeHtmlLang[locale]} className={quicksand.variable}>
       <body className="flex min-h-screen flex-col bg-white text-navy antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
-        />
-        {/* Development banner */}
-        <div style={{
-          background: "#000", color: "#e2e2cf", textAlign: "center",
-          padding: "10px 20px", fontSize: 12, letterSpacing: "0.15em",
-          textTransform: "uppercase"
-        }}>
-          {dict.banner.contactLabel}{" "}
-          <a href="tel:+421905108641" style={{ color: "#fff", textDecoration: "underline" }}>
-            +421 905 108 641
-          </a>
-          {" · "}
-          <a href="mailto:info@skinderma.sk" style={{ color: "#fff", textDecoration: "underline" }}>
-            info@skinderma.sk
-          </a>
-        </div>
-        <Navbar locale={locale} />
+        {!isLinkHub && (
+          <>
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
+            />
+            {/* Development banner */}
+            <div style={{
+              background: "#000", color: "#e2e2cf", textAlign: "center",
+              padding: "10px 20px", fontSize: 12, letterSpacing: "0.15em",
+              textTransform: "uppercase"
+            }}>
+              {dict.banner.contactLabel}{" "}
+              <a href="tel:+421905108641" style={{ color: "#fff", textDecoration: "underline" }}>
+                +421 905 108 641
+              </a>
+              {" · "}
+              <a href="mailto:info@skinderma.sk" style={{ color: "#fff", textDecoration: "underline" }}>
+                info@skinderma.sk
+              </a>
+            </div>
+            <Navbar locale={locale} />
+          </>
+        )}
         <main className="flex-1">{children}</main>
-        <Footer locale={locale} />
-        {/* Hotjar Tracking */}
-        <Script id="hotjar" strategy="afterInteractive">{`
-          (function(h,o,t,j,a,r){
-            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-            h._hjSettings={hjid:6648776,hjsv:6};
-            a=o.getElementsByTagName('head')[0];
-            r=o.createElement('script');r.async=1;
-            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-            a.appendChild(r);
-          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-        `}</Script>
+        {!isLinkHub && (
+          <>
+            <Footer locale={locale} />
+            {/* Hotjar Tracking */}
+            <Script id="hotjar" strategy="afterInteractive">{`
+              (function(h,o,t,j,a,r){
+                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                h._hjSettings={hjid:6648776,hjsv:6};
+                a=o.getElementsByTagName('head')[0];
+                r=o.createElement('script');r.async=1;
+                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                a.appendChild(r);
+              })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+            `}</Script>
+          </>
+        )}
       </body>
     </html>
   );
