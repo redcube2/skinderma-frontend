@@ -90,6 +90,7 @@ export interface WPPost {
   content: { rendered: string };
   featured_media: number;
   modified?: string;
+  categories?: number[];
   yoast_head?: string;
   yoast_head_json?: YoastMeta;
   _embedded?: {
@@ -99,5 +100,18 @@ export interface WPPost {
       alt_text?: string;
     }>;
     author?: Array<{ id: number; name: string }>;
+    "wp:term"?: Array<
+      Array<{ id: number; name: string; slug: string; taxonomy: string }>
+    >;
   };
+}
+
+/** WordPress post category (taxonomy "category"), from /wp-json/wp/v2/categories. */
+export interface WPCategory {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  count: number;
+  parent: number;
 }
