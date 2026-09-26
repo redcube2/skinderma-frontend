@@ -1,16 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
-
-const WP_BASE = "https://skinderma.sk";
+import { fetchPostViewCount } from "@/lib/postViews";
 
 export function PostViewTracker({ postId }: { postId: number }) {
   const [views, setViews] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch(`${WP_BASE}/wp-json/skinderma/v1/views/${postId}`, { method: "POST" })
-      .then((r) => r.json())
-      .then((data) => setViews(data.views))
-      .catch(() => null);
+    let active = true;
+    fetchPostViewCount(postId).then((count) => {
+      if (active) setViews(count);
+    });
+    return () => {
+      active = false;
+    };
   }, [postId]);
 
   if (views === null) return null;
