@@ -1,12 +1,16 @@
 import type { MetadataRoute } from "next";
 import { getAllProductSlugs, getCategories } from "@/lib/woocommerce";
-import { getPosts } from "@/lib/wordpress";
-import { localeHreflang, localizedUrl, locales } from "@/lib/i18n/config";
+import { BLOG_REVALIDATE_SECONDS, getBlogCategories, getPosts } from "@/lib/wordpress";
+import { SITE_URL, localeHreflang, localizedUrl, locales } from "@/lib/i18n/config";
 import { ROUTE_SEGMENTS } from "@/lib/i18n/routes";
+import {
+  buildBlogCategorySitemapUrls,
+  buildBlogPostSitemapUrls,
+} from "@/lib/seo/blogSitemap";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.skinderma.sk";
 
-export const revalidate = 3600;
+export const revalidate = BLOG_REVALIDATE_SECONDS;
 
 /**
  * Localised content routes (sk default + /cs + /hu), each carrying the full
@@ -50,9 +54,10 @@ function localizedContentEntries(now: Date): MetadataRoute.Sitemap {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [products, categories, posts] = await Promise.all([
+  const [products, categories, blogCategories, posts] = await Promise.all([
     getAllProductSlugs().catch(() => []),
     getCategories().catch(() => []),
+    getBlogCategories().catch(() => []),
     getPosts({ per_page: 100, _fields: "slug,modified" }).catch(() => []),
   ]);
 
@@ -74,12 +79,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }));
 
-  const postUrls: MetadataRoute.Sitemap = posts.map((p) => ({
-    url: `${BASE}/blog/${p.slug}`,
-    lastModified: p.modified ? new Date(p.modified) : now,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
+  // Blog URLs always use the normalized www origin (SITE_URL), never the bare
+  // `BASE` above — NEXT_PUBLIC_SITE_URL is often set to the apex, and the
+  // headless blog's single canonical is www.skinderma.sk/blog/{slug}.
+  const postUrls = buildBlogPostSitemapUrls(posts, SITE_URL, now);
+  const blogCategoryUrls = buildBlogCategorySitemapUrls(blogCategories, SITE_URL, now);
 
   return [
     ...localizedContentEntries(now),
@@ -96,5 +100,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...productUrls,
     ...categoryUrls,
     ...postUrls,
+    ...blogCategoryUrls,
   ];
 }
