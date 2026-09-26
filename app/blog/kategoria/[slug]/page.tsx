@@ -6,6 +6,7 @@ import {
   getBlogCategory,
   getPostsPage,
 } from "@/lib/wordpress";
+import { resolveBlogCategoryPageState } from "@/lib/seo/blogPagination";
 import { stripHtml } from "@/lib/woocommerce";
 import { localizedUrl } from "@/lib/i18n/config";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
@@ -35,6 +36,26 @@ export async function generateMetadata({
   }
 
   const page = parsePage(searchParams);
+  const { posts, totalPages } = await getPostsPage({
+    category: category.id,
+    page,
+    per_page: PER_PAGE,
+  }).catch(() => ({ posts: [], totalPages: 0, page }));
+
+  const state = resolveBlogCategoryPageState({
+    page,
+    totalPages,
+    postsCount: posts.length,
+    categoryCount: category.count,
+  });
+
+  // An out-of-range page must never resolve to indexable metadata — the page
+  // component 404s it below, and this mirrors that so the two can never
+  // drift into an indexable soft-404 (see lib/seo/blogPagination.ts).
+  if (state.kind === "not-found") {
+    return { title: "Kategória nenájdená", robots: { index: false, follow: false } };
+  }
+
   const canonicalBase = localizedUrl("sk", `/blog/kategoria/${category.slug}`);
   const canonical = page > 1 ? `${canonicalBase}?page=${page}` : canonicalBase;
   const description = category.description
@@ -42,7 +63,7 @@ export async function generateMetadata({
     : `Články z kategórie ${category.name} na blogu Skinderma.`;
   // An empty category has nothing worth ranking for and must never be
   // indexed — it also never enters the sitemap (see lib/seo/blogSitemap.ts).
-  const isEmpty = category.count === 0;
+  const isEmpty = state.kind === "empty";
 
   return {
     title: `${category.name} | Blog`,
@@ -76,11 +97,19 @@ export default async function BlogCategoryPage({
     per_page: PER_PAGE,
   }).catch(() => ({ posts: [], totalPages: 0, page }));
 
-  // An out-of-range page (page > totalPages) is a broken link, not an empty
-  // category — 404 it rather than rendering a misleading "no posts" state.
-  if (page > 1 && totalPages > 0 && page > totalPages) notFound();
+  const state = resolveBlogCategoryPageState({
+    page,
+    totalPages,
+    postsCount: posts.length,
+    categoryCount: category.count,
+  });
 
-  const isEmpty = category.count === 0 || (totalPages === 0 && posts.length === 0);
+  // An out-of-range page (no valid page data, or page > totalPages) is a
+  // broken link, not an empty category — 404 it rather than rendering a
+  // misleading "no posts" state (see lib/seo/blogPagination.ts).
+  if (state.kind === "not-found") notFound();
+
+  const isEmpty = state.kind === "empty";
 
   return (
     <section className="container-page py-12 md:py-16">

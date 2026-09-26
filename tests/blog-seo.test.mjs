@@ -30,6 +30,7 @@ import {
   BLOG_REVALIDATE_SECONDS,
   getPostCategories,
 } from "../lib/wordpress.ts";
+import { resolveBlogCategoryPageState } from "../lib/seo/blogPagination.ts";
 
 function makePost(overrides = {}) {
   return {
@@ -237,6 +238,61 @@ test("blog detail + category archive + sitemap use the shared 5-minute revalidat
 test("empty category archives are noindex and the sitemap only links non-empty categories", () => {
   assert.ok(blogCategorySrc.includes("index: false"));
   assert.ok(sitemapSrc.includes("buildBlogCategorySitemapUrls"));
+});
+
+// ---------------------------------------------------------------------------
+// Out-of-range category page (?page=99) must 404, never render/index a soft-404.
+// ---------------------------------------------------------------------------
+
+test("an out-of-range page with no valid page data (WP 400, totalPages=0) is not-found, even for a non-empty category", () => {
+  // This is exactly what getPostsPage returns for a WP 400
+  // rest_post_invalid_page_number response: no X-WP-TotalPages header at all.
+  const state = resolveBlogCategoryPageState({
+    page: 99,
+    totalPages: 0,
+    postsCount: 0,
+    categoryCount: 4,
+  });
+  assert.equal(state.kind, "not-found");
+});
+
+test("a requested page beyond a known totalPages is not-found", () => {
+  const state = resolveBlogCategoryPageState({
+    page: 99,
+    totalPages: 3,
+    postsCount: 0,
+    categoryCount: 4,
+  });
+  assert.equal(state.kind, "not-found");
+});
+
+test("page 1 with totalPages=0 is the empty-category state, not not-found", () => {
+  const state = resolveBlogCategoryPageState({
+    page: 1,
+    totalPages: 0,
+    postsCount: 0,
+    categoryCount: 0,
+  });
+  assert.equal(state.kind, "empty");
+});
+
+test("a valid page within range renders normally", () => {
+  const state = resolveBlogCategoryPageState({
+    page: 2,
+    totalPages: 3,
+    postsCount: 12,
+    categoryCount: 30,
+  });
+  assert.equal(state.kind, "ok");
+});
+
+test("blog category archive resolves out-of-range pages via the shared helper in both generateMetadata and the page component (no duplicated ad hoc range check)", () => {
+  assert.ok(blogCategorySrc.includes("resolveBlogCategoryPageState"));
+  const occurrences = blogCategorySrc.split("resolveBlogCategoryPageState(").length - 1;
+  assert.ok(
+    occurrences >= 2,
+    "expected resolveBlogCategoryPageState to be called from both generateMetadata and the page component"
+  );
 });
 
 test("BlogPostCard keeps post + category links unprefixed (Slovak-only blog surface, reused from /cs and /hu)", () => {
