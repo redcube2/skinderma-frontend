@@ -20,8 +20,8 @@ interface FormErrors {
 /**
  * Locale-aware partnership form. Identical wire format and /api/partner-contact
  * endpoint as the Slovak app/partnerstvo/PartnerContactForm.tsx — only visible
- * copy is parametrised. Field names, validation rules and the honeypot are
- * unchanged.
+ * copy is parametrised. Field names and the honeypot are unchanged; only
+ * salonName, contactPerson, email and gdpr are required, the rest are optional.
  */
 export default function PartnerContactForm({
   dict,
@@ -47,22 +47,17 @@ export default function PartnerContactForm({
     const errs: FormErrors = {};
 
     if (!salonName.trim()) errs.salonName = dict.required;
-    if (!ico.trim()) {
-      errs.ico = dict.required;
-    } else if (!new RegExp(dict.icoPattern).test(normalizeCompanyId(ico))) {
+    if (ico.trim() && !new RegExp(dict.icoPattern).test(normalizeCompanyId(ico))) {
       // The identifier is not the same shape in every market, so the accepted
       // pattern travels with the dictionary rather than being hard-coded here.
       errs.ico = dict.icoInvalid;
     }
-    if (!address.trim()) errs.address = dict.required;
     if (!contactPerson.trim()) errs.contactPerson = dict.required;
     if (!email.trim()) {
       errs.email = dict.required;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       errs.email = dict.invalidEmail;
     }
-    if (!phone.trim()) errs.phone = dict.required;
-    if (!web.trim()) errs.web = dict.required;
     if (!gdpr) errs.gdpr = dict.consentRequired;
 
     return errs;
@@ -168,7 +163,6 @@ export default function PartnerContactForm({
           <span className={labelClass}>{dict.ico}</span>
           <input
             type="text"
-            required
             value={ico}
             onChange={(e) => setIco(e.target.value)}
             className={inputClass}
@@ -183,7 +177,6 @@ export default function PartnerContactForm({
         <span className={labelClass}>{dict.address}</span>
         <input
           type="text"
-          required
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           className={inputClass}
@@ -238,7 +231,6 @@ export default function PartnerContactForm({
           <span className={labelClass}>{dict.phone}</span>
           <input
             type="tel"
-            required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className={inputClass}
@@ -252,7 +244,6 @@ export default function PartnerContactForm({
         <span className={labelClass}>{dict.web}</span>
         <input
           type="text"
-          required
           value={web}
           onChange={(e) => setWeb(e.target.value)}
           className={inputClass}

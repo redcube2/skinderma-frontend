@@ -178,8 +178,10 @@ export default function PartnerstvoPage() {
             Kontaktujte nás
           </h2>
           <p className="mt-4 text-sm text-brand-gray leading-relaxed">
-            Vyplňte formulár a my sa vám ozveme do 2 pracovných dní.
-            Všetky polia označené hviezdičkou (*) sú povinné.
+            Vyplňte formulár a my sa vám ozveme do 2 pracovných dní. Stačí
+            vyplniť názov salónu, kontaktnú osobu, e-mail a potvrdiť súhlas so
+            spracovaním osobných údajov — ostatné údaje sú nepovinné, ale
+            pomôžu nám pripraviť presnejšiu ponuku.
           </p>
 
           <div className="mt-8">

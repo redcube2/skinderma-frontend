@@ -174,15 +174,14 @@ export async function POST(req: NextRequest) {
   const web = String(body.web ?? "").trim();
   const message = String(body.message ?? "").trim();
 
-  // Server-side validation
+  // Server-side validation — Ramon's decision: only the salon name, contact
+  // person, email and GDPR consent are required. Phone, IČO, address,
+  // position and web/social stay optional end-to-end. If IČO is filled in,
+  // its existing format validation still applies.
   const missing: string[] = [];
   if (!salonName) missing.push("salonName");
-  if (!ico) missing.push("ico");
-  if (!address) missing.push("address");
   if (!contactPerson) missing.push("contactPerson");
   if (!email) missing.push("email");
-  if (!phone) missing.push("phone");
-  if (!web) missing.push("web");
   if (!body.gdpr) missing.push("gdpr");
 
   if (missing.length > 0) {
@@ -192,7 +191,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (!/^\d{8}$/.test(ico)) {
+  if (ico && !/^\d{8}$/.test(ico)) {
     return NextResponse.json(
       { error: "IČO musí mať presne 8 číslic" },
       { status: 400 }
