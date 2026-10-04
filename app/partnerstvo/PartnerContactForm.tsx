@@ -36,20 +36,15 @@ export default function PartnerContactForm() {
     const errs: FormErrors = {};
 
     if (!salonName.trim()) errs.salonName = "Povinné pole";
-    if (!ico.trim()) {
-      errs.ico = "Povinné pole";
-    } else if (!/^\d{8}$/.test(normalizeCompanyId(ico))) {
+    if (ico.trim() && !/^\d{8}$/.test(normalizeCompanyId(ico))) {
       errs.ico = "IČO musí mať presne 8 číslic";
     }
-    if (!address.trim()) errs.address = "Povinné pole";
     if (!contactPerson.trim()) errs.contactPerson = "Povinné pole";
     if (!email.trim()) {
       errs.email = "Povinné pole";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       errs.email = "Neplatná e-mailová adresa";
     }
-    if (!phone.trim()) errs.phone = "Povinné pole";
-    if (!web.trim()) errs.web = "Povinné pole";
     if (!gdpr) errs.gdpr = "Súhlas je povinný";
 
     return errs;
@@ -160,10 +155,9 @@ export default function PartnerContactForm() {
         </label>
 
         <label className="block">
-          <span className={labelClass}>IČO *</span>
+          <span className={labelClass}>IČO</span>
           <input
             type="text"
-            required
             value={ico}
             onChange={(e) => setIco(e.target.value)}
             className={inputClass}
@@ -176,10 +170,9 @@ export default function PartnerContactForm() {
 
       {/* Address */}
       <label className="block">
-        <span className={labelClass}>Adresa prevádzky *</span>
+        <span className={labelClass}>Adresa prevádzky</span>
         <input
           type="text"
-          required
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           className={inputClass}
@@ -233,10 +226,9 @@ export default function PartnerContactForm() {
         </label>
 
         <label className="block">
-          <span className={labelClass}>Telefón *</span>
+          <span className={labelClass}>Telefón</span>
           <input
             type="tel"
-            required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className={inputClass}
@@ -248,10 +240,9 @@ export default function PartnerContactForm() {
 
       {/* Web */}
       <label className="block">
-        <span className={labelClass}>Web alebo Instagram/Facebook *</span>
+        <span className={labelClass}>Web alebo Instagram/Facebook</span>
         <input
           type="text"
-          required
           value={web}
           onChange={(e) => setWeb(e.target.value)}
           className={inputClass}
