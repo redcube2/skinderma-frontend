@@ -3,8 +3,8 @@ import { localizedPath } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getRequestLocale } from "@/lib/i18n/request";
 
-export default function NotFound() {
-  const locale = getRequestLocale();
+export default async function NotFound() {
+  const locale = await getRequestLocale();
   const t = getDictionary(locale).notFound;
 
   return (

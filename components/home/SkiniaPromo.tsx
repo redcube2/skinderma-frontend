@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type SkiniaDict = {
   eyebrow: string;
   titleLines: string[];
@@ -146,7 +148,7 @@ export default function SkiniaPromo({ dict }: { dict?: SkiniaDict }) {
             >
               {d.ctaSkinia}
             </a>
-            <a
+            <Link
               href="/produkty"
               style={{
                 border: "1px solid #646467",
@@ -159,7 +161,7 @@ export default function SkiniaPromo({ dict }: { dict?: SkiniaDict }) {
               }}
             >
               {d.ctaProducts}
-            </a>
+            </Link>
           </div>
         </div>
 

@@ -1,5 +1,10 @@
 import { redirect } from "next/navigation";
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
-  redirect(`https://skinderma.sk/produkt/${params.slug}`);
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  redirect(`https://skinderma.sk/produkt/${slug}`);
 }

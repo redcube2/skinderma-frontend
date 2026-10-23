@@ -41,9 +41,9 @@ export function buildMenu(locale: Locale): MenuItem[] {
   ];
 }
 
-export default function Navbar({ locale }: { locale: Locale }) {
+export default async function Navbar({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
-  const { segment } = getRequestRoute();
+  const { segment } = await getRequestRoute();
   const switchSegment = switchableSegment(segment);
   const menu = buildMenu(locale);
   const homeHref = localizedPath(locale, "/");

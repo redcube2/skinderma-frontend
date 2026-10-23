@@ -25,8 +25,8 @@ const quicksand = Quicksand({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://skinderma.sk";
 
-export function generateMetadata(): Metadata {
-  const { locale, segment } = getRequestRoute();
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale, segment } = await getRequestRoute();
   const dict = getDictionary(locale);
   const isHome = segment === "/";
 
@@ -73,14 +73,15 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const locale = getRequestLocale();
+  const locale = await getRequestLocale();
   const dict = getDictionary(locale);
-  const isLinkHub = locale === defaultLocale && getRequestRoute().segment === "/link";
+  const isLinkHub =
+    locale === defaultLocale && (await getRequestRoute()).segment === "/link";
   const jsonLdGraph = {
     "@context": "https://schema.org",
     "@graph": [

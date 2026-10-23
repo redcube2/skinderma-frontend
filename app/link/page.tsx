@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import ProductCarousel from "@/components/link/ProductCarousel";
 import { primaryLinks } from "@/lib/link-hub";
 import styles from "./link.module.css";
@@ -23,9 +24,9 @@ export const metadata: Metadata = {
 export default function LinkHubPage() {
   return <div className={styles.page}>
     <header className={styles.header}>
-      <a href="/" className={styles.wordmark} aria-label="SKINDERMA – domov">
+      <Link href="/" className={styles.wordmark} aria-label="SKINDERMA – domov">
         <Image src="/brand/skinderma-logo.png" alt="SKINDERMA Medical Cosmetics" width={1024} height={224} priority unoptimized className={styles.logo} />
-      </a>
+      </Link>
     </header>
     <div className={styles.content}>
       <section className={styles.intro} aria-labelledby="link-hub-title"><p className={styles.eyebrow}>Starostlivosť o pleť</p><h1 id="link-hub-title">Objavte SKINDERMA pre svoju pleť alebo salón</h1><p>Produkty pre domácu rutinu, odborná starostlivosť v Skin Beauty House a partnerstvo pre kozmetičky a salóny.</p></section>

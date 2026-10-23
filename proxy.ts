@@ -15,7 +15,8 @@ import {
 } from "@/lib/i18n/routes";
 
 /**
- * i18n middleware.
+ * i18n proxy (Next.js 16 rename of the "middleware" file convention — same
+ * request-time behavior, just renamed from middleware.ts/middleware()).
  *
  * Responsibilities:
  *  0. 301 an explicit "/sk" prefix away — Slovak is served prefix-less.
@@ -50,7 +51,7 @@ const PARSE_ACCEPT_LANGUAGE = (header: string | null): Locale | null => {
   return null;
 };
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
 
   // ---- 0. "/sk/..." is not a shape we serve -> drop the prefix -------------

@@ -11,14 +11,17 @@ import { stripHtml } from "@/lib/woocommerce";
 import { localizedUrl } from "@/lib/i18n/config";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 
-export const revalidate = BLOG_REVALIDATE_SECONDS;
+// Next.js statically extracts route segment config, so `revalidate` must be
+// a literal, not an import — the `typeof` annotation still ties it to
+// BLOG_REVALIDATE_SECONDS, so TypeScript fails the build if they ever drift.
+export const revalidate: typeof BLOG_REVALIDATE_SECONDS = 300;
 
-type Params = { slug: string };
-type SearchParams = { page?: string };
+type Params = Promise<{ slug: string }>;
+type SearchParams = Promise<{ page?: string }>;
 
 const PER_PAGE = 12;
 
-function parsePage(searchParams?: SearchParams): number {
+function parsePage(searchParams?: { page?: string }): number {
   const n = Number(searchParams?.page);
   return Number.isFinite(n) && n >= 1 ? Math.floor(n) : 1;
 }
@@ -30,12 +33,13 @@ export async function generateMetadata({
   params: Params;
   searchParams?: SearchParams;
 }): Promise<Metadata> {
-  const category = await getBlogCategory(params.slug).catch(() => null);
+  const { slug } = await params;
+  const category = await getBlogCategory(slug).catch(() => null);
   if (!category) {
     return { title: "Kategória nenájdená", robots: { index: false, follow: false } };
   }
 
-  const page = parsePage(searchParams);
+  const page = parsePage(await searchParams);
   const { posts, totalPages } = await getPostsPage({
     category: category.id,
     page,
@@ -87,10 +91,11 @@ export default async function BlogCategoryPage({
   params: Params;
   searchParams?: SearchParams;
 }) {
-  const category = await getBlogCategory(params.slug).catch(() => null);
+  const { slug } = await params;
+  const category = await getBlogCategory(slug).catch(() => null);
   if (!category) notFound();
 
-  const page = parsePage(searchParams);
+  const page = parsePage(await searchParams);
   const { posts, totalPages } = await getPostsPage({
     category: category.id,
     page,
