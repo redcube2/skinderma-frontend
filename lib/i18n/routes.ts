@@ -9,7 +9,7 @@ import { defaultLocale, locales } from "./config";
  * Next.js folders are named identically across locales (app/o-nas,
  * app/cs/o-nas, app/hu/o-nas), so the canonical slug does not change per
  * language. Localized vanity slugs (e.g. Hungarian "kapcsolat") are handled
- * as 301 aliases in middleware.ts, never as separate routes.
+ * as 301 aliases in proxy.ts, never as separate routes.
  */
 export type RouteKey =
   | "home"

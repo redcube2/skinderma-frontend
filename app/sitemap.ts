@@ -10,7 +10,10 @@ import {
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.skinderma.sk";
 
-export const revalidate = BLOG_REVALIDATE_SECONDS;
+// Next.js statically extracts route segment config, so `revalidate` must be
+// a literal, not an import — the `typeof` annotation still ties it to
+// BLOG_REVALIDATE_SECONDS, so TypeScript fails the build if they ever drift.
+export const revalidate: typeof BLOG_REVALIDATE_SECONDS = 300;
 
 /**
  * Localised content routes (sk default + /cs + /hu), each carrying the full

@@ -19,22 +19,27 @@ import {
 import { buildBlogPostingJsonLd } from "@/lib/seo/blogPosting";
 import { serializeJsonLd } from "@/lib/seo/jsonLd";
 
-export const revalidate = BLOG_REVALIDATE_SECONDS;
+// Next.js statically extracts route segment config, so `revalidate` must be
+// a literal, not an import — the `typeof` annotation still ties it to
+// BLOG_REVALIDATE_SECONDS, so TypeScript fails the build if they ever drift.
+export const revalidate: typeof BLOG_REVALIDATE_SECONDS = 300;
 
-type Params = { slug: string };
+type Params = Promise<{ slug: string }>;
 
 export async function generateMetadata({
   params,
 }: {
   params: Params;
 }): Promise<Metadata> {
-  const post = await getPost(params.slug).catch(() => null);
+  const { slug } = await params;
+  const post = await getPost(slug).catch(() => null);
   if (!post) return { title: "Článok nenájdený" };
   return buildBlogPostMetadata(post);
 }
 
 export default async function BlogPostPage({ params }: { params: Params }) {
-  const post = await getPost(params.slug).catch(() => null);
+  const { slug } = await params;
+  const post = await getPost(slug).catch(() => null);
   if (!post) notFound();
 
   const media = post._embedded?.["wp:featuredmedia"]?.[0];
